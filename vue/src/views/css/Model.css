@@ -1,0 +1,32 @@
+ur,li{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+p{
+    font-size: 30px;
+    color: burlywood;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.page-background{
+    margin: 0px 20px 0px 20px;
+    background-color: rgba(255, 255, 255, 0.27);
+    border-radius: 10px;
+    border: 1px solid #aaa;
+    box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
+}
+.user-models-header{
+    display: flex;
+
+}
+.addModel{
+    width: 120px;
+    height: 35px;
+    margin-top: 25px;
+    margin-left: 10px;
+    font-size: 22px;
+}
+.models{
+
+}
