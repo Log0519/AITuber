@@ -35,7 +35,7 @@
 
 
 <script>
-import '../../../../../AITuber/vue/src/views/css/Model.css'
+import './css/Model.css'
 
 
 export default {
