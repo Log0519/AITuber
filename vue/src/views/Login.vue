@@ -87,12 +87,13 @@ export default {
   },
   methods: {
     login() {
-
       if(this.identifyCode === this.formLogin.code)
       {
         this.$refs['form'].validate((valid) => {
           if (valid) {
-            request.post("/user/login", this.form).then(res => {
+            request.post("user/login",this.form).then(res => {
+              console.log(this.form.username)
+              console.log(this.form.password)
               if (res.code === '0') {
                 this.$message({
                   type: "success",
