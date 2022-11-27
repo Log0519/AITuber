@@ -29,13 +29,13 @@ export default {
 
   methods:{
     goHome(){
-      this.$router.push("/home")
+      //this.$router.push("/home")
     },
     goModel(){
       this.$router.push("/model")
     },
     goMocap(){
-      this.$router.push("/model")
+      this.$router.push("/mocap")
     },
   }
 }

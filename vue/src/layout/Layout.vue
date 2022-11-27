@@ -13,13 +13,11 @@
 <script>
 
 import Header from "../components/Header.vue";
-import HomeView from "../views/HomeView.vue";
 
 export default {
   name:"Layout",
   components:{
     Header,
-    HomeView
 
   }
 }

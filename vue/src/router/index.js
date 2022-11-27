@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Layout from "../layout/Layout.vue";
-import HomeView from "../views/HomeView.vue"
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Model from "../views/Model.vue";
@@ -16,11 +15,6 @@ const routes = [
     component: Layout,
     redirect:'/login',
     children:[
-      {
-        path: '/home',
-        name: 'HomeView',
-        component: HomeView,
-      },
       {
         path: '/mocap',
         name: 'mocap',

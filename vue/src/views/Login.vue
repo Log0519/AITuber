@@ -100,7 +100,7 @@ export default {
                   message: "登录成功"
                 })
                 sessionStorage.setItem("user", JSON.stringify(res.data))
-                this.$router.push("/home") //登陆成功进行页面跳转
+                this.$router.push("/model") //登陆成功进行页面跳转
               } else {
                 this.$message({
                   type: "error",
