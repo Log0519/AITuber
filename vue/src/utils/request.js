@@ -18,7 +18,7 @@ request.interceptors.request.use(config => {
     const userJson = sessionStorage.getItem("user")
     if(!userJson)
     {
-        router.push("/login")
+        //router.push("/login")
     }
 
     return config
