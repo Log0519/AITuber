@@ -4,6 +4,8 @@ import HomeView from "../views/HomeView.vue"
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Model from "../views/Model.vue";
+import Mocap from "../views/Mocap.vue";
+import ModelScene from "../views/ModelScene.vue";
 
 
 
@@ -18,6 +20,16 @@ const routes = [
         path: '/home',
         name: 'HomeView',
         component: HomeView,
+      },
+      {
+        path: '/mocap',
+        name: 'mocap',
+        component: Mocap,
+      },
+      {
+        path: '/modelscene',
+        name: 'modelscene',
+        component: ModelScene,
       },
       {
         path: '/model',
