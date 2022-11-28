@@ -16,9 +16,10 @@ request.interceptors.request.use(config => {
 
     //取出sessionStorage里面缓存的用户信息
     const userJson = sessionStorage.getItem("user")
+    router.push("/login")
     if(!userJson)
     {
-        //router.push("/login")
+        router.push("/login")
     }
 
     return config
