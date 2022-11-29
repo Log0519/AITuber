@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "@tensorflow-models/facemesh": "^0.0.5",
+    "face-api.js": "^0.22.2",
     "sass": "^1.56.1",
+    "tensorflow-models": "^0.0.1",
     "three": "^0.146.0",
     "three-css2drender": "^1.0.0",
     "three-obj-mtl-loader": "^1.0.3",

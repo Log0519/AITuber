@@ -36,9 +36,10 @@
           </el-row>
         </el-form-item>
 
-        <el-form-item style="margin-left: 160px">
+        <el-form-item style="margin-left: 80px">
           <el-button type="primary" size="small" @click="login">登 录</el-button>
           <el-button type="primary" size="small" @click="goRegister">注 册</el-button>
+          <el-button type="primary" size="small" @click="go">跳过</el-button>
         </el-form-item>
       </el-form>
 
@@ -119,6 +120,9 @@ export default {
     }, goRegister() {
       this.$router.push("/register")
     },
+    go() {
+    this.$router.push("/mocap")
+  },
     // 重置验证码
     refreshCode() {
       this.identifyCode = "";

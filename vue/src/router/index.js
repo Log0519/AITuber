@@ -5,6 +5,7 @@ import Register from "../views/Register.vue";
 import Model from "../views/Model.vue";
 import Mocap from "../views/Mocap.vue";
 import ModelScene from "../views/ModelScene.vue";
+import MocapTest from "../views/MocapTest.vue";
 
 
 
@@ -29,6 +30,11 @@ const routes = [
         path: '/model',
         name: 'Model',
         component: Model,
+      },
+      {
+        path: '/mocapTest',
+        name: 'MocapTest',
+        component: MocapTest,
       },
     ]
   },
