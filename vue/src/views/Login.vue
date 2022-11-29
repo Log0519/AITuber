@@ -1,12 +1,7 @@
 <template>
   <div style="width: 100%;height: 100vh;overflow:hidden">
-    <div style="margin: 100px auto;
-    background-color: rgba(255, 255, 255, 0.27);
-    border-radius: 10px;
-    border: 1px solid #aaa;
-    width: 500px;
-    height: 350px;
-    box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);">
+    <div class="login">
+      <div class="content">
       <div style="color: #51b1f8;font-size: 30px;font-weight: bold;text-align: center;padding: 30px">
 <!--        天气查询系统-->
       </div>
@@ -44,7 +39,7 @@
       </el-form>
 
 
-
+      </div>
     </div>
   </div>
 
@@ -54,6 +49,7 @@
 
 import request from "../utils/request";
 import dentify from "../components/dentify.vue";
+import './css/login.css'
 
 export default {
   name: "Login",
