@@ -8,8 +8,7 @@
     height: 350px;
     box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);">
       <div style="color: #51b1f8;font-size: 30px;font-weight: bold;text-align: center;padding: 30px">
-        天气查询系统
-
+<!--        天气查询系统-->
       </div>
       <el-form ref="form" :model="form" size="normal" style="width: 60%;margin-left: 83px"
       :rules="rules">
@@ -35,12 +34,12 @@
                 <dentify :identifyCode="identifyCode"></dentify></div
               ></el-col>
           </el-row>
-
         </el-form-item>
 
-        <el-form-item style="margin-left: 160px">
+        <el-form-item style="margin-left: 80px">
           <el-button type="primary" size="small" @click="login">登 录</el-button>
           <el-button type="primary" size="small" @click="goRegister">注 册</el-button>
+          <el-button type="primary" size="small" @click="go">跳过</el-button>
         </el-form-item>
       </el-form>
 
@@ -100,7 +99,7 @@ export default {
                   message: "登录成功"
                 })
                 sessionStorage.setItem("user", JSON.stringify(res.data))
-                this.$router.push("/home") //登陆成功进行页面跳转
+                this.$router.push("/model") //登陆成功进行页面跳转
               } else {
                 this.$message({
                   type: "error",
@@ -121,6 +120,9 @@ export default {
     }, goRegister() {
       this.$router.push("/register")
     },
+    go() {
+    this.$router.push("/mocap")
+  },
     // 重置验证码
     refreshCode() {
       this.identifyCode = "";

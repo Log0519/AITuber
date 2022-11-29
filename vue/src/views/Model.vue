@@ -1,9 +1,5 @@
 <template>
-
-
       <div class="page-background">
-
-
         <div class="user-models-header">
           <p>用户模型</p>
           <el-button class="addModel" round>导入模型</el-button>
@@ -24,13 +20,7 @@
             </li>
           </ur>
         </el-container>
-
       </div>
-
-
-
-
-
 </template>
 
 

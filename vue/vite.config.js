@@ -11,7 +11,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  server: {                //记住，别写错了devServer//设置本地默认端口  选填
+  server: {
     host: 'localhost', port:9876,
     proxy: {                 //设置代理，必须填
       '/api': {              //设置拦截器  拦截器格式   斜杠+拦截器名字，名字可以自己定

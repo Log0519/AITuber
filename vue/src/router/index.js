@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Layout from "../layout/Layout.vue";
-import HomeView from "../views/HomeView.vue"
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Model from "../views/Model.vue";
-import Mocap from "../views/Mocap.vue";
+import MocapNo from "../views/MocapNo.vue";
 import ModelScene from "../views/ModelScene.vue";
+import Mocap from "../views/Mocap.vue";
 
 
 
@@ -17,14 +17,9 @@ const routes = [
     redirect:'/login',
     children:[
       {
-        path: '/home',
-        name: 'HomeView',
-        component: HomeView,
-      },
-      {
-        path: '/mocap',
-        name: 'mocap',
-        component: Mocap,
+        path: '/mocapNo',
+        name: 'mocapNo',
+        component: MocapNo,
       },
       {
         path: '/modelscene',
@@ -35,6 +30,11 @@ const routes = [
         path: '/model',
         name: 'Model',
         component: Model,
+      },
+      {
+        path: '/mocap',
+        name: 'Mocap',
+        component: Mocap,
       },
     ]
   },

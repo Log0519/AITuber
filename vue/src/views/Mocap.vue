@@ -1,152 +1,96 @@
 <template>
-  <body>
-  <!-- virtual 3d model show here -->
-  <div
-      id="model"
-      style="
-                width: 48%;
-                border: solid 1px #ccc;
-                border-radius: 10px;
-                height: fit-content;
-                top: 10px;
-                left: 10px;
-                overflow: hidden;
-                position: fixed;
-            "
-  ></div>
 
-  <div id="status" style="position: absolute; bottom: 140px">
-            <span style="position: absolute; left: 10px; font-size: 12px"
-            >Render</span
-            >
-    <span style="position: absolute; left: 100px; font-size: 12px"
-    >Mocap</span
-    >
+  <div style="margin-left: 100px;display: flex" >
+    <div class="window1" >
+
+    </div>
+    <div class="window2" >
+  <div style="margin: 1px">
+    <div style="margin: 0px 0px 0px 10px" class="camera_outer">
+        <embed :src="src" width=650px height=500px />
+    </div>
+
+  <div style="margin-top: 10px;margin-left: 20px">
+    <el-button  v-if="os" @click="openCamera" size="large" style="font-size: 19px">开始面捕</el-button>
+    <el-button  v-else @click="stopCamera"  size="large" style="font-size: 19px">停止面捕</el-button>
+    <el-button :disabled="os"  v-if="record" @click="beginRecord" size="large" style="font-size: 19px">录制</el-button>
+    <el-button  v-else @click="stopRecord" size="large" style="font-size: 19px">停止</el-button>
   </div>
 
-  <div
-      id="controller"
-      style="position: absolute; bottom: 95px; right: 20px"
-  >
-    <div
-        style="
-                    display: inline-block;
-                    margin-left: -85px;
-                    color: #777;
-                    position: absolute;
-                "
-    >
-      <i
-          class="mdui-icon material-icons"
-          style="transform: scale(0.8)"
-      >videocam</i
-      ><span style="font-size: 12px; margin-left: 5px">相机视角</span>
     </div>
-    <div
-        class="targetButton mdui-ripple"
-        v-bind:class="{'mdui-color-theme':target == 'full'}"
-        onclick="changeTarget('full')"
-    >
-      <div class="my-icon">
-        <i
-            class="mdui-icon material-icons"
-            style="transform: scale(0.8); margin-top: -3px"
-        >accessibility</i
-        >
-      </div>
-      <span>全身</span>
-    </div>
-    <div
-        class="targetButton mdui-ripple"
-        v-bind:class="{'mdui-color-theme':target == 'half'}"
-        onclick="changeTarget('half')"
-    >
-      <div class="my-icon">
-        <i
-            class="mdui-icon material-icons"
-            style="transform: scale(1.2); margin-top: 3px"
-        >accessibility</i
-        >
-      </div>
-      <span>半身</span>
-    </div>
-    <div
-        class="targetButton mdui-ripple"
-        v-bind:class="{'mdui-color-theme':target == 'face'}"
-        onclick="changeTarget('face')"
-    >
-      <div class="my-icon">
-        <i
-            class="mdui-icon material-icons"
-            style="transform: scale(1.2)"
-        >person</i
-        >
-      </div>
-      <span>特写</span>
     </div>
   </div>
-
-  <div
-      style="
-                position: fixed;
-                left: calc(50vw - 100px);
-                bottom: 80px;
-                width: 200px;
-                height: 40px;
-                border-radius: 20px;
-                background-color: #fffe;
-            "
-      class="mdui-shadow-5"
-      id="loading"
-  >
-    <div
-        class="mdui-spinner mdui-spinner-colorful"
-        style="margin: 10px 15px; width: 20px; height: 20px"
-    ></div>
-    <span
-        style="
-                    line-height: 40px;
-                    position: fixed;
-                    color: #555;
-                    font-size: 14px;
-                    margin-left: -3px;
-                "
-    >初始化动作捕捉引擎…</span
-    >
-  </div>
-
-  <div
-      id="recording"
-      style="
-                position: fixed;
-                bottom: 20px;
-                height: 40px;
-                width: 200px;
-                background-color: #a40601;
-                left: calc(50% - 100px);
-                border-radius: 20px;
-                text-align: center;
-                line-height: 40px;
-                display: none;
-                color: #fff;
-            "
-  >
-    正在录制，按R键停止
-  </div>
-
-  <canvas
-      id="background-canvas"
-      style="position: absolute; top: -99999999px; left: -9999999999px"
-  ></canvas>
-  </body>
 </template>
-
 <script>
+
 export default {
-  name: "Mocap"
-}
+  name: "mocap",
+  data() {
+    return {
+      os: true,//控制摄像头开关
+      record:true,
+      videoWidth: 500,
+      videoHeight: 400,
+      src:''
+    };
+  },
+  created() {
+  },
+  mounted() {
+  },
+  methods: {
+    beginRecord(){
+      this.record=false;
+      },
+    stopRecord(){
+      this.record=true;
+    },
+    // 调用摄像头权限
+    openCamera() {
+      //必须在model中render后才可获取到dom节点,直接获取无法获取到model中的dom节点
+      this.$nextTick(() => {
+        const _this = this;
+        this.os = false;//切换成关闭摄像头
+        this.src="./src/views/mocap.html"
+        this.record=true;
+
+      });
+    },
+    //关闭摄像头
+    stopCamera() {
+        this.os = true;//切换成打开摄像头
+        this.record=true;
+        this.src=''
+
+    },
+  }
+};
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.window1{
+  margin: 20px 0px 0px 80px;
+  background-color: rgba(255, 255, 255, 0.27);
+  border-radius: 10px;
+  border: 1px solid #aaa;
+  width: 660px;
+  height: 600px;
+  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
+}
+//人物视角窗口window2
+.window2{
+  margin: 20px;
+  background-color: rgba(255, 255, 255, 0.27);
+  border-radius: 10px;
+  border: 1px solid #aaa;
+  width: 660px;
+  height: 600px;
+  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
+}
+.camera_outer{
+    -moz-transform:scaleX(-1);
+    -webkit-transform:scaleX(-1);
+    -o-transform:scaleX(-1);
+    transform:scaleX(-1);
+}
 </style>
