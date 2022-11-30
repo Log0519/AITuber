@@ -1,5 +1,10 @@
 <template>
-      <div class="page-background">
+<!--  侧边栏-->
+  <div >
+    <ModelSidebar/>
+<!--    主体-->
+  </div>
+      <div class="page-background" style="width:100%;margin-top: 20px">
         <div class="user-models-header">
           <p>用户模型</p>
           <el-button class="addModel" round>导入模型</el-button>
@@ -26,10 +31,13 @@
 
 <script>
 import './css/Model.css'
-
+import ModelSidebar from "../components/ModelSidebar.vue";
 
 export default {
-  name: "Model"
+  name: "Model",
+  components:{
+    ModelSidebar
+  }
 }
 </script>
 

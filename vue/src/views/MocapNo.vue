@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-left: 250px;display: flex" >
+  <div style="display: flex" >
     <div class="window1" >
     </div>
     <div class="window2" >
@@ -19,16 +19,6 @@
   </div>
 </template>
 <script>
-import * as facemesh from '@tensorflow-models/facemesh';
-//  import * as handPoseDetection from '@tensorflow-models/hand-pose-detection';
-// const model = handPoseDetection.SupportedModels.MediaPipeHands;
-// const detectorConfig = {
-//   runtime: 'mediapipe', // or 'tfjs'
-//   modelType: 'full'
-// };
-// let detector = await handPoseDetection.createDetector(model, detectorConfig);
-// // const video = document.getElementById('videoCamera');
-// // const hands = await detector.estimateHands(video);
 export default {
   name: "mocapNo",
   data() {

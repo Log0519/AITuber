@@ -1,8 +1,20 @@
 <template>
-
-  <div style="margin-left: 100px;display: flex" >
+<!--侧边栏-->
+  <div>
+    <MocapSidebar/>
+  </div>
+<!--  主体-->
+  <div class="body" style="display: flex" >
     <div class="window1" >
-
+      <el-select id="1" v-model="value" placeholder="选择模型" style="width: 100px;margin:10px 30px">
+        <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+        >
+        </el-option>
+      </el-select>
     </div>
     <div class="window2" >
   <div style="margin: 1px">
@@ -16,15 +28,18 @@
     <el-button :disabled="os"  v-if="record" @click="beginRecord" size="large" style="font-size: 19px">录制</el-button>
     <el-button  v-else @click="stopRecord" size="large" style="font-size: 19px">停止</el-button>
   </div>
-
     </div>
     </div>
   </div>
 </template>
 <script>
+import MocapSidebar from "../components/MocapSidebar.vue";
 
 export default {
   name: "mocap",
+  components:{
+    MocapSidebar
+  },
   data() {
     return {
       os: true,//控制摄像头开关
@@ -69,7 +84,7 @@ export default {
 
 <style lang="scss" scoped>
 .window1{
-  margin: 20px 0px 0px 80px;
+  margin: 20px 0px 0px 20px;
   background-color: rgba(255, 255, 255, 0.27);
   border-radius: 10px;
   border: 1px solid #aaa;
