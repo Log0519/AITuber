@@ -1,13 +1,9 @@
 <template>
   <div style="width: 100%;height: 100vh;overflow:hidden">
-    <div style="width: 400px;margin: 100px auto;
-    background-color: rgba(255, 255, 255, 0.27);
-    border-radius: 10px;
-    border: 1px solid #aaa;
-    width: 500px;
-    height: 300px;
-    box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);">
-      <div style="color: #51b1f8;font-size: 30px;font-weight: bold;text-align: center;padding: 30px">
+    <div class="register">
+      <div class="register-content">
+    <div >
+      <div style="color: #ef73d3;font-size: 30px;font-weight: bold;text-align: center;padding: 30px">
         欢迎注册
 
       </div>
@@ -29,11 +25,14 @@
       </el-form>
     </div>
   </div>
+    </div>
+  </div>
 
 </template>
 
 <script>
 import request from "../utils/request";
+import './css/login.css'
 
 export default {
   name: "Register",

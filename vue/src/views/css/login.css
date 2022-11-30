@@ -1,7 +1,7 @@
 :root {
     --clr: rgb(194, 236, 210);
     --b-clr1: rgb(110, 245, 234);
-    --b-clr2: rgb(250, 159, 177);
+    --b-clr2: rgb(241, 172, 187);
 }
 
 body{
@@ -29,12 +29,38 @@ body{
     border-radius: 24px;
     border: 1px solid #aaa;
     width: 500px;
-    height: 350px;
+    height: 340px;
+    z-index: 1;
+    box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
+    overflow: hidden;
+}
+.register {
+    position: relative;
+    content: '';
+    margin: 100px auto;
+    /*background-color: rgba(255, 255, 255, 0.27);*/
+    background:linear-gradient(transparent,transparent,var(--b-clr1));
+    border-radius: 24px;
+    border: 1px solid #aaa;
+    width: 512.5px;
+    height: 302px;
     z-index: 1;
     box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
     overflow: hidden;
 }
 .login::before{
+    content:'';
+    width: 350px;
+    height: 490px;
+    background: linear-gradient(transparent,transparent,var(--b-clr1));
+    position: absolute;
+    animation: myAnimate 2s linear infinite;
+    transform-origin: bottom left;
+    top:-95%;
+    left:+50%;
+    z-index: -1;
+}
+.register::before{
     content:'';
     width: 350px;
     height: 500px;
@@ -47,6 +73,19 @@ body{
     z-index: -1;
 }
 .login::after{
+    content:'';
+    width: 350px;
+    height: 490px;
+    background: linear-gradient(var(--b-clr2),transparent,transparent);
+    position: absolute;
+    animation: myAnimate 2s linear infinite;
+    transform-origin: top right;
+    top:+50%;
+    left:-20%;
+    z-index: -1;
+
+}
+.register::after{
     content:'';
     width: 350px;
     height: 500px;
@@ -70,8 +109,20 @@ body{
 .content{
     color: #fff;
     width: 490px;
-    height: 340px;
-    background: var(--clr);
+    height: 328px;
+    background: linear-gradient(150deg, #fdc3ec, #fef9d7);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    flex-direction: column;
+    z-index: 2;
+}
+.register-content{
+    color: #fff;
+    width: 500px;
+    height: 290px;
+    background: linear-gradient(150deg, #fdc3ec, #fef9d7);
     border-radius: 20px;
     display: flex;
     justify-content: center;
