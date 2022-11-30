@@ -2,8 +2,8 @@
   <div style="width: 100%;height: 100vh;overflow:hidden">
     <div class="login">
       <div class="content">
-      <div style="color: #51b1f8;font-size: 30px;font-weight: bold;text-align: center;padding: 30px">
-<!--        天气查询系统-->
+      <div style="color: #ef73d3;font-size: 30px;font-weight: bold;text-align: center;padding: 30px">
+      AI数字人
       </div>
       <el-form ref="form" :model="form" size="normal" style="width: 60%;margin-left: 83px"
       :rules="rules">
