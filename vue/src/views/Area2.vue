@@ -1,7 +1,7 @@
 <template>
 <!--侧边栏-->
   <div>
-    <AreaSidebar/>
+    <AreaSidebar2/>
   </div>
 <!--  主体-->
   <div class="back" >
@@ -19,14 +19,14 @@
 
 </template>
 <script>
-import AreaSidebar from "../components/AreaSidebar.vue";
+import AreaSidebar2 from "../components/AreaSidebar2.vue";
 import {Headset} from "@element-plus/icons";
 
 export default {
   name: "area",
   components:{
     Headset,
-    AreaSidebar
+    AreaSidebar2
   },
   data() {
     return {

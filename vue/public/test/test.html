@@ -9,8 +9,8 @@
 </head>
 <body>
 <div class="container">
-    <video class="input_video" hidden></video>
-    <canvas class="output_canvas" width="640px" height="470px"></canvas>
+    <video class="input_video"></video>
+    <canvas class="output_canvas" width="1280px" height="720px"></canvas>
 </div>
 </body>
 </html>
@@ -22,13 +22,12 @@
     function onResults(results) {
         canvasCtx.save();
         canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-        //绘制热像
         // canvasCtx.drawImage(results.segmentationMask, 0, 0,
         //     canvasElement.width, canvasElement.height);
 
         // Only overwrite existing pixels.
         canvasCtx.globalCompositeOperation = 'source-in';
-        // canvasCtx.fillStyle = '#00FF00';
+       // canvasCtx.fillStyle = '#00FF00';
         canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
 
         // Only overwrite missing pixels.
@@ -37,21 +36,20 @@
             results.image, 0, 0, canvasElement.width, canvasElement.height);
 
         canvasCtx.globalCompositeOperation = 'source-over';
-        //绘制逻辑
         drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
-            {color: 'rgba(0,255,19,0.5)', lineWidth: 2});
-        // drawLandmarks(canvasCtx, results.poseLandmarks,
-        //     {color: '#FF0000', lineWidth: 1});
+            {color: '#00FF00', lineWidth: 4});
+        drawLandmarks(canvasCtx, results.poseLandmarks,
+            {color: '#FF0000', lineWidth: 2});
         drawConnectors(canvasCtx, results.faceLandmarks, FACEMESH_TESSELATION,
-            {color: 'rgba(141,255,218,0.4)', lineWidth: 1});
+            {color: '#C0C0C070', lineWidth: 1});
         drawConnectors(canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS,
-            {color: '#00ccad', lineWidth: 2});
-        // drawLandmarks(canvasCtx, results.leftHandLandmarks,
-        //     {color: '#00FF00', lineWidth: 1});
+            {color: '#CC0000', lineWidth: 5});
+        drawLandmarks(canvasCtx, results.leftHandLandmarks,
+            {color: '#00FF00', lineWidth: 2});
         drawConnectors(canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS,
-            {color: '#00fdba', lineWidth: 2});
-        // drawLandmarks(canvasCtx, results.rightHandLandmarks,
-        //     {color: '#00ff00', lineWidth: 1});
+            {color: '#00CC00', lineWidth: 5});
+        drawLandmarks(canvasCtx, results.rightHandLandmarks,
+            {color: '#FF0000', lineWidth: 2});
         canvasCtx.restore();
     }
 
@@ -80,6 +78,10 @@
 
 </script>
 <style>
-
+    .output_canvas{
+        -moz-transform:scaleX(-1);
+        -webkit-transform:scaleX(-1);
+        -o-transform:scaleX(-1);
+        transform:scaleX(-1);
+    }
 </style>
-
