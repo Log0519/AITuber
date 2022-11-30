@@ -1,12 +1,15 @@
 <template>
 <!--侧边栏-->
-  <div>
-    <MocapSidebar/>
-  </div>
+<!--  <div>-->
+<!--    <MocapSidebar/>-->
+<!--  </div>-->
 <!--  主体-->
   <div class="body" style="display: flex" >
     <div class="window1" >
-      <el-select id="1" v-model="value" placeholder="选择模型" style="width: 100px;margin:10px 30px">
+      <div class="window1-left" style="width: 26%">
+      <div style="margin: 20px">
+        ⭐模型：
+      <el-select id="1" v-model="value" placeholder="选择模型" style="width: 100px;margin:10px 0px">
         <el-option
             v-for="item in options"
             :key="item.value"
@@ -15,6 +18,32 @@
         >
         </el-option>
       </el-select>
+      </div>
+        <!--    左-->
+        <div style="display: flex;margin: 20px">
+          <div style="font-size: 16px">
+            <div style="font-size: 20px">⭐声音:</div>
+            <div style="margin-top: 20px">1、文字转语音：
+              <el-input
+                  style="margin: 10px"
+                  placeholder="请输入内容"
+                  type="textarea"
+                  :autosize="{ minRows: 4, maxRows: 8}"
+                  v-model="inputWords"
+                  :disabled="flag">
+              </el-input>
+              <el-button style="margin-left: 115px">转化</el-button>
+            </div>
+            <div>2、导入音频：
+              <el-button style="margin: 10px">导入</el-button>
+            </div>
+            <div>3、实时传入：
+              <el-select style="margin: 10px"></el-select>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
     <div class="window2" >
   <div style="margin: 1px">
@@ -88,7 +117,7 @@ export default {
   background-color: rgba(255, 255, 255, 0.27);
   border-radius: 10px;
   border: 1px solid #aaa;
-  width: 660px;
+  width: 815px;
   height: 600px;
   box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
 }
