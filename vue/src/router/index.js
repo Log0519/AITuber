@@ -3,8 +3,14 @@ import Layout from "../layout/Layout.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Model from "../views/Model.vue";
-import Mocap from "../views/Mocap.vue";
+import MocapNo from "../views/MocapNo.vue";
 import ModelScene from "../views/ModelScene.vue";
+import Mocap from "../views/Mocap.vue";
+import Mocap1 from "../views/Mocap1.vue";
+import Area from "../views/Area.vue";
+import Area2 from "../views/Area2.vue";
+import AllSet from "../views/AllSet.vue";
+
 
 
 
@@ -16,9 +22,9 @@ const routes = [
     redirect:'/login',
     children:[
       {
-        path: '/mocap',
-        name: 'mocap',
-        component: Mocap,
+        path: '/mocapNo',
+        name: 'mocapNo',
+        component: MocapNo,
       },
       {
         path: '/modelscene',
@@ -29,6 +35,31 @@ const routes = [
         path: '/model',
         name: 'Model',
         component: Model,
+      },
+      {
+        path: '/mocap',
+        name: 'Mocap',
+        component: Mocap,
+      },
+      {
+        path: '/mocap1',
+        name: 'Mocap1',
+        component: Mocap1,
+      },
+      {
+        path: '/area2',
+        name: 'Area2',
+        component: Area2,
+      },
+      {
+        path: '/area',
+        name: 'Area',
+        component: Area,
+      },
+      {
+        path: '/allSet',
+        name: 'AllSet',
+        component: AllSet,
       },
     ]
   },

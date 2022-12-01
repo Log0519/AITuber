@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <video class="input_video" hidden></video>
+    <canvas class="output_canvas" width="640px" height="470px"></canvas>
+</div>
+</body>
+</html>
+<script type="module">
+    const videoElement = document.getElementsByClassName('input_video')[0];
+    const canvasElement = document.getElementsByClassName('output_canvas')[0];
+    const canvasCtx = canvasElement.getContext('2d');
+
+    function onResults(results) {
+        canvasCtx.save();
+        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        //绘制热像
+        // canvasCtx.drawImage(results.segmentationMask, 0, 0,
+        //     canvasElement.width, canvasElement.height);
+
+        // Only overwrite existing pixels.
+        canvasCtx.globalCompositeOperation = 'source-in';
+        // canvasCtx.fillStyle = '#00FF00';
+        canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
+
+        // Only overwrite missing pixels.
+        canvasCtx.globalCompositeOperation = 'destination-atop';
+        canvasCtx.drawImage(
+            results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+        canvasCtx.globalCompositeOperation = 'source-over';
+        //绘制逻辑
+        drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
+            {color: 'rgba(0,255,19,0.5)', lineWidth: 2});
+        // drawLandmarks(canvasCtx, results.poseLandmarks,
+        //     {color: '#FF0000', lineWidth: 1});
+        drawConnectors(canvasCtx, results.faceLandmarks, FACEMESH_TESSELATION,
+            {color: 'rgba(141,255,218,0.4)', lineWidth: 1});
+        drawConnectors(canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS,
+            {color: '#00ccad', lineWidth: 2});
+        // drawLandmarks(canvasCtx, results.leftHandLandmarks,
+        //     {color: '#00FF00', lineWidth: 1});
+        drawConnectors(canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS,
+            {color: '#00fdba', lineWidth: 2});
+        // drawLandmarks(canvasCtx, results.rightHandLandmarks,
+        //     {color: '#00ff00', lineWidth: 1});
+        canvasCtx.restore();
+    }
+
+    const holistic = new Holistic({locateFile: (file) => {
+            return `https://cdn.jsdelivr.net/npm/@mediapipe/holistic/${file}`;
+        }});
+    holistic.setOptions({
+        modelComplexity: 1,
+        smoothLandmarks: true,
+        enableSegmentation: true,
+        smoothSegmentation: true,
+        refineFaceLandmarks: true,
+        minDetectionConfidence: 0.5,
+        minTrackingConfidence: 0.5
+    });
+    holistic.onResults(onResults);
+
+    const camera = new Camera(videoElement, {
+        onFrame: async () => {
+            await holistic.send({image: videoElement});
+        },
+        width: 1280,
+        height: 720
+    });
+    camera.start();
+
+</script>
+<style>
+
+</style>
+
