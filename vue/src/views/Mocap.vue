@@ -5,7 +5,7 @@
 <!--  </div>-->
 <!--  主体-->
   <div class="body" style="display: flex" >
-    <div class="window1" style="display: flex">
+    <div class="window1" >
       <div class="window1-left" style="width: 26%">
       <div style="margin: 20px">
         ⭐模型：
@@ -41,21 +41,14 @@
               <el-select style="margin: 10px"></el-select>
             </div>
           </div>
-
         </div>
+      </div>
 
-      </div>
-      <!--    右    >-->
-      <div class="window1-right" style="width: 76%">
-        <div class="window-model" style="width: 300px;height: 370px"></div>
-        <danmuTest style="font-size: 16px;background-color: rgba(236,223,253,0.45);color: #635773"/>
-      </div>
     </div>
-
     <div class="window2" >
   <div style="margin: 1px">
     <div style="margin: 0px 0px 0px 10px" class="camera_outer">
-        <embed :src="src" width=650px height=390px />
+        <embed :src="src" width=650px height=500px />
     </div>
 
   <div style="margin-top: 10px;margin-left: 20px">
@@ -70,13 +63,11 @@
 </template>
 <script>
 import MocapSidebar from "../components/MocapSidebar.vue";
-import danmuTest from "../components/danmuTest.vue";
 
 export default {
   name: "mocap",
   components:{
-    MocapSidebar,
-    danmuTest
+    MocapSidebar
   },
   data() {
     return {

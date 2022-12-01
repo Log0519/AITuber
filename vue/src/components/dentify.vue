@@ -57,7 +57,6 @@ export default {
       default: 38,
     },
   },
-
   methods: {
     // 生成一个随机数
     randomNum(min, max) {
