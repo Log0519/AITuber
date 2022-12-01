@@ -15,7 +15,8 @@ function setup() {
     // with an array every time new predictions are made
     facemesh.on("predict", results => {
         predictions = results;
-    })
+    });
+
     // Hide the video element, and just show the canvas
     video.hide();
 }
