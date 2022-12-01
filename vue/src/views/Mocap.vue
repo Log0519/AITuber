@@ -55,10 +55,10 @@
     <div class="window2" >
   <div style="margin: 1px">
     <div style="margin: 0px 0px 0px 10px" class="camera_outer">
-        <embed :src="src" width=650px height=390px />
+        <embed :src="src" width=650px height=435px />
     </div>
 
-  <div style="margin-top: 10px;margin-left: 20px">
+  <div style="margin-top: 0px;margin-left: 20px">
     <el-button  v-if="os" @click="openCamera" size="large" style="font-size: 19px">开始面捕</el-button>
     <el-button  v-else @click="stopCamera"  size="large" style="font-size: 19px">停止面捕</el-button>
     <el-button :disabled="os"  v-if="record" @click="beginRecord" size="large" style="font-size: 19px">录制</el-button>

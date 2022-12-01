@@ -57,7 +57,7 @@ export default {
         this.items.push(this.items[0])
         this.items.shift()
         this.animateUp = false
-      }, 200)
+      }, 190)
     },
     stopFn(){
       clearInterval(this.timer)
