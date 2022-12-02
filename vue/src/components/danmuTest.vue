@@ -3,9 +3,19 @@
   <div class="message-page">
     <div class="msg-tit">
       <div class="msg-top">
-        <div class="tit-word">消息通知</div>
-        <div class="tit-word" style="margin-left: 30px">实时告警</div>
-        <el-button style="margin-left: 340px" @click="openSetWindow">回复管理</el-button>
+        <div class="tit-word">
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">消息通知</el-button>
+        </div>
+        <div class="tit-word" style="margin-left: 30px;">
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">实时告警</el-button>
+        </div>
+        <div class="tit-word" style="margin-left: 30px;">
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">频繁问题</el-button>
+        </div>
+        <div class="tit-word" style="margin-left: 30px;">
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">活跃用户</el-button>
+        </div>
+        <el-button style="margin-left: 75px;font-size: 14px;background-color: rgba(254,249,215,0)" text @click="openSetWindow">管理 >></el-button>
       </div>
       <div class="msg-line"></div>
       <div class="marquee-wrap">
@@ -54,13 +64,13 @@ export default {
   computed: {
     fontStyle(){
       const _site = {
-        'color':'#7b6988',
+        'color':'#635879',
       }
       return _site
     },
     fontStyle2(){
       const _site = {
-        'color':'#cb365b',
+        'color':'#dc2958',
       }
       return _site
     },
@@ -70,7 +80,7 @@ export default {
   },
   methods:{
     openChangeWindow(name,answer){
-      this.$prompt('问题：'+name, '已设置的自动回复', {
+      this.$prompt('问题：'+name, '详情', {
         inputValue:answer,
         confirmButtonText: '确认修改',
         cancelButtonText: '取消',
@@ -110,7 +120,7 @@ export default {
       clearInterval(this.timer)
     },
     startFn(){
-      this.timer = setInterval(this.scrollAnimate, 1500);
+      this.timer = setInterval(this.scrollAnimate, 1300);
     }
   },
   destroyed() {

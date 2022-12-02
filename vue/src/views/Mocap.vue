@@ -59,8 +59,8 @@
     </div>
 
   <div style="margin-top: 0px;margin-left: 20px">
-    <el-button  v-if="os" @click="openCamera" size="large" style="font-size: 19px">开始面捕</el-button>
-    <el-button  v-else @click="stopCamera"  size="large" style="font-size: 19px">停止面捕</el-button>
+    <el-button  v-if="os" @click="openCamera" size="large" style="font-size: 19px">开始捕捉</el-button>
+    <el-button  v-else @click="stopCamera"  size="large" style="font-size: 19px">停止捕捉</el-button>
     <el-button :disabled="os"  v-if="record" @click="beginRecord" size="large" style="font-size: 19px">录制</el-button>
     <el-button  v-else @click="stopRecord" size="large" style="font-size: 19px">停止</el-button>
   </div>
@@ -116,7 +116,7 @@ export default {
     stopCamera() {
         this.os = true;//切换成打开摄像头
         this.record=true;
-        this.src=''
+        this.src='-'
 
     },
   }

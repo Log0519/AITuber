@@ -2,10 +2,10 @@
   <div style="position: relative; margin: 0px auto; width: auto;height: 60px;justify-content: center;align-content: center;display: block;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)" >
     <div class="button-container" style="margin: auto;width: 650px;display: block" >
       <el-button type="primary" @click="goModel" style="width: 100px; height: 40px; background-color:white;margin-top: 10px; font-size: 18px; color: #181818; line-height: 40px" round>模型</el-button>
-      <el-button type="primary" @click="goMocap" style="width: 100px; height: 40px; background-color:white; margin-top: 10px; font-size: 18px; color: #181818; line-height: 40px" round>面捕</el-button>
+      <el-button type="primary" @click="goMocap" style="width: 100px; height: 40px; background-color:white; margin-top: 10px; font-size: 18px; color: #181818; line-height: 40px" round>捕捉</el-button>
       <el-button type="primary" @click="goArea" style="width: 100px;  height: 40px; background-color:white; margin-top: 10px; font-size: 18px; color: #181818; line-height: 40px" round>房间</el-button>
       <el-button type="primary" @click="goAllSet" style="width: 100px;  height: 40px; background-color:white; margin-top: 10px; font-size: 18px; color: #181818; line-height: 40px" round>设置</el-button>
-      <el-button type="primary" @click="goNoMocap" style="width: 100px;  height: 40px; background-color:white; margin-top: 10px; font-size: 18px; color: #181818; line-height: 40px" round>无面捕</el-button>
+      <el-button type="primary" @click="goNoMocap" style="width: 100px;  height: 40px; background-color:white; margin-top: 10px; font-size: 18px; color: #181818; line-height: 40px" round>无捕</el-button>
     </div>
 
   </div>

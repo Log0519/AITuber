@@ -7,7 +7,9 @@
   <div class="back" >
 <!--    主要内容-->
   <div  style="margin-top: 10px;margin-left: 20px">
-  <div style="text-align: center;font-size: 30px">商家房间列表</div>
+  <div style="margin-left:570px;font-size: 30px">商家房间列表
+    <el-button type="primary" style="width: 90px; height: 30px; background-color:white;margin-left: 200px; font-size: 18px; color: #181818; line-height: 40px" round>创建房间</el-button>
+  </div>
     <!--    房间列表-->
     <div class="homes" style="text-align: center;font-size: 30px">
 
