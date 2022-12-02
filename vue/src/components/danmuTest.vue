@@ -99,7 +99,7 @@ export default {
       });
     },
     scrollAnimate() {
-      this.animateUp = true
+      this.animateUp = false
       setTimeout(() => {
         this.items.push(this.items[0])
         this.items.shift()
