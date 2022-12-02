@@ -4,38 +4,47 @@
     <div class="msg-tit">
       <div class="msg-top">
         <div class="tit-word">消息通知</div>
+        <div class="tit-word" style="margin-left: 30px">实时告警</div>
+        <el-button style="margin-left: 340px" @click="openSetWindow">回复管理</el-button>
       </div>
       <div class="msg-line"></div>
       <div class="marquee-wrap">
         <ul class="marquee-list" :class="{'animate-up': animateUp}" @mouseenter="stopFn" @mouseleave="startFn">
           <li   v-for="(item, index) in items" :key="index">
-              <p style="font-size: 14px" class="p-word">
+              <p v-if="item.flag" :style="fontStyle" class="p-word">
               {{'('+item.state+')'}}  {{'---"'+item.name+'"---'}} {{item.time}}
+                <el-button @click="openChangeWindow(item.name,item.answer)" style="max-height: 10px;max-width: 30px;background-color: rgba(254,249,215,0)" text>详情</el-button>
               </p>
+            <p v-else :style="fontStyle2" class="p-word">
+              {{'('+item.state+')'}}  {{'---"'+item.name+'"---'}} {{item.time}}
+              <el-button @click="openChangeWindow(item.name,item.answer)" style="max-height: 10px;max-width: 30px;color: #e33d60;background-color: rgba(254,249,215,0)" text> 详情</el-button>
+            </p>
           </li>
         </ul>
       </div>
     </div>
+
   </div>
+
 </template>
 
 <script>
-
 export default {
   name: 'MessagePage',
   data(){
     return{
+      dialogVisible: false,
+      formLabelWidth: '120px',
       items:[
-          {'state':"自动",'name': "这个商品打折吗",'time':"2022-12-1 11:04:17"},
-          {'state':"未解决",'name': "今天天气怎么样",'time':"2022-12-1 12:08:06"},
-          {'state':"未解决",'name': "预计多久发售呢",'time':"2022-12-1 12:12:53"},
-          {'state':"自动",'name': "这个商品打折吗",'time':"2022-12-1 12:14:41"},
-          {'state':"未解决",'name': "疫情期间可以发货吗",'time':"2022-12-1 12:25:26"},
-          {'state':"自动",'name': "双十一活动吗",'time':"2022-12-1 12:46:13"},
-          {'state':"自动",'name': "商品有保险吗",'time':"2022-12-1 13:16:41"},
-          {'state':"未解决",'name': "这个有其他颜色的吗",'time':"2022-12-1 13:17:32"},
-          {'state':"未解决",'name': "这个销量怎么样子",'time':"2022-12-1 13:17:59"},
-          {'state':"自动",'name': "七天包退换吗",'time':"2022-12-1 13:18:41"},
+          {'flag':false,'state':'未解决','name': "今天天气怎么样",'time':"2022-12-1 12:08:06",'answer':''},
+          {'flag':true,'state':"自动",'name': "预计多久发售呢",'time':"2022-12-1 12:12:53",'answer':'12月份就会发售'},
+          {'flag':true,'state':"自动",'name': "这个商品打折吗",'time':"2022-12-1 12:14:41",'answer':'新品不打折哟'},
+          {'flag':false,'state':"未解决",'name': "疫情期间可以发货吗",'time':"2022-12-1 12:25:26",'answer':''},
+          {'flag':true,'state':"自动",'name': "双十一活动吗",'time':"2022-12-1 12:46:13",'answer':'双十一活动暂时还没确定'},
+          {'flag':true,'state':"自动",'name': "商品有保险吗",'time':"2022-12-1 13:16:41",'answer':'有的'},
+          {'flag':true,'state':"自动",'name': "这个有其他颜色的吗",'time':"2022-12-1 13:17:32",'answer':'这个有红色和白色'},
+          {'flag':false,'state':"未解决",'name': "这个销量怎么样子",'time':"2022-12-1 13:17:59",'answer':''},
+          {'flag':true,'state':"自动",'name': "七天包退换吗",'time':"2022-12-1 13:18:41",'answer':'是的'},
       ],
       animateUp: false,
       timer: null
@@ -43,14 +52,52 @@ export default {
 
   },
   computed: {
-    /*top () {
-      return -this.activeIndex * 50 + 'px'
-    }*/
+    fontStyle(){
+      const _site = {
+        'color':'#7b6988',
+      }
+      return _site
+    },
+    fontStyle2(){
+      const _site = {
+        'color':'#cb365b',
+      }
+      return _site
+    },
   },
   created() {
     this.timer = setInterval(this.scrollAnimate, 1300);
   },
   methods:{
+    openChangeWindow(name,answer){
+      this.$prompt('问题：'+name, '已设置的自动回复', {
+        inputValue:answer,
+        confirmButtonText: '确认修改',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        this.$message({
+          type: 'success',
+          message: '修改成功: '
+        });
+      });
+    },
+    openSetWindow(){
+      this.$prompt('修改', '已设置的自动回复', {
+        inputType:'ew',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        this.$message({
+          type: 'success',
+          message: '修改成功'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消修改'
+        });
+      });
+    },
     scrollAnimate() {
       this.animateUp = true
       setTimeout(() => {
@@ -83,10 +130,9 @@ export default {
   overflow: hidden;
   /**/
   .msg-tit{
-    padding: 5px 5px 5px 5px;
+    padding: 6px 5px 5px 10px;
     .msg-top{
       display: flex;
-      justify-content: space-between;
     }
     .msg-line{
       width: 580px;
@@ -114,7 +160,7 @@ export default {
             margin-top: 8px;
             font-size: 14px;
             font-family: PingFangSC-Regular, PingFang SC;
-            color: #614d73;
+
             height: 16px;
             line-height: 18px;
             width: 767px;

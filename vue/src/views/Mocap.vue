@@ -67,7 +67,10 @@
     </div>
     </div>
   </div>
+
 </template>
+
+
 <script>
 import MocapSidebar from "../components/MocapSidebar.vue";
 import danmuTest from "../components/danmuTest.vue";
@@ -84,7 +87,7 @@ export default {
       record:true,
       videoWidth: 500,
       videoHeight: 400,
-      src:''
+      src:'',
     };
   },
   created() {
