@@ -4,7 +4,7 @@
     <div class="msg-tit">
       <div class="msg-top">
         <div class="tit-word">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">消息通知</el-button>
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">历史消息</el-button>
         </div>
         <div class="tit-word" style="margin-left: 30px;">
           <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">实时告警</el-button>

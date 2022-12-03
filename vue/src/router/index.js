@@ -10,6 +10,7 @@ import Mocap1 from "../views/Mocap1.vue";
 import Area from "../views/Area.vue";
 import Area2 from "../views/Area2.vue";
 import AllSet from "../views/AllSet.vue";
+import DatasView from "../views/DatasView.vue";
 
 
 
@@ -60,6 +61,11 @@ const routes = [
         path: '/allSet',
         name: 'AllSet',
         component: AllSet,
+      },
+      {
+        path: '/datasView',
+        name: 'DatasView',
+        component: DatasView,
       },
     ]
   },
