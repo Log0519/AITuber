@@ -52,11 +52,14 @@
       </div>
     </div>
 
+
     <div class="window2" >
   <div style="margin: 1px">
     <div style="margin: 0px 0px 0px 10px" class="camera_outer">
         <embed :src="src" width=650px height=435px />
+
     </div>
+
 
   <div style="margin-top: 0px;margin-left: 20px">
     <el-button  v-if="os" @click="openCamera" size="large" style="font-size: 19px">开始捕捉</el-button>
