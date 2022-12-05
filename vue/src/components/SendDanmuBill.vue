@@ -1,20 +1,20 @@
 <template>
   <div id="sse">
-    <div>
+    <div style="display: flex;font-size: 16px">
       <span>url:</span>
-      <input type="text" id="url" value="wss://broadcastlv.chat.bilibili.com/sub">
+      <el-input type="text" id="url" value="wss://broadcastlv.chat.bilibili.com/sub" style="width: 40%;margin-left: 10px"> </el-input>
     </div>
-    <div>
-      <span>roomid:</span>
-      <input type="text" id="roomid" value="1440094">
+    <div style="display: flex;font-size: 16px;margin-top: 5px">
+      房间 roomid:
+      <el-input type="text" id="roomid" value="1440094" style="width: 13%;margin-left: 10px"></el-input>
     </div>
     <!-- <div>
         <span>key</span>
         <textarea id="key" cols="30" rows="10">81p2t7xxh6MmAz0pCFZxcbNglVd8Ao846GHF1S9BHEvfh_REfuOxWugDtqgqPnPYQhfSCCsB8ghzV5Y2Urb5FaZW-2pmO7q0Fsm32hxueRt9Yi-OPsV-Bp5lxothWUejvkIOiRHyN__MO5co</textarea>
     </div> -->
     <div>
-      <el-button @click="getDanmu">运行WebSocket</el-button>
-      <el-button @click="stopDanmu">停止WebSocket</el-button>
+      <el-button @click="getDanmu">实时获取</el-button>
+      <el-button @click="stopDanmu">停止获取</el-button>
     </div>
   </div>
 </template>
@@ -24,9 +24,15 @@
   import request from "../utils/request";
 
   export default {
-  name: "DanmuTest",
+  name: "sendDanmuBill",
     methods:{
     stopDanmu(){
+      if(flag===true){
+        ws.close()
+        flag=false;
+      }else {
+        console.log("连接未打开")
+      }
 
     },
     getDanmu(){
@@ -35,20 +41,8 @@
     }
   }
   var timer = null;
+  var flag=false;
   var ws;
-
-  class Danmu {
-      _neirong
-
-    get neirong() {
-      return this._neirong;
-    }
-
-    set neirong(value) {
-      this._neirong = value;
-    }
-  }
-
 
   function WebSocketTest() {
   var roomid = document.getElementById("roomid").value;
@@ -73,6 +67,7 @@
   ws.close()
   // 打开一个 web socket
   ws = new WebSocket(url);
+  flag=true;
 
   // WebSocket连接成功回调
   ws.onopen = function () {

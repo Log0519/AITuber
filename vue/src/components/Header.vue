@@ -7,7 +7,6 @@
       <el-button type="primary" @click="goAllSet" style="width: 100px;  height: 40px; background-color:white; margin-top: 10px; font-size: 18px; color: #181818; line-height: 40px" round>设置</el-button>
       <el-button type="primary" @click="goNoMocap" style="width: 100px;  height: 40px; background-color:white; margin-top: 10px; font-size: 18px; color: #181818; line-height: 40px" round>无捕</el-button>
       <el-button type="primary" @click="goDatasView" style="width: 100px;  height: 40px; background-color:white; margin-top: 10px; font-size: 18px; color: #181818; line-height: 40px" round>数据面板</el-button>
-      <el-button type="primary" @click="goDanmu" style="width: 100px;  height: 40px; background-color:white; margin-top: 10px; font-size: 18px; color: #181818; line-height: 40px" round>获取弹幕</el-button>
       <el-button type="primary" @click="returnLogin" style="width: 80px; margin-left: 280px; height: 30px; background-color:white; margin-top: 10px; font-size: 15px; color: #181818; line-height: 40px" round>退出登录</el-button>
     </div>
 
@@ -49,9 +48,6 @@ export default {
     },
     goDatasView(){
       this.$router.push("/datasView")
-    },
-    goDanmu(){
-      this.$router.push("/danmuTest")
     },
   }
 }

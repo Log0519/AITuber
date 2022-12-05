@@ -11,7 +11,7 @@ import Area from "../views/Area.vue";
 import Area2 from "../views/Area2.vue";
 import AllSet from "../views/AllSet.vue";
 import DatasView from "../views/DatasView.vue";
-import DanmuTest from "../views/DanmuTest.vue";
+
 
 
 
@@ -67,11 +67,6 @@ const routes = [
         path: '/datasView',
         name: 'DatasView',
         component: DatasView,
-      },
-      {
-        path: '/danmuTest',
-        name: 'DanmuTest',
-        component: DanmuTest,
       },
     ]
   },

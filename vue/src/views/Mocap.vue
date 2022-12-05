@@ -47,7 +47,8 @@
       </div>
       <!--    右    >-->
       <div class="window1-right" style="width: 76%">
-        <div class="window-model" style="width: 300px;height: 370px"></div>
+        <div class="window-model" style="width: 300px;height: 270px"></div>
+        <SendDanmuBill/>
         <danmuTest style="font-size: 16px;background-color: rgba(236,223,253,0.45);color: #635773"/>
       </div>
     </div>
@@ -77,10 +78,12 @@
 <script>
 import MocapSidebar from "../components/MocapSidebar.vue";
 import danmuTest from "../components/danmuTest.vue";
+import SendDanmuBill from "../components/SendDanmuBill.vue";
 
 export default {
   name: "mocap",
   components:{
+    SendDanmuBill,
     MocapSidebar,
     danmuTest
   },
