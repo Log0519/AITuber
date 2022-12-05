@@ -3,7 +3,8 @@
     <el-col :span="30">
       <el-menu
           background-color="RGB(181,255,255，0.1)"
-          active-text-color="RGB(111,255,215)"
+          active-text-color=#ffe68b
+          text-color=#ffabbb
           default-active="/area2"
           router="router"
           style="min-width: 150px"

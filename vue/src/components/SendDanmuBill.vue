@@ -8,10 +8,8 @@
       房间 roomid:
       <el-input type="text" id="roomid" value="1440094" style="width: 13%;margin-left: 10px"></el-input>
     </div>
-    <!-- <div>
-        <span>key</span>
-        <textarea id="key" cols="30" rows="10">81p2t7xxh6MmAz0pCFZxcbNglVd8Ao846GHF1S9BHEvfh_REfuOxWugDtqgqPnPYQhfSCCsB8ghzV5Y2Urb5FaZW-2pmO7q0Fsm32hxueRt9Yi-OPsV-Bp5lxothWUejvkIOiRHyN__MO5co</textarea>
-    </div> -->
+<!--    直播间的实时消息会发送到flink，经过处理后作为生产者发送到kafka的DanmuSource主题上-->
+<!--    先打开kafka消费者，bin/kafka-console-consumer.sh --bootstrap-server hadoop102:9092 --topic DanmuSource-->
     <div>
       <el-button @click="getDanmu">实时获取</el-button>
       <el-button @click="stopDanmu">停止获取</el-button>
@@ -94,7 +92,6 @@
   if (timer != null)
   clearInterval(timer);
 };
-
   //WebSocket接收数据回调
   ws.onmessage = function (evt) {
   var blob = evt.data;
@@ -130,14 +127,10 @@
 }
   //还有其他的
 }
-
 }
 });
 };
-
-
 }
-
   // 文本解码器
   var textDecoder = new TextDecoder('utf-8');
   // 从buffer中读取int
@@ -197,7 +190,6 @@
 }
   reader.readAsArrayBuffer(blob);
 }
-
 
   //组合认证数据包
   function getCertification(json) {
