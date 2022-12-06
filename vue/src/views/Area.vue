@@ -7,7 +7,7 @@
   <div class="back" >
 <!--    主要内容-->
   <div  style="margin-top: 10px;margin-left: 20px">
-  <div style="margin-left:570px;font-size: 30px;color: #fcec87">商家房间列表
+  <div style="margin-left:570px;font-size: 30px;color:  #b349ef">商家房间列表
     <el-button @click="onDialog()"
                type="primary"
                style="width: 90px;
@@ -31,14 +31,19 @@
         cancelText="取消"
         okText="确认"
         switchFullscreen
+        ref="test"
         @close="onClose"
         @cancel="onCancel"
         @ok="onConfirm"
         v-show="showDialog"
     />
     <div class="homes" style="font-size: 30px">
-    <Home />
-
+      <div v-for="(d,index) in counter" :key="index">
+        <Home
+            :home-name="homeName"
+            @delete="onDelete"
+        />
+      </div>
     </div>
   </div>
 
@@ -61,6 +66,8 @@ export default {
   },
   data() {
     return {
+      homeName:'默认',
+      counter:[],
       showDialog: false,
       content: '',
       dialogVisible: true,
@@ -75,6 +82,9 @@ export default {
     this.flag=false;
   },
   methods: {
+    onDelete(){
+      this.counter.pop()
+    },
 //对话框方法
     onDialog () { // 调用Dialog弹出对话框
       this.showDialog = true
@@ -86,6 +96,8 @@ export default {
       this.showDialog = false
     },
     onConfirm () { // “确定”按钮回调
+      this.homeName=this.$refs.test.form.homename
+      this.counter.push({})
       this.showDialog = false
     }
     ,

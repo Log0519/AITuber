@@ -11,10 +11,10 @@
         <div class="m-dialog-body" :style="`height: calc(${dialogHeight} - 156px);`">
           <el-form ref="form" :model="form" label-width="100px">
             <div style="display: flex">
-            <el-form-item label="房间名称">
+            <el-form-item v-model="form.homename0" label="房间名称">
               <el-input  style="width: 150px"></el-input>
             </el-form-item>
-              <el-form-item label="房间room_id" style=" margin-left:50px;display: flex">
+              <el-form-item  v-model="form.homeId0" label="房间room_id" style=" margin-left:50px;display: flex">
                 <el-input  style="width: 100px"></el-input>
               </el-form-item>
             </div>
@@ -104,6 +104,8 @@ export default {
   data () {
     return {
       form: {
+        homename0:'',
+        homeId0:'',
         name: '',
         pace:'哔哩哔哩',
         region: '',

@@ -7,7 +7,7 @@
   <div class="back" >
 <!--    主要内容-->
   <div  style="margin-top: 10px;margin-left: 20px">
-  <div style="margin-left:570px;font-size: 30px;color: #fcec87">直播房间列表
+  <div style="margin-left:570px;font-size: 30px;color: #b349ef">直播房间列表
     <el-button
         type="primary"
         style="width: 90px;

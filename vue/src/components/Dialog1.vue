@@ -8,20 +8,26 @@
         <div class="m-dialog-header">
           <div class="u-head">{{ title }}</div>
         </div>
+<!--        商家-->
         <div class="m-dialog-body" :style="`height: calc(${dialogHeight} - 156px);`">
           <el-form ref="form" :model="form" label-width="100px">
             <div style="display: flex;width:70%">
+              <div style="display: flex">
+                <el-form-item  label="房间名称" >
+                  <el-input v-model="form.homename" style="width: 150px"></el-input>
+                </el-form-item>
+                <el-form-item label="房间room_id" style=" margin-left:50px;display: flex">
+                  <el-input v-model="form.homeId" style="width: 100px"></el-input>
+                </el-form-item>
+              </div>
+            </div>
             <el-form-item label="直播平台">
-              <el-select v-model="form.pace" >
+              <el-select v-model="form.pace" style="width: 100px">
                 <el-option label="拼多多" value="shanghai"></el-option>
                 <el-option label="淘宝" value="beijing"></el-option>
                 <el-option label="京东" value="beijing"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="房间room_id" style=" margin-left:50px;display: flex">
-              <el-input  style="width: 100px"></el-input>
-            </el-form-item>
-            </div>
             <el-form-item label="自动开始">
               <el-switch
                   v-model="value1"
@@ -101,6 +107,8 @@ export default {
   data () {
     return {
       form: {
+        homename:'',
+        homeId:'',
         name: '',
         pace:'拼多多',
         region: '',
@@ -145,6 +153,7 @@ export default {
     },
     onConfirm () {
       this.$emit('ok')
+
     }
   }
 }

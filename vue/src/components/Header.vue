@@ -5,7 +5,7 @@
       <el-button type="primary" @click="goMocap" style="width: 100px; height: 40px; background-color:#fdea78; margin-top: 10px; font-size: 18px; color: #c175df; line-height: 40px" round>捕捉</el-button>
       <el-button type="primary" @click="goArea" style="width: 100px;  height: 40px; background-color:#fdea78; margin-top: 10px; font-size: 18px; color: #c175df; line-height: 40px" round>房间</el-button>
       <el-button type="primary" @click="goAllSet" style="width: 100px;  height: 40px; background-color:#fdea78; margin-top: 10px; font-size: 18px; color: #c175df; line-height: 40px" round>设置</el-button>
-      <el-button type="primary" @click="goNoMocap" style="width: 100px;  height: 40px; background-color:#fdea78; margin-top: 10px; font-size: 18px; color: #c175df; line-height: 40px" round>无捕</el-button>
+<!--      <el-button type="primary" @click="goNoMocap" style="width: 100px;  height: 40px; background-color:#fdea78; margin-top: 10px; font-size: 18px; color: #c175df; line-height: 40px" round>无捕</el-button>-->
       <el-button type="primary" @click="goDatasView" style="width: 100px;  height: 40px; background-color:#fdea78; margin-top: 10px; font-size: 18px; color: #c175df; line-height: 40px" round>数据面板</el-button>
       <el-button type="primary" @click="returnLogin" style="width: 80px; margin-left: 280px; height: 30px;background-color:#fdea78; margin-top: 10px; font-size: 15px; color: #bf74de; line-height: 40px" round>退出登录</el-button>
     </div>

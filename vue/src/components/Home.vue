@@ -2,11 +2,11 @@
 <div class="homeBack">
   <div class="information" >
     <div style="font-size: 20px;text-align: center">
-      房间01
+      房间
     </div>
   <div style="font-size: 17px;display: flex">名称：
-  <div class="homeName" style="font-size: 17px;color: #777777">
-    拼多多直播间-01
+  <div class="homeName" style="font-size: 17px;color: #c657ff">
+    {{ homeName }}
   </div>
   </div>
     <div class="state" style="display: flex;font-size: 17px">
@@ -23,23 +23,37 @@
         当前告警:
       </div>
     </div>
-  <el-button style="background-color: rgba(238,236,255,0);font-size: 16px;margin-left: 370px" text>进入房间>></el-button>
- </div>
+    <div style="display: flex">
+    <el-button type="danger" style="font-size:5px;margin-left: 270px" @click="deleteHome()">删除房间</el-button>
+  <el-button style="background-color: rgba(238,236,255,0);font-size: 16px" text>进入房间>></el-button>
+    </div>
+    </div>
 </div>
 </template>
 
 <script>
 export default {
-  name: "home"
+  name: "home",
+  props: {
+    homeName: { // 标题
+      type: String,
+      default: '默认'
+    },
+  },
+  methods:{
+    deleteHome(){
+      this.$emit('delete')
+    }
+  },
 }
 </script>
 
 <style scoped>
 .homeBack{
   margin: 20px 0px 0px 20px;
-  background-color: rgba(255, 255, 255, 0.27);
+  background-color: rgb(248, 240, 148);
   border-radius: 20px;
-  border: 1px solid #aaa;
+  border: 3px solid #d3a6ff;
   width: 500px;
   height: 150px;
   box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
