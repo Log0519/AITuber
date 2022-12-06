@@ -1,11 +1,15 @@
 <template>
   <div id="sse">
     <div style="display: flex;font-size: 16px">
-      <span>url:</span>
-      <el-input type="text" id="url" value="wss://broadcastlv.chat.bilibili.com/sub" style="width: 40%;margin-left: 10px"> </el-input>
+      <span>BillBill_url:</span>
+<!--      wss://titan-ws.pinduoduo.com/-->
+<!--      wss://broadcastlv.chat.bilibili.com/sub-->
+      <el-input disabled type="text" id="url" value="wss://broadcastlv.chat.bilibili.com/sub" style="width: 40%;margin-left: 10px"> </el-input>
     </div>
     <div style="display: flex;font-size: 16px;margin-top: 5px">
-      房间 roomid:
+<!--      401854710-->
+<!--      1440094-->
+      直播房间 roomid:
       <el-input type="text" id="roomid" value="1440094" style="width: 13%;margin-left: 10px"></el-input>
     </div>
 <!--    直播间的实时消息会发送到flink，经过处理后作为生产者发送到kafka的DanmuSource主题上-->
@@ -15,6 +19,8 @@
       <el-button @click="stopDanmu">停止获取</el-button>
     </div>
   </div>
+
+
 </template>
 
 
@@ -22,6 +28,13 @@
   import request from "../utils/request";
 
   export default {
+    components:{
+
+    },
+    data() {
+      return {
+
+      }},
   name: "sendDanmuBill",
     methods:{
     stopDanmu(){
@@ -31,12 +44,12 @@
       }else {
         console.log("连接未打开")
       }
-
     },
     getDanmu(){
       WebSocketTest()
     }
-    }
+    },
+
   }
   var timer = null;
   var flag=false;

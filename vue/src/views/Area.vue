@@ -8,9 +8,34 @@
 <!--    主要内容-->
   <div  style="margin-top: 10px;margin-left: 20px">
   <div style="margin-left:570px;font-size: 30px;color: #fcec87">商家房间列表
-    <el-button type="primary" style="width: 90px; height: 30px; background-color:#fce889;margin-left: 200px; font-size: 18px; color: #c073e4; line-height: 40px" round>创建房间</el-button>
+    <el-button @click="onDialog()"
+               type="primary"
+               style="width: 90px;
+               height: 30px;
+               background-color:#fce889;
+               margin-left: 200px;
+               font-size: 18px;
+               color: #c073e4;
+               line-height: 40px"
+               round>创建房间
+    </el-button>
   </div>
     <!--    房间列表-->
+    <Dialog1
+        style="z-index: 1"
+        title="直播信息"
+        :width="720"
+        :height="480"
+        :content="content"
+        :footer="true"
+        cancelText="取消"
+        okText="确认"
+        switchFullscreen
+        @close="onClose"
+        @cancel="onCancel"
+        @ok="onConfirm"
+        v-show="showDialog"
+    />
     <div class="homes" style="font-size: 30px">
     <Home />
 
@@ -25,31 +50,23 @@
 import AreaSidebar from "../components/AreaSidebar.vue";
 import {Headset} from "@element-plus/icons";
 import Home from "../components/Home.vue";
-
+import Dialog1 from "../components/Dialog1.vue"
 export default {
   name: "area",
   components:{
     Headset,
     Home,
+    Dialog1,
     AreaSidebar
   },
   data() {
     return {
+      showDialog: false,
+      content: '',
+      dialogVisible: true,
       input: '',
       inputWords:'',
       flag:true,
-      flag2:'',
-      options: [{
-        value: '选项1',
-        label: '传入音频'
-      }, {
-        value: '选项2',
-        label: '实时声音'
-      }, {
-        value: '选项3',
-        label: '文字转语音'
-      }],
-      value: '文字转语音'
     };
   },
   created() {
@@ -58,8 +75,27 @@ export default {
     this.flag=false;
   },
   methods: {
-
-
+//对话框方法
+    onDialog () { // 调用Dialog弹出对话框
+      this.showDialog = true
+    },
+    onClose () { // 关闭dialog
+      this.showDialog = false
+    },
+    onCancel () { // “取消”按钮回调
+      this.showDialog = false
+    },
+    onConfirm () { // “确定”按钮回调
+      this.showDialog = false
+    }
+    ,
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+    }
   }
 };
 </script>

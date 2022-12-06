@@ -30,9 +30,9 @@
                   type="textarea"
                   :autosize="{ minRows: 4, maxRows: 8}"
                   v-model="inputWords"
-                  :disabled="flag">
+                  >
               </el-input>
-              <el-button style="margin-left: 115px">转化</el-button>
+              <el-button style="margin-left: 115px" @click="ChangeToVoice">转化</el-button>
             </div>
             <div>2、导入音频：
               <el-button style="margin: 10px">导入</el-button>
@@ -72,6 +72,7 @@
     </div>
   </div>
 
+
 </template>
 
 
@@ -85,15 +86,17 @@ export default {
   components:{
     SendDanmuBill,
     MocapSidebar,
-    danmuTest
+    danmuTest,
   },
   data() {
     return {
+
       os: true,//控制摄像头开关
       record:true,
       videoWidth: 500,
       videoHeight: 400,
       src:'',
+      inputWords:''
     };
   },
   created() {
@@ -101,6 +104,9 @@ export default {
   mounted() {
   },
   methods: {
+    ChangeToVoice(){
+      console.log(this.inputWords)
+    },
     beginRecord(){
       this.record=false;
       },
@@ -123,8 +129,8 @@ export default {
         this.os = true;//切换成打开摄像头
         this.record=true;
         this.src='-'
-
     },
+
   }
 };
 </script>

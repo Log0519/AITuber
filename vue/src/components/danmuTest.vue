@@ -1,6 +1,6 @@
 <!--<li v-for='item in items' >{{'('+item[0].state+')'}}  {{'---"'+item[1].name+'"---'}} {{item[2].time}}</li>-->
 <template>
-  <div class="message-page">
+  <div class="message-page" style="display:flex;">
     <div class="msg-tit">
       <div class="msg-top">
         <div class="tit-word">
@@ -15,7 +15,7 @@
         <div class="tit-word" style="margin-left: 30px;">
           <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">活跃用户</el-button>
         </div>
-        <el-button style="margin-left: 75px;font-size: 14px;background-color: rgba(254,249,215,0)" text @click="openSetWindow">管理 >></el-button>
+        <el-button style="margin-left: 75px;font-size: 14px;background-color: rgba(254,249,215,0)" text @click="onDialog()">管理 >></el-button>
       </div>
       <div class="msg-line"></div>
       <div class="marquee-wrap">
@@ -33,17 +33,40 @@
         </ul>
       </div>
     </div>
-
+    <MocapDialog
+        style="z-index: 1"
+        title="回答设置"
+        :width="720"
+        :height="480"
+        :content="content"
+        :footer="true"
+        cancelText="取消"
+        okText="确认"
+        switchFullscreen
+        @close="onClose"
+        @cancel="onCancel"
+        @ok="onConfirm"
+        v-show="showDialog"
+    />
   </div>
+
 
 </template>
 
 <script>
+import MocapDialog from "../components/MocapDialog.vue"
 export default {
   name: 'MessagePage',
+  components:{
+    MocapDialog
+  },
   data(){
     return{
-      dialogVisible: false,
+      //dialog
+      showDialog: false,
+      content: '',
+      dialogVisible: true,
+      //dialog
       formLabelWidth: '120px',
       items:[
           {'flag':false,'state':'未解决','name': "今天天气怎么样",'time':"2022-12-1 12:08:06",'answer':''},
@@ -79,6 +102,27 @@ export default {
     this.timer = setInterval(this.scrollAnimate, 1300);
   },
   methods:{
+    //对话框方法
+    onDialog () { // 调用Dialog弹出对话框
+      this.showDialog = true
+    },
+    onClose () { // 关闭dialog
+      this.showDialog = false
+    },
+    onCancel () { // “取消”按钮回调
+      this.showDialog = false
+    },
+    onConfirm () { // “确定”按钮回调
+      this.showDialog = false
+    }
+    ,
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+    },
     openChangeWindow(name,answer){
       this.$prompt('问题：'+name, '详情', {
         inputValue:answer,
@@ -88,23 +132,6 @@ export default {
         this.$message({
           type: 'success',
           message: '修改成功: '
-        });
-      });
-    },
-    openSetWindow(){
-      this.$prompt('修改', '已设置的自动回复', {
-        inputType:'ew',
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-      }).then(({ value }) => {
-        this.$message({
-          type: 'success',
-          message: '修改成功'
-        });
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '取消修改'
         });
       });
     },
@@ -187,7 +214,6 @@ export default {
       }
     }
   }
-
-
 }
+
 </style>
