@@ -166,7 +166,7 @@ export default {
   background: rgba(0,0,0,0.45);
   .m-dialog {
     position: relative;
-    top: 50%;
+    top: 40%;
     transform: translateY(-50%);
     -ms-transform: translateY(-50%);; /* IE 9 */
     -webkit-transform: translateY(-50%); /* Safari and Chrome */

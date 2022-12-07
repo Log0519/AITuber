@@ -8,57 +8,7 @@
         <div class="m-dialog-header">
           <div class="u-head">{{ title }}</div>
         </div>
-<!--        商家-->
-        <div class="m-dialog-body" :style="`height: calc(${dialogHeight} - 156px);`">
-          <el-form ref="form" :model="form" label-width="100px">
-            <div style="display: flex;width:70%">
-              <div style="display: flex">
-                <el-form-item  label="房间名称" >
-                  <el-input v-model="form.homename" style="width: 150px"></el-input>
-                </el-form-item>
-                <el-form-item label="房间room_id" style=" margin-left:50px;display: flex">
-                  <el-input v-model="form.homeId" style="width: 100px"></el-input>
-                </el-form-item>
-              </div>
-            </div>
-            <el-form-item label="直播平台">
-              <el-select v-model="form.pace" style="width: 100px">
-                <el-option label="拼多多" value="拼多多"></el-option>
-                <el-option label="淘宝" value="淘宝"></el-option>
-                <el-option label="京东" value="京东1"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="自动开始">
-              <el-switch
-                  v-model="value1"
-                  active-color="RGB(111,111,223)"
-                  >
-              </el-switch>
-            </el-form-item>
-            <el-form-item label="一直播放">
-              <el-switch
-                  v-model="value2"
-                  active-color="RGB(111,111,223)"
-              >
-              </el-switch>
-            </el-form-item>
-            <el-form-item  label="直播时长">
-                <el-time-picker :disabled="value2" placeholder="选择时间" v-model="form.date2" style="width: 20%;"></el-time-picker>
-            </el-form-item>
-            <el-form-item  style="z-index: 12" label="活动区">
-              <el-select  placeholder="请选择活动区域" >
-                <el-option label="区域一" value="shanghai"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="介绍">
-              <el-input type="textarea" v-model="form.desc"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="onSubmit">立即创建</el-button>
-              <el-button>取消</el-button>
-            </el-form-item>
-          </el-form>
-        </div>
+        <div style="font-size: 16px;margin: 20px">确认删除？</div>
         <div class="m-dialog-footer" v-show="footer">
           <button class="u-cancel" @click="onCancel">{{ cancelText }}</button>
           <button class="u-confirm" @click="onConfirm">{{ okText }}</button>
@@ -69,7 +19,7 @@
 </template>
 <script>
 export default {
-  name: 'Dialog1',
+  name: 'DeleteDialog',
   props: {
     title: { // 标题
       type: String,
@@ -107,10 +57,10 @@ export default {
   data () {
     return {
       form: {
-        homename:'',
-        homeId:'',
+        homename0:'',
+        homeId0:'',
         name: '',
-        pace:'',
+        pace:'哔哩哔哩',
         region: '',
         date1: '',
         date2: '',
@@ -119,8 +69,7 @@ export default {
         resource: '',
         desc: ''
       },
-      value1:false,
-      value2:true,
+      value:false,
       fullScreen: false,
     }
   },
@@ -141,6 +90,7 @@ export default {
     }
   },
   methods: {
+
     onFullScreen () {
       this.fullScreen = !this.fullScreen
     },
@@ -153,8 +103,8 @@ export default {
     },
     onConfirm () {
       this.$emit('ok')
+    },
 
-    }
   }
 }
 </script>
@@ -171,7 +121,7 @@ export default {
   background: rgba(0,0,0,0.45);
   .m-dialog {
     position: relative;
-    top: 40%;
+    top: 30%;
     transform: translateY(-50%);
     -ms-transform: translateY(-50%);; /* IE 9 */
     -webkit-transform: translateY(-50%); /* Safari and Chrome */
@@ -222,9 +172,9 @@ export default {
         transition: all .3s;
       }
       .m-dialog-footer {
-        padding: 10px 16px;
+        padding: 10px 10px;
         text-align: right;
-        border-top: 1px solid #e8e8e8;
+
         .u-cancel {
           height: 32px;
           line-height: 32px;
