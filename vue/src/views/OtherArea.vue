@@ -1,14 +1,14 @@
 <template>
 <!--侧边栏-->
   <div>
-    <AreaSidebar/>
+    <OtherAreaSidebar/>
   </div>
 <!--  主体-->
   <div class="back" >
 <!--    主要内容-->
   <div  style="margin-top: 10px;margin-left: 20px" >
 
-  <div style="margin-left:570px;font-size: 30px;color:  #b349ef">商家房间列表
+  <div style="margin-left:570px;font-size: 30px;color:  #b349ef">直播房间列表
     <el-button @click="onDialog()"
                type="primary"
                style="width: 90px;
@@ -22,7 +22,7 @@
     </el-button>
   </div>
     <!--    房间列表-->
-    <BusinessDialog
+    <OtherDialog
         style="z-index: 1"
         title="直播信息"
         :width="720"
@@ -42,7 +42,6 @@
       <div v-for="(d,index) in counter" :key="index">
         <Home
             ref="home"
-            :end-time="d.endTime"
             :pace="d.pace"
             :home-name=d.hostname
             @delete="onDelete"
@@ -56,17 +55,17 @@
 
 </template>
 <script>
-import AreaSidebar from "../components/sidebar/BusinessAreaSidebar.vue";
+import OtherAreaSidebar from "../components/sidebar/OtherAreaSidebar.vue";
 import {Headset} from "@element-plus/icons";
 import Home from "../components/Home.vue";
-import BusinessDialog from "../components/dialog/BusinessDialog.vue"
+import OtherDialog from "../components/dialog/OtherDialog.vue"
 export default {
   name: "area",
   components:{
     Headset,
     Home,
-    BusinessDialog,
-    AreaSidebar
+    OtherDialog,
+    OtherAreaSidebar
   },
   data() {
     return {
@@ -80,9 +79,6 @@ export default {
       input: '',
       inputWords:'',
       flag:true,
-      endYear:"",
-      endMo:"",
-      endDay:"",
       index:1
     };
   },
@@ -90,22 +86,9 @@ export default {
   },
   mounted() {
     this.flag=false;
-    console.log(this.getNowDate())
     this.temp=new Map()
   },
   methods: {
-    getNowDate() {
-      //获取当前时间
-      var _this = this;
-      let yy = new Date().getFullYear();
-      let mm = new Date().getMonth()+1;
-      let dd = new Date().getDate();
-      let hh = new Date().getHours();
-      let mf = new Date().getMinutes()<10 ? '0'+new Date().getMinutes() : new Date().getMinutes();
-      let ss = new Date().getSeconds()<10 ? '0'+new Date().getSeconds() : new Date().getSeconds();
-      _this.gettime = yy+'-'+mm+'-'+dd+' '+hh+':'+mf+':'+ss;
-      return _this.gettime
-    },
     load () {
       this.count += 2
     },
@@ -129,13 +112,6 @@ export default {
     onConfirm () { // “确定”按钮回调
       this.homeName=this.$refs.test.form.homename
       this.pace=this.$refs.test.form.pace
-      this.endYear=this.$refs.test.form.date1.toString().split(" ")[3]
-      this.endMo=this.$refs.test.form.date1.toString().split(" ")[1]
-      this.endDay=this.$refs.test.form.date1.toString().split(" ")[2]
-      this.endTime2=this.$refs.test.form.date2.toString().split(" ")[4]
-      this.endTime=this.endYear+"-"+"12"+"-"+this.endDay+" "+this.endTime2
-      console.log(this.$refs.test.form.date1)
-      console.log(this.endTime)
       if(this.homeName===""){
         this.$message.error('房间名称不能为空！');
         return
@@ -146,7 +122,7 @@ export default {
       }
       if(this.temp.get(this.homeName)==null){
         this.temp.set(this.homeName,this.homeName)
-        this.counter.push({"hostname":this.homeName,"pace":this.pace,"endTime":this.endTime})
+        this.counter.push({"hostname":this.homeName,"pace":this.pace})
       }else {
         this.$message.error('房间名称不能重复！');
       }

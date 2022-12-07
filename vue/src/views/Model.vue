@@ -32,7 +32,7 @@
 
 <script>
 import './css/Model.css'
-import ModelSidebar from "../components/ModelSidebar.vue";
+import ModelSidebar from "../components/sidebar/ModelSidebar.vue";
 
 
 export default {

@@ -10,8 +10,9 @@
         </div>
         <div style="font-size: 16px;margin: 20px">确认删除？</div>
         <div class="m-dialog-footer" v-show="footer">
-          <button class="u-cancel" @click="onCancel">{{ cancelText }}</button>
           <button class="u-confirm" @click="onConfirm">{{ okText }}</button>
+          <button class="u-cancel" @click="onCancel">{{ cancelText }}</button>
+
         </div>
       </div>
     </div>

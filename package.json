@@ -9,6 +9,7 @@
     "three-css2drender": "^1.0.0",
     "three-obj-mtl-loader": "^1.0.3",
     "three-orbit-controls": "^82.1.0",
+    "vant": "^4.0.2",
     "vue-baberrage": "^3.2.4"
   }
 }

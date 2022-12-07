@@ -4,7 +4,7 @@
     <div style="font-size: 20px;text-align: center">
       房间
     </div>
-  <div style="font-size: 17px;display: flex">名称：
+  <div style="font-size: 17px;display: flex">房间名称：
   <div class="homeName" style="font-size: 17px;color: #c657ff">
     {{ homeName }}
   </div>
@@ -17,21 +17,20 @@
     <div class="state" style="display: flex;font-size: 17px">
       状态：
     <div style="font-size: 17px;color: #8d8f8d">{{state}}</div>
-      <div style="margin-left: 163px">
-        已自动回复:
+      <div style="margin-left: 100px">
+    创建时间：
       </div>
     </div>
     <div class="moddle" style="display: flex;font-size: 17px">
       模式：
     <div style="font-size: 17px;color: #13da2e">自动</div>
-      <div style="margin-left: 180px">
-        当前告警:
+        <div style="display: flex;margin-left: 117px">剩余时间：  <CountDown :endTime='endTime'/>
       </div>
     </div>
     <div style="display: flex">
 
 
-    <el-button type="danger" style="font-size:5px;margin-left: 270px" @click="onDialog()">删除房间</el-button>
+    <el-button type="danger" style="font-size:5px;margin-left: 370px" @click="onDialog()">删除房间</el-button>
   <el-button style="background-color: rgba(238,236,255,0);font-size: 16px" text>进入房间>></el-button>
     </div>
     </div>
@@ -54,11 +53,13 @@
 </template>
 
 <script>
-import DeleteDialog from "./DeleteDialog.vue";
+import DeleteDialog from "./dialog/DeleteDialog.vue";
+import CountDown from "./CountDown.vue";
 export default {
   name: "home",
   components:{
-    DeleteDialog
+    DeleteDialog,
+    CountDown
   },
   data(){
     return {
@@ -69,11 +70,15 @@ export default {
   props: {
     homeName: { // 标题
       type: String,
-      default: '默认'
+      default: ''
     },
     pace: { // 标题
       type: String,
-      default: '默认'
+      default: ''
+    },
+    endTime: { // 结束时间
+      type: String,
+      default: ''
     },
   },
   methods:{

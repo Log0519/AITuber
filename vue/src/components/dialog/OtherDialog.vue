@@ -8,39 +8,42 @@
         <div class="m-dialog-header">
           <div class="u-head">{{ title }}</div>
         </div>
+<!--        其他-->
         <div class="m-dialog-body" :style="`height: calc(${dialogHeight} - 156px);`">
           <el-form ref="form" :model="form" label-width="100px">
-            <div style="display: flex">
-            <el-form-item v-model="form.homename0" label="房间名称">
-              <el-input  style="width: 150px"></el-input>
-            </el-form-item>
-              <el-form-item  v-model="form.homeId0" label="房间room_id" style=" margin-left:50px;display: flex">
-                <el-input  style="width: 100px"></el-input>
-              </el-form-item>
+            <div style="display: flex;width:70%">
+              <div style="display: flex" >
+                <el-form-item  label="房间名称" >
+                  <el-input v-model="form.homename" style="width: 150px"></el-input>
+                </el-form-item>
+                <el-form-item label="房间room_id" style=" margin-left:50px;display: flex">
+                  <el-input v-model="form.homeId" style="width: 100px"></el-input>
+                </el-form-item>
+              </div>
             </div>
-            <div style="display: flex;width:31%">
             <el-form-item label="直播平台">
-              <el-select v-model="form.pace" >
-                <el-option label="哔哩哔哩" value="shanghai"></el-option>
-                <el-option label="虎牙" value="beijing"></el-option>
+              <el-select v-model="form.pace" style="width: 100px">
+                <el-option label="拼多多" value="拼多多"></el-option>
+                <el-option label="淘宝" value="淘宝"></el-option>
+                <el-option label="京东" value="京东1"></el-option>
               </el-select>
             </el-form-item>
-            </div>
             <el-form-item label="自动开始">
               <el-switch
-                  v-model="value"
+                  v-model="value1"
                   active-color="RGB(111,111,223)"
                   >
               </el-switch>
             </el-form-item>
-            <el-form-item label="直播时长">
-                <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 20%;"></el-time-picker>
+            <el-form-item label="一直播放">
+              <el-switch
+                  v-model="value2"
+                  active-color="RGB(111,111,223)"
+              >
+              </el-switch>
             </el-form-item>
-            <el-form-item label="直播方式">
-              <el-checkbox-group v-model="form.type">
-                <el-checkbox label="循环" name="type"></el-checkbox>
-                <el-checkbox label="自动结束" name="type"></el-checkbox>
-              </el-checkbox-group>
+            <el-form-item  label="直播时长">
+                <el-time-picker :disabled="value2" placeholder="选择时间" v-model="form.date2" style="width: 20%;"></el-time-picker>
             </el-form-item>
             <el-form-item  style="z-index: 12" label="活动区">
               <el-select  placeholder="请选择活动区域" >
@@ -49,10 +52,6 @@
             </el-form-item>
             <el-form-item label="介绍">
               <el-input type="textarea" v-model="form.desc"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="onSubmit">立即创建</el-button>
-              <el-button>取消</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -66,7 +65,7 @@
 </template>
 <script>
 export default {
-  name: 'Dialog',
+  name: 'Dialog1',
   props: {
     title: { // 标题
       type: String,
@@ -104,10 +103,10 @@ export default {
   data () {
     return {
       form: {
-        homename0:'',
-        homeId0:'',
+        homename:'',
+        homeId:'',
         name: '',
-        pace:'哔哩哔哩',
+        pace:'',
         region: '',
         date1: '',
         date2: '',
@@ -116,7 +115,8 @@ export default {
         resource: '',
         desc: ''
       },
-      value:false,
+      value1:false,
+      value2:true,
       fullScreen: false,
     }
   },
@@ -149,6 +149,7 @@ export default {
     },
     onConfirm () {
       this.$emit('ok')
+
     }
   }
 }
@@ -165,6 +166,7 @@ export default {
   z-index: 10000;
   background: rgba(0,0,0,0.45);
   .m-dialog {
+
     position: relative;
     top: 40%;
     transform: translateY(-50%);
@@ -174,9 +176,9 @@ export default {
     transition: all .3s ease;
     .m-dialog-content {
       position: relative;
-      background: #fff;
+      background: #ffe5ac;
       border-radius: 4px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.1);
+      box-shadow: 0 4px 12px rgba(211, 158, 158, 0.1);
       .u-screen {
         .u-close();
         right: 64px;
@@ -203,14 +205,14 @@ export default {
           margin: 0;
           color: rgba(0,0,0,.85);
           font-weight: 500;
-          font-size: 16px;
+          font-size: 18px;
           line-height: 22px;
           word-wrap: break-word;
         }
       }
       .m-dialog-body {
         padding: 24px;
-        font-size: 16px;
+        font-size: 18px;
         line-height: 1.5;
         word-wrap: break-word;
         overflow: auto;
@@ -224,7 +226,7 @@ export default {
           height: 32px;
           line-height: 32px;
           padding: 0 15px;
-          font-size: 16px;
+          font-size: 18px;
           border-radius: 4px;
           color: rgba(0,0,0,.65);
           background: #fff;
@@ -245,7 +247,7 @@ export default {
           height: 32px;
           line-height: 32px;
           padding: 0 15px;
-          font-size: 16px;
+          font-size: 18px;
           border-radius: 4px;
           background: #1890ff;
           border: 1px solid #1890ff;

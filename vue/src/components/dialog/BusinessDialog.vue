@@ -12,7 +12,7 @@
         <div class="m-dialog-body" :style="`height: calc(${dialogHeight} - 156px);`">
           <el-form ref="form" :model="form" label-width="100px">
             <div style="display: flex;width:70%">
-              <div style="display: flex">
+              <div style="display: flex" >
                 <el-form-item  label="房间名称" >
                   <el-input v-model="form.homename" style="width: 150px"></el-input>
                 </el-form-item>
@@ -42,8 +42,10 @@
               >
               </el-switch>
             </el-form-item>
-            <el-form-item  label="直播时长">
-                <el-time-picker :disabled="value2" placeholder="选择时间" v-model="form.date2" style="width: 20%;"></el-time-picker>
+            <el-form-item label="结束时间" style="display:flex;">
+                <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 20%;"></el-date-picker>
+
+                <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 20%;"></el-time-picker>
             </el-form-item>
             <el-form-item  style="z-index: 12" label="活动区">
               <el-select  placeholder="请选择活动区域" >
@@ -52,10 +54,6 @@
             </el-form-item>
             <el-form-item label="介绍">
               <el-input type="textarea" v-model="form.desc"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="onSubmit">立即创建</el-button>
-              <el-button>取消</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -170,6 +168,7 @@ export default {
   z-index: 10000;
   background: rgba(0,0,0,0.45);
   .m-dialog {
+
     position: relative;
     top: 40%;
     transform: translateY(-50%);
@@ -179,9 +178,9 @@ export default {
     transition: all .3s ease;
     .m-dialog-content {
       position: relative;
-      background: #fff;
+      background: #ffe5ac;
       border-radius: 4px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.1);
+      box-shadow: 0 4px 12px rgba(211, 158, 158, 0.1);
       .u-screen {
         .u-close();
         right: 64px;
@@ -208,14 +207,14 @@ export default {
           margin: 0;
           color: rgba(0,0,0,.85);
           font-weight: 500;
-          font-size: 16px;
+          font-size: 18px;
           line-height: 22px;
           word-wrap: break-word;
         }
       }
       .m-dialog-body {
         padding: 24px;
-        font-size: 16px;
+        font-size: 18px;
         line-height: 1.5;
         word-wrap: break-word;
         overflow: auto;
@@ -229,7 +228,7 @@ export default {
           height: 32px;
           line-height: 32px;
           padding: 0 15px;
-          font-size: 16px;
+          font-size: 18px;
           border-radius: 4px;
           color: rgba(0,0,0,.65);
           background: #fff;
@@ -250,7 +249,7 @@ export default {
           height: 32px;
           line-height: 32px;
           padding: 0 15px;
-          font-size: 16px;
+          font-size: 18px;
           border-radius: 4px;
           background: #1890ff;
           border: 1px solid #1890ff;

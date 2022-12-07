@@ -7,8 +7,10 @@
   <div class="body" style="display: flex" >
     <div class="window1" style="display: flex">
       <div class="window1-left" style="width: 26%">
+
       <div style="margin: 20px">
         ⭐模型：
+
       <el-select id="1" v-model="value" placeholder="选择模型" style="width: 100px;margin:10px 0px">
         <el-option
             v-for="item in options"
@@ -77,7 +79,7 @@
 
 
 <script>
-import MocapSidebar from "../components/MocapSidebar.vue";
+import MocapSidebar from "../components/sidebar/MocapSidebar.vue";
 import danmuTest from "../components/danmuTest.vue";
 import SendDanmuBill from "../components/SendDanmuBill.vue";
 
@@ -90,16 +92,16 @@ export default {
   },
   data() {
     return {
-
       os: true,//控制摄像头开关
       record:true,
       videoWidth: 500,
       videoHeight: 400,
       src:'',
-      inputWords:''
+      inputWords:'',
     };
   },
   created() {
+
   },
   mounted() {
   },

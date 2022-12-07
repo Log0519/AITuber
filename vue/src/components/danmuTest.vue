@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import MocapDialog from "../components/MocapDialog.vue"
+import MocapDialog from "./dialog/MocapDialog.vue"
 export default {
   name: 'MessagePage',
   components:{

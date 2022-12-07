@@ -6,12 +6,10 @@ import Model from "../views/Model.vue";
 import MocapNo from "../views/MocapNo.vue";
 import ModelScene from "../views/ModelScene.vue";
 import Mocap from "../views/Mocap.vue";
-import Mocap1 from "../views/Mocap1.vue";
 import Area from "../views/Area.vue";
-import Area2 from "../views/Area2.vue";
+import OtherArea from "../views/OtherArea.vue";
 import AllSet from "../views/AllSet.vue";
 import DatasView from "../views/DatasView.vue";
-
 
 
 
@@ -44,14 +42,9 @@ const routes = [
         component: Mocap,
       },
       {
-        path: '/mocap1',
-        name: 'Mocap1',
-        component: Mocap1,
-      },
-      {
-        path: '/area2',
-        name: 'Area2',
-        component: Area2,
+        path: '/otherArea',
+        name: 'OtherArea',
+        component: OtherArea,
       },
       {
         path: '/area',

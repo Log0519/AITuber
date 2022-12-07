@@ -17,7 +17,7 @@
 
 </template>
 <script>
-import AllSetSidebar from "../components/AllSetSidebar.vue";
+import AllSetSidebar from "../components/sidebar/AllSetSidebar.vue";
 import {Headset} from "@element-plus/icons";
 
 export default {
