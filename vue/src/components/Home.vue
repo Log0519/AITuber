@@ -31,7 +31,7 @@
 
 
     <el-button type="danger" style="font-size:5px;margin-left: 370px" @click="onDialog()">删除房间</el-button>
-  <el-button style="background-color: rgba(238,236,255,0);font-size: 16px" text>进入房间>></el-button>
+  <el-button style="background-color: rgba(238,236,255,0);font-size: 16px" text @click="enterHome()">进入房间>></el-button>
     </div>
     </div>
 </div>
@@ -88,6 +88,9 @@ export default {
   methods:{
     deleteHome(){
       this.$emit('delete')
+    },
+    enterHome(){
+      this.$emit('enter')
     },
     //对话框方法
     onDialog () { // 调用Dialog弹出对话框

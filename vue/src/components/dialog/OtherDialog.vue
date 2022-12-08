@@ -25,7 +25,7 @@
               <el-select v-model="form.pace" style="width: 100px">
                 <el-option label="拼多多" value="拼多多"></el-option>
                 <el-option label="淘宝" value="淘宝"></el-option>
-                <el-option label="京东" value="京东1"></el-option>
+                <el-option label="京东" value="京东"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="自动开始">

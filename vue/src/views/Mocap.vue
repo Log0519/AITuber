@@ -70,6 +70,9 @@
     <el-button :disabled="os"  v-if="record" @click="beginRecord" size="large" style="font-size: 19px">录制</el-button>
     <el-button  v-else @click="stopRecord" size="large" style="font-size: 19px">停止</el-button>
   </div>
+    <div>
+      <el-button style="margin-left: 550px;margin-top: 60px" size="large" @click="backArea">返回列表</el-button>
+    </div>
     </div>
     </div>
   </div>
@@ -106,6 +109,9 @@ export default {
   mounted() {
   },
   methods: {
+    backArea(){
+      this.$router.push("/area")
+    },
     ChangeToVoice(){
       console.log(this.inputWords)
     },

@@ -47,6 +47,7 @@
             :pace="d.pace"
             :home-name=d.hostname
             @delete="onDelete"
+            @enter="onEnter"
         />
       </div>
     </div>
@@ -116,6 +117,9 @@ export default {
       this.temp.forEach((value,key)=>{
         this.counter.push({"hostname":value})
       })
+    },
+    onEnter(){
+      this.$router.push("/mocap")
     },
 //对话框方法
     onDialog () { // 调用Dialog弹出对话框
