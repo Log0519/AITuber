@@ -18,7 +18,7 @@
       状态：
     <div style="font-size: 17px;color: #8d8f8d">{{state}}</div>
       <div style="margin-left: 100px">
-    创建时间：
+    创建时间：{{nowDate}}
       </div>
     </div>
     <div class="moddle" style="display: flex;font-size: 17px">
@@ -77,6 +77,10 @@ export default {
       default: ''
     },
     endTime: { // 结束时间
+      type: String,
+      default: ''
+    },
+    nowDate: { // 创建时间
       type: String,
       default: ''
     },
