@@ -55,7 +55,7 @@ object DanmuKafka {
   def GetDanmu(): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
     //构建ETL管道
-    //从Kafka读取数据
+    //从Kafka读取数据,并且写入mysql
     val properties = new Properties()
     properties.setProperty("bootstrap.servers","hadoop102:9092")
     val stream: DataStream[String] = env.addSource(new FlinkKafkaConsumer[String]("DanmuSource", new SimpleStringSchema(), properties))

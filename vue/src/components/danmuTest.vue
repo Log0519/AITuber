@@ -23,11 +23,11 @@
         <ul class="marquee-list" :class="{'animate-up': animateUp}" @mouseenter="stopFn" @mouseleave="startFn">
           <li   v-for="(item, index) in items" :key="index">
               <p v-if="item.flag" :style="fontStyle" class="p-word">
-              {{'('+item.state+')'}}  {{' ---名称：'+item.name+'---'}} {{item.neirong+'--- '}} {{item.time}}
+                {{'('+item.state+') '}} {{item.time}}  {{' — '+item.name+' ::'}} {{' '+item.neirong}}
                 <el-button @click="openChangeWindow(item.neirong,item.answer)" style="max-height: 10px;max-width: 30px;background-color: rgba(254,249,215,0)" text>详情</el-button>
               </p>
             <p v-else :style="fontStyle2" class="p-word">
-              {{'('+item.state+')'}}  {{'---'+item.name+'---'}} {{'---'+item.neirong+'---'}} {{item.time}}
+              {{'('+item.state+') '}} {{item.time}}  {{' — '+item.name+' ::'}} {{' '+item.neirong}}
               <el-button @click="openChangeWindow(item.neirong,item.answer)" style="max-height: 10px;max-width: 30px;color: #e33d60;background-color: rgba(254,249,215,0)" text> 详情</el-button>
             </p>
           </li>
@@ -122,8 +122,6 @@ export default {
     },
     //对话框方法
     onDialog () { // 调用Dialog弹出对话框
-      this.items=this.$refs.send.itemsSend
-      console.log("this.items=this.$refs.send.itemsSend======="+this.$refs.send.itemsSend)
       this.showDialog = true
     },
     onClose () { // 关闭dialog
@@ -155,25 +153,26 @@ export default {
         });
       });
     },
-    scrollAnimate() {
-      this.animateUp = false
-      setTimeout(() => {
-        this.items.push(this.items[0])
-        this.items.shift()
-        this.animateUp = false
-      }, 190)
-    },
-    stopFn(){
-      clearInterval(this.timer)
-    },
-    startFn(){
-      this.timer = setInterval(this.scrollAnimate, 1300);
-    }
-  },
+  //   scrollAnimate() {
+  //     this.animateUp = false
+  //     setTimeout(() => {
+  //       this.items.push(this.items[0])
+  //       this.items.shift()
+  //       this.animateUp = false
+  //     }, 190)
+  //   },
+  //   stopFn(){
+  //     clearInterval(this.timer)
+  //   },
+  //   startFn(){
+  //     this.timer = setInterval(this.scrollAnimate, 1300);
+  //   }
+},
   destroyed() {
     clearInterval(this.timer)
   }
 }
+
 </script>
 
 <style scoped lang="less">
@@ -181,7 +180,7 @@ export default {
   border: 1px solid transparent;
   margin-top: 14px;
   width: 595px;
-  height: 320px;
+  height: 310px;
   background: #FFFFFF;
   border-radius: 4px;
   /**/
@@ -205,7 +204,6 @@ export default {
       height:170px;
       width: 580px;
       margin: 0 auto;
-
       .marquee-list {
         /*border: 1px solid red;*/
         li {
@@ -221,7 +219,6 @@ export default {
             margin-top: 8px;
             font-size: 14px;
             font-family: PingFangSC-Regular, PingFang SC,serif;
-
             height: 16px;
             line-height: 18px;
             width: 767px;

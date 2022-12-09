@@ -10,7 +10,7 @@
 <!--      401854710-->
 <!--      1440094-->
       直播房间 roomid:
-      <el-input type="text" id="roomid" value="903562" style="width: 13%;margin-left: 10px"></el-input>
+      <el-input type="text" id="roomid" value="3763613" style="width: 13%;margin-left: 10px"></el-input>
     </div>
 <!--    直播间的实时消息会发送到flink，经过处理后作为生产者发送到kafka的DanmuSource主题上-->
 <!--    先打开kafka消费者，bin/kafka-console-consumer.sh --bootstrap-server hadoop102:9092 --topic DanmuSource-->
@@ -24,9 +24,11 @@
 </template>
 
 
-<script>
-  import request from "../utils/request";
 
+<script>
+
+import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
+import {Locale} from "vant";
   export default {
     name: "sendDanmuBill",
     components:{
@@ -36,7 +38,8 @@
     },
     data() {
       return {
-        itemsSend:[]
+        itemsSend:[],
+        temp:[]
       }
       },
     methods:{
@@ -125,8 +128,54 @@
   + " 用户: " + element.info[2][1]
   + " \n内容: " + element.info[1]
   + " \n时间:" + element.info[9].ts);
-    itemsSend.push({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':element.info[9].ts,'answer':'新品不打折哟'})
 
+    var formats = "yyyy-MM-dd HH:mm:ss";
+    var  newDate = new SimpleDateFormat(formats,Locale.CHINA).format(new Date(element.info[9].ts*1000));
+    //Fri Dec 09 2022 20:16:02 GMT+0800
+    var strings = newDate.toString().split(" ");
+    var mm=strings[1];
+    var em = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    switch (mm) {
+      case em[0]:
+        mm = 1;
+        break;
+      case em[1]:
+        mm = 2;
+        break;
+      case em[2]:
+        mm = 3;
+        break;
+      case em[3]:
+        mm = 4;
+        break;
+      case em[4]:
+        mm = 5;
+        break;
+      case em[5]:
+        mm = 6;
+        break;
+      case em[6]:
+        mm = 7;
+        break;
+      case em[7]:
+        mm = 8;
+        break;
+      case em[8]:
+        mm = 9;
+        break;
+      case em[9]:
+        mm = 10;
+        break;
+      case em[10]:
+        mm = 11;
+        break;
+      case em[11]:
+        mm = 12;
+        break;
+    }
+    var finalDate=strings[3]+'-'+mm+'-'+strings[2]+' '+strings[4]
+    itemsSend.unshift({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':finalDate,'answer':'新品不打折哟'})
+    //itemsSend.push({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':finalDate,'answer':'新品不打折哟'})
     console.log("开始一次提交")
     // request.get("/danmuSource/send",{
     //   params: {
