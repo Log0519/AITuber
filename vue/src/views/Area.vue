@@ -79,7 +79,7 @@ export default {
       showDialog: false,
       content: '',
       dialogVisible: true,
-      input: '',
+      input:'',
       inputWords:'',
       flag:true,
       endYear:"",
@@ -115,7 +115,11 @@ export default {
       this.temp.delete(this.$refs.home[0].homeName)
       this.counter=[]
       this.temp.forEach((value,key)=>{
-        this.counter.push({"hostname":value})
+        this.counter.push({"hostname":value.toString().split(",")[0],
+          "pace":value.toString().split(",")[1],
+          "endTime":value.toString().split(",")[2],
+          "nowDate":value.toString().split(",")[3]
+        })
       })
     },
     onEnter(){
@@ -140,13 +144,9 @@ export default {
       this.endDay=this.$refs.test.form.date1.toString().split(" ")[2]
       this.endTime2=this.$refs.test.form.date2.toString().split(" ")[4]
       this.endTime=this.endYear+"-"+this.endMo+"-"+this.endDay+" "+this.endTime2
-      console.log(this.$refs.test.form.date1)
       console.log(this.endTime)
+      console.log(this.nowDate)
 
-      if(this.endTime<=this.nowDate){
-        this.$message.error('结束时间必须大于现在时间！');
-        return
-      }
       if(this.homeName===""){
         this.$message.error('房间名称不能为空！');
         return
@@ -155,13 +155,29 @@ export default {
         this.$message.error('请选择直播平台！');
         return
       }
+      if(this.endTime==="undefined-undefined-undefined undefined"){
+        this.$message.error('请选择结束时间！');
+        return
+      }
+      if(this.endTime<=this.nowDate){
+        this.$message.error('结束时间必须大于现在时间！');
+        return
+      }
       if(this.temp.get(this.homeName)==null){
-        this.temp.set(this.homeName,this.homeName)
+        this.temp.set(this.homeName,this.homeName+","+this.pace+","+this.endTime+","+this.nowDate)
         this.counter.push({"hostname":this.homeName,"pace":this.pace,"endTime":this.endTime,"nowDate":this.nowDate})
       }else {
         this.$message.error('房间名称不能重复！');
       }
+      this.endYear=""
+      this.endMo=""
+      this.endDay=""
       this.showDialog = false
+      this.endTime=""
+      this.$refs.test.form.homename=""
+      this.$refs.test.form.pace=""
+      this.$refs.test.form.date1='2002-13-14 20:20:12'
+      this.$refs.test.form.date2='2002-13-14 20:20:12'
       this.$refs.test.form=[]
     }
     ,

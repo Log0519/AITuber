@@ -118,7 +118,7 @@
   //做一下简单的打印
   console.log(element);//数据格式从打印中就可以分析出来啦
   //cmd = DANMU_MSG 是弹幕
-  if (element.cmd === "DANMU_MSG:4:0:2:2:2:0") {
+  if (element.cmd === "DANMU_MSG"){
   console.log("uid: " + element.info[2][0]
   + " 用户: " + element.info[2][1]
   + " \n内容: " + element.info[1]

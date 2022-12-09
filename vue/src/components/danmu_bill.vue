@@ -20,14 +20,15 @@
       <div class="msg-line"></div>
       <div class="marquee-wrap">
         <ul class="marquee-list" :class="{'animate-up': animateUp}" @mouseenter="stopFn" @mouseleave="startFn">
-          <li   v-for="(item, index) in items" :key="index" style="overflow: auto;display:flex; flex-wrap: wrap">
+          <el-button @click="get1()">添加数据</el-button>
+          <li   v-for="(item, index) in items" :key="index">
               <p v-if="item.flag" :style="fontStyle" class="p-word">
-              {{'('+item.state+')'}}  {{'---"'+item.name+'"---'}} {{'---"'+item.neirong+'"---'}} {{item.time}}
-                <el-button @click="openChangeWindow(item.neirong,item.answer)" style="max-height: 10px;max-width: 30px;background-color: rgba(254,249,215,0)" text>详情</el-button>
+              {{'('+item.state+')'}}  {{'---"'+item.name+'"---'}} {{item.time}}
+                <el-button @click="openChangeWindow(item.name,item.answer)" style="max-height: 10px;max-width: 30px;background-color: rgba(254,249,215,0)" text>详情</el-button>
               </p>
             <p v-else :style="fontStyle2" class="p-word">
-              {{'('+item.state+')'}}  {{'---"'+item.name+'"---'}} {{'---"'+item.neirong+'"---'}} {{item.time}}
-              <el-button @click="openChangeWindow(item.neirong,item.answer)" style="max-height: 10px;max-width: 30px;color: #e33d60;background-color: rgba(254,249,215,0)" text> 详情</el-button>
+              {{'('+item.state+')'}}  {{'---"'+item.name+'"---'}} {{item.time}}
+              <el-button @click="openChangeWindow(item.name,item.answer)" style="max-height: 10px;max-width: 30px;color: #e33d60;background-color: rgba(254,249,215,0)" text> 详情</el-button>
             </p>
           </li>
         </ul>
@@ -70,7 +71,17 @@ export default {
       dialogVisible: true,
       //dialog
       formLabelWidth: '120px',
-      items:[],
+      items:[
+           {'flag':false,'state':'未解决','name': "今天天气怎么样",'time':"2022-12-1 12:08:06",'answer':''},
+          // {'flag':true,'state':"自动",'name': "预计多久发售呢",'time':"2022-12-1 12:12:53",'answer':'12月份就会发售'},
+          // {'flag':true,'state':"自动",'name': "这个商品打折吗",'time':"2022-12-1 12:14:41",'answer':'新品不打折哟'},
+          // {'flag':false,'state':"未解决",'name': "疫情期间可以发货吗",'time':"2022-12-1 12:25:26",'answer':''},
+          // {'flag':true,'state':"自动",'name': "双十一活动吗",'time':"2022-12-1 12:46:13",'answer':'双十一活动暂时还没确定'},
+          // {'flag':true,'state':"自动",'name': "商品有保险吗",'time':"2022-12-1 13:16:41",'answer':'有的'},
+          // {'flag':true,'state':"自动",'name': "这个有其他颜色的吗",'time':"2022-12-1 13:17:32",'answer':'这个有红色和白色'},
+          // {'flag':false,'state':"未解决",'name': "这个销量怎么样子",'time':"2022-12-1 13:17:59",'answer':''},
+          // {'flag':true,'state':"自动",'name': "七天包退换吗",'time':"2022-12-1 13:18:41",'answer':'是的'},
+      ],
       animateUp: false,
       timer: null
     }
@@ -93,20 +104,11 @@ export default {
   created() {
     this.timer = setInterval(this.scrollAnimate, 1300);
   },
-  mounted() {
-    this.getHis()
-  },
   methods:{
-    getHis(){
+    get1(){
       request.get("/danmuSource/get").then(res=>{
-        console.log(res.data)
-        console.log(res.data[0])
-        this.items=[]
-        for (let i = 0; i < res.data.length; i++) {
-          var words=res.data[i].split(",")
-          this.items.push({'flag':true,'state':"自动",'name': words[0],'neirong':words[1],'time': words[2],'answer':'新品不打折哟'})
-        }res.data.length()
 
+        this.items.push({'flag':true,'state':"自动",'name': res.data.name,'time':res.data.time,'answer':'新品不打折哟'})
       })
     },
     //对话框方法
@@ -171,10 +173,9 @@ export default {
   height: 200px;
   background: #FFFFFF;
   border-radius: 4px;
-
+  overflow: hidden;
   /**/
   .msg-tit{
-
     padding: 6px 5px 5px 10px;
     .msg-top{
       display: flex;
@@ -188,17 +189,12 @@ export default {
     }
     .marquee-wrap  {
       /*width: 80%;*/
-      overflow: auto;
-      display:flex;
-      flex-wrap: wrap;
-      height:160px;
-      width: 580px;
+      height:150px;
       margin: 0 auto;
-
+      overflow: hidden;
       .marquee-list {
         /*border: 1px solid red;*/
         li {
-
           .p-tit{
             font-size: 12px;
             font-family: PingFangSC-Regular, PingFang SC;
