@@ -50,7 +50,6 @@
       <!--    右    >-->
       <div class="window1-right" style="width: 76%">
         <div class="window-model" style="width: 300px;height: 270px"></div>
-        <SendDanmuBill/>
         <danmuTest style="font-size: 16px;background-color: rgba(236,223,253,0.45);color: #635773"/>
       </div>
     </div>

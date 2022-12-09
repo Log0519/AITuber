@@ -1,7 +1,8 @@
 <!--<li v-for='item in items' >{{'('+item[0].state+')'}}  {{'---"'+item[1].name+'"---'}} {{item[2].time}}</li>-->
 <template>
   <div class="message-page" style="display:flex;">
-    <div class="msg-tit">
+    <div  class="msg-tit">
+      <SendDanmuBill ref="send"/>
       <div class="msg-top">
         <div class="tit-word">
           <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">历史消息</el-button>
@@ -20,13 +21,13 @@
       <div class="msg-line"></div>
       <div class="marquee-wrap">
         <ul class="marquee-list" :class="{'animate-up': animateUp}" @mouseenter="stopFn" @mouseleave="startFn">
-          <li   v-for="(item, index) in items" :key="index" style="overflow: auto;display:flex; flex-wrap: wrap">
+          <li   v-for="(item, index) in items" :key="index">
               <p v-if="item.flag" :style="fontStyle" class="p-word">
-              {{'('+item.state+')'}}  {{'---"'+item.name+'"---'}} {{'---"'+item.neirong+'"---'}} {{item.time}}
+              {{'('+item.state+')'}}  {{' ---名称：'+item.name+'---'}} {{item.neirong+'--- '}} {{item.time}}
                 <el-button @click="openChangeWindow(item.neirong,item.answer)" style="max-height: 10px;max-width: 30px;background-color: rgba(254,249,215,0)" text>详情</el-button>
               </p>
             <p v-else :style="fontStyle2" class="p-word">
-              {{'('+item.state+')'}}  {{'---"'+item.name+'"---'}} {{'---"'+item.neirong+'"---'}} {{item.time}}
+              {{'('+item.state+')'}}  {{'---'+item.name+'---'}} {{'---'+item.neirong+'---'}} {{item.time}}
               <el-button @click="openChangeWindow(item.neirong,item.answer)" style="max-height: 10px;max-width: 30px;color: #e33d60;background-color: rgba(254,249,215,0)" text> 详情</el-button>
             </p>
           </li>
@@ -57,9 +58,12 @@
 <script>
 import MocapDialog from "./dialog/MocapDialog.vue"
 import request from "../utils/request";
+import SendDanmuBill from "./SendDanmuBill.vue";
+
 export default {
   name: 'MessagePage',
   components:{
+    SendDanmuBill,
     MocapDialog
   },
   data(){
@@ -92,11 +96,18 @@ export default {
   },
   created() {
     this.timer = setInterval(this.scrollAnimate, 1300);
+
   },
   mounted() {
-    this.getHis()
+    if(this.$refs.send.itemsSend){
+      this.items=this.$refs.send.itemsSend
+
+    }
   },
   methods:{
+    getnew(){
+
+    },
     getHis(){
       request.get("/danmuSource/get").then(res=>{
         console.log(res.data)
@@ -104,13 +115,15 @@ export default {
         this.items=[]
         for (let i = 0; i < res.data.length; i++) {
           var words=res.data[i].split(",")
-          this.items.push({'flag':true,'state':"自动",'name': words[0],'neirong':words[1],'time': words[2],'answer':'新品不打折哟'})
+          this.items.push({'flag':true,'state':"自动",'name': words[0].split("[")[1],'neirong':words[1],'time': words[2].split("]")[0],'answer':'新品不打折哟'})
         }res.data.length()
 
       })
     },
     //对话框方法
     onDialog () { // 调用Dialog弹出对话框
+      this.items=this.$refs.send.itemsSend
+      console.log("this.items=this.$refs.send.itemsSend======="+this.$refs.send.itemsSend)
       this.showDialog = true
     },
     onClose () { // 关闭dialog
@@ -168,13 +181,11 @@ export default {
   border: 1px solid transparent;
   margin-top: 14px;
   width: 595px;
-  height: 200px;
+  height: 320px;
   background: #FFFFFF;
   border-radius: 4px;
-
   /**/
   .msg-tit{
-
     padding: 6px 5px 5px 10px;
     .msg-top{
       display: flex;
@@ -191,7 +202,7 @@ export default {
       overflow: auto;
       display:flex;
       flex-wrap: wrap;
-      height:160px;
+      height:170px;
       width: 580px;
       margin: 0 auto;
 
@@ -201,7 +212,7 @@ export default {
 
           .p-tit{
             font-size: 12px;
-            font-family: PingFangSC-Regular, PingFang SC;
+            font-family: PingFangSC-Regular, PingFang SC,serif;
             color: #222222;
             height: 22px;
             line-height: 22px;
@@ -209,13 +220,11 @@ export default {
           .p-word{
             margin-top: 8px;
             font-size: 14px;
-            font-family: PingFangSC-Regular, PingFang SC;
+            font-family: PingFangSC-Regular, PingFang SC,serif;
 
             height: 16px;
             line-height: 18px;
             width: 767px;
-            overflow: hidden;
-            text-overflow: ellipsis;
             white-space: nowrap;
           }
 

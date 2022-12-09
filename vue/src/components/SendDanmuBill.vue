@@ -10,7 +10,7 @@
 <!--      401854710-->
 <!--      1440094-->
       直播房间 roomid:
-      <el-input type="text" id="roomid" value="1440094" style="width: 13%;margin-left: 10px"></el-input>
+      <el-input type="text" id="roomid" value="903562" style="width: 13%;margin-left: 10px"></el-input>
     </div>
 <!--    直播间的实时消息会发送到flink，经过处理后作为生产者发送到kafka的DanmuSource主题上-->
 <!--    先打开kafka消费者，bin/kafka-console-consumer.sh --bootstrap-server hadoop102:9092 --topic DanmuSource-->
@@ -24,18 +24,21 @@
 </template>
 
 
-<script type="text/javascript">
+<script>
   import request from "../utils/request";
 
   export default {
+    name: "sendDanmuBill",
     components:{
-
+    },
+    mounted() {
+      window.itemsSend=this.itemsSend
     },
     data() {
       return {
-
-      }},
-  name: "sendDanmuBill",
+        itemsSend:[]
+      }
+      },
     methods:{
     stopDanmu(){
       if(flag===true){
@@ -54,8 +57,7 @@
   var timer = null;
   var flag=false;
   var ws;
-
-  function WebSocketTest() {
+  function WebSocketTest(t) {
   var roomid = document.getElementById("roomid").value;
   var url = document.getElementById("url").value;
   // var key = document.getElementById("key").value;
@@ -123,16 +125,17 @@
   + " 用户: " + element.info[2][1]
   + " \n内容: " + element.info[1]
   + " \n时间:" + element.info[9].ts);
+    itemsSend.push({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':element.info[9].ts,'answer':'新品不打折哟'})
 
-  console.log("开始一次提交")
-    request.get("/danmuSource/send",{
-      params: {
-        name: element.info[2][1],
-        neirong: element.info[1],
-        time: element.info[9].ts
-      }}).then(res=>{
-      console.log("完成一次提交")
-    })
+    console.log("开始一次提交")
+    // request.get("/danmuSource/send",{
+    //   params: {
+    //     name: element.info[2][1],
+    //     neirong: element.info[1],
+    //     time: element.info[9].ts
+    //   }}).then(res=>{
+    //   console.log("完成一次提交")
+    // })
 }
   //cmd = INTERACT_WORD 有人进入直播了
   else if (element.cmd === "INTERACT_WORD") {
