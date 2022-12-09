@@ -10,13 +10,20 @@
 <!--      401854710-->
 <!--      1440094-->
       直播房间 roomid:
-      <el-input type="text" id="roomid" value="3763613" style="width: 13%;margin-left: 10px"></el-input>
+      <el-input type="text" id="roomid" value="545068" style="width: 13%;margin-left: 10px"></el-input>
     </div>
 <!--    直播间的实时消息会发送到flink，经过处理后作为生产者发送到kafka的DanmuSource主题上-->
 <!--    先打开kafka消费者，bin/kafka-console-consumer.sh --bootstrap-server hadoop102:9092 --topic DanmuSource-->
     <div>
-      <el-button @click="getDanmu">实时获取</el-button>
+      <el-button @click="getDanmu();writeToMysql()">实时获取</el-button>
       <el-button @click="stopDanmu">停止获取</el-button>
+      <el-switch
+          style="margin-left: 30px"
+          v-model="isWrite"
+          @change="writeToMysql()"
+          active-text="入库"
+          >
+      </el-switch>
     </div>
   </div>
 
@@ -29,6 +36,7 @@
 
 import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
 import {Locale} from "vant";
+import request from "../utils/request";
   export default {
     name: "sendDanmuBill",
     components:{
@@ -38,11 +46,26 @@ import {Locale} from "vant";
     },
     data() {
       return {
+        isWrite:false,
         itemsSend:[],
         temp:[]
       }
       },
     methods:{
+      writeToMysql(){
+        console.log("进入writeToMysql方法"+this.isWrite)
+        if(this.isWrite===true){
+          if(flag===false){
+            request.get("/danmuSource/write").then(res=>{
+              console.log("开启写入mysql数据通道")
+            })
+          }else {
+            console.log("已经打开了一条mysql数据通道")
+          }
+        }else {
+          console.log("关闭mysql数据通道")
+        }
+      },
     stopDanmu(){
       if(flag===true){
         ws.close()
@@ -53,6 +76,7 @@ import {Locale} from "vant";
     },
     getDanmu(){
       WebSocketTest()
+
     }
     },
 
@@ -174,17 +198,20 @@ import {Locale} from "vant";
         break;
     }
     var finalDate=strings[3]+'-'+mm+'-'+strings[2]+' '+strings[4]
+    //itemsSend是另外一个页面用来获取所有弹幕信息的数组，使用unshift可以把后来的数据放在前面
     itemsSend.unshift({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':finalDate,'answer':'新品不打折哟'})
     //itemsSend.push({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':finalDate,'answer':'新品不打折哟'})
     console.log("开始一次提交")
-    // request.get("/danmuSource/send",{
-    //   params: {
-    //     name: element.info[2][1],
-    //     neirong: element.info[1],
-    //     time: element.info[9].ts
-    //   }}).then(res=>{
-    //   console.log("完成一次提交")
-    // })
+
+    //启动springboot，启动虚拟机上的kafka，可以进行获取弹幕发送到kafka并且写入到aituber下的danmu_bill数据库
+    request.get("/danmuSource/send",{
+      params: {
+        name: element.info[2][1],
+        neirong: element.info[1],
+        time: element.info[9].ts
+      }}).then(res=>{
+      console.log("发送到kafka")
+    })
 }
   //cmd = INTERACT_WORD 有人进入直播了
   else if (element.cmd === "INTERACT_WORD") {

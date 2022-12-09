@@ -17,13 +17,20 @@ import java.util.Queue;
 @RestController
 @RequestMapping("/danmuSource")
 public class DanmuController {
-
     @GetMapping ("/send")
     public Result<?> login(@RequestParam(defaultValue = "") String name,
                            @RequestParam(defaultValue = "") String neirong,
                            @RequestParam(defaultValue = "") String time
     ){
         DanmuKafka.SendDanmu(name+","+neirong+","+time);
+
+        return Result.success();
+    }
+
+    @GetMapping ("/write")
+    public Result<?> write(){
+
+        DanmuKafka.GetDanmu();
         return Result.success();
     }
 

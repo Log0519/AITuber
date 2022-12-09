@@ -20,9 +20,6 @@ import java.util.{Collections, Properties}
  */
 case class danmu(name:String,neirong:String,time:String)
 object DanmuKafka {
-  def main(args: Array[String]): Unit = {
-      GetDanmu()
-  }
   def SendDanmu(info: String): Unit ={
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
     val strings: Array[String] = info.split(",")
@@ -59,7 +56,7 @@ object DanmuKafka {
     val properties = new Properties()
     properties.setProperty("bootstrap.servers","hadoop102:9092")
     val stream: DataStream[String] = env.addSource(new FlinkKafkaConsumer[String]("DanmuSource", new SimpleStringSchema(), properties))
-    val map = new util.HashMap[String, String]()
+
     //用户：主子是墨鱼丸子-	内容：飘逸了	time：2022-12-09 12:28:16
     val danmuStream: DataStream[danmu] = stream.map(data => {
       val words: Array[String] = data.split("\t")
