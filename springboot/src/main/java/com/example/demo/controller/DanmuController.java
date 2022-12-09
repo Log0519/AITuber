@@ -23,14 +23,12 @@ public class DanmuController {
                            @RequestParam(defaultValue = "") String time
     ){
         DanmuKafka.SendDanmu(name+","+neirong+","+time);
-
         return Result.success();
     }
 
     @GetMapping ("/write")
     public Result<?> write(){
-
-        DanmuKafka.GetDanmu();
+            DanmuKafka.GetDanmu();
         return Result.success();
     }
 

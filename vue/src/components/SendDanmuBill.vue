@@ -43,6 +43,7 @@ import request from "../utils/request";
     },
     mounted() {
       window.itemsSend=this.itemsSend
+      this.isWrite=false
     },
     data() {
       return {
