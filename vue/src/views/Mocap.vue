@@ -50,8 +50,7 @@
       <!--    右    >-->
       <div class="window1-right" style="width: 76%">
         <div class="window-model" style="width: 300px;height: 270px"></div>
-        <SendDanmuBill/>
-        <danmuTest style="font-size: 16px;background-color: rgba(236,223,253,0.45);color: #635773"/>
+        <danmuArea_bill style="font-size: 16px;background-color: rgba(236,223,253,0.45);color: #635773"/>
       </div>
     </div>
 
@@ -83,7 +82,7 @@
 
 <script>
 import MocapSidebar from "../components/sidebar/MocapSidebar.vue";
-import danmuTest from "../components/danmuTest.vue";
+import DanmuArea_bill from "../components/DanmuArea_bill.vue";
 import SendDanmuBill from "../components/SendDanmuBill.vue";
 
 export default {
@@ -91,7 +90,7 @@ export default {
   components:{
     SendDanmuBill,
     MocapSidebar,
-    danmuTest,
+    DanmuArea_bill,
   },
   data() {
     return {

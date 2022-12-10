@@ -10,13 +10,20 @@
 <!--      401854710-->
 <!--      1440094-->
       直播房间 roomid:
-      <el-input type="text" id="roomid" value="1440094" style="width: 13%;margin-left: 10px"></el-input>
+      <el-input type="text" id="roomid" value="545068" style="width: 13%;margin-left: 10px"></el-input>
     </div>
 <!--    直播间的实时消息会发送到flink，经过处理后作为生产者发送到kafka的DanmuSource主题上-->
 <!--    先打开kafka消费者，bin/kafka-console-consumer.sh --bootstrap-server hadoop102:9092 --topic DanmuSource-->
     <div>
-      <el-button @click="getDanmu">实时获取</el-button>
+      <el-button @click="getDanmu()">实时获取</el-button>
       <el-button @click="stopDanmu">停止获取</el-button>
+      <el-switch
+          style="margin-left: 30px"
+          v-model="isWrite"
+          @change="writeToMysql()"
+          active-text="入库"
+          >
+      </el-switch>
     </div>
   </div>
 
@@ -24,19 +31,50 @@
 </template>
 
 
-<script type="text/javascript">
-  import request from "../utils/request";
 
+<script>
+
+import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
+import {Locale} from "vant";
+import request from "../utils/request";
   export default {
+    name: "sendDanmuBill",
     components:{
-
+    },
+    mounted() {
+      window.itemsSend=this.itemsSend
+      this.isWrite=false
     },
     data() {
       return {
-
-      }},
-  name: "sendDanmuBill",
+        isWrite:false,
+        itemsSend:[],
+        temp:[]
+      }
+      },
     methods:{
+      writeToMysql(){
+        console.log("进入writeToMysql方法"+this.isWrite)
+        if(this.isWrite===true){
+          console.log("正在开启写入mysql数据通道"+this.isWrite)
+            request.get("/danmuSource/write",{
+              params:{
+                flag:this.isWrite
+              }
+             }).then(res=> {
+              console.log("完成开启写入mysql数据通道"+this.isWrite)
+            })
+        }else {
+          console.log("正在关闭写入mysql数据通道"+this.isWrite)
+          request.get("/danmuSource/write",{
+            params:{
+              flag:this.isWrite
+            }
+          }).then(res=> {
+            console.log("完成关闭写入mysql数据通道"+this.isWrite)
+          })
+        }
+      },
     stopDanmu(){
       if(flag===true){
         ws.close()
@@ -47,6 +85,7 @@
     },
     getDanmu(){
       WebSocketTest()
+
     }
     },
 
@@ -54,8 +93,7 @@
   var timer = null;
   var flag=false;
   var ws;
-
-  function WebSocketTest() {
+  function WebSocketTest(t) {
   var roomid = document.getElementById("roomid").value;
   var url = document.getElementById("url").value;
   // var key = document.getElementById("key").value;
@@ -118,20 +156,70 @@
   //做一下简单的打印
   console.log(element);//数据格式从打印中就可以分析出来啦
   //cmd = DANMU_MSG 是弹幕
-  if (element.cmd === "DANMU_MSG:4:0:2:2:2:0") {
+  if (element.cmd === "DANMU_MSG"){
   console.log("uid: " + element.info[2][0]
   + " 用户: " + element.info[2][1]
   + " \n内容: " + element.info[1]
   + " \n时间:" + element.info[9].ts);
 
-  console.log("开始一次提交")
+    var formats = "yyyy-MM-dd HH:mm:ss";
+    var  newDate = new SimpleDateFormat(formats,Locale.CHINA).format(new Date(element.info[9].ts*1000));
+    //Fri Dec 09 2022 20:16:02 GMT+0800
+    var strings = newDate.toString().split(" ");
+    var mm=strings[1];
+    var em = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    switch (mm) {
+      case em[0]:
+        mm = 1;
+        break;
+      case em[1]:
+        mm = 2;
+        break;
+      case em[2]:
+        mm = 3;
+        break;
+      case em[3]:
+        mm = 4;
+        break;
+      case em[4]:
+        mm = 5;
+        break;
+      case em[5]:
+        mm = 6;
+        break;
+      case em[6]:
+        mm = 7;
+        break;
+      case em[7]:
+        mm = 8;
+        break;
+      case em[8]:
+        mm = 9;
+        break;
+      case em[9]:
+        mm = 10;
+        break;
+      case em[10]:
+        mm = 11;
+        break;
+      case em[11]:
+        mm = 12;
+        break;
+    }
+    var finalDate=strings[3]+'-'+mm+'-'+strings[2]+' '+strings[4]
+    //itemsSend是另外一个页面用来获取所有弹幕信息的数组，使用unshift可以把后来的数据放在前面
+    itemsSend.unshift({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':finalDate,'answer':'新品不打折哟'})
+    //itemsSend.push({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':finalDate,'answer':'新品不打折哟'})
+    console.log("开始一次提交")
+
+    //启动springboot，启动虚拟机上的kafka，可以进行获取弹幕发送到kafka并且写入到aituber下的danmu_bill数据库
     request.get("/danmuSource/send",{
       params: {
         name: element.info[2][1],
         neirong: element.info[1],
         time: element.info[9].ts
       }}).then(res=>{
-      console.log("完成一次提交")
+      console.log("发送到kafka")
     })
 }
   //cmd = INTERACT_WORD 有人进入直播了
