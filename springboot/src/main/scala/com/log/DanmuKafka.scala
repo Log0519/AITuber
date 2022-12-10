@@ -2,11 +2,13 @@ package com.log
 import com.utils.TimeUtils.TimeStampToDate
 import org.apache.flink.api.common.serialization.SimpleStringSchema
 import org.apache.flink.configuration.Configuration
+import org.apache.flink.connector.jdbc.{JdbcConnectionOptions, JdbcSink, JdbcStatementBuilder}
 import org.apache.flink.streaming.api.functions.sink.{RichSinkFunction, SinkFunction}
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.apache.flink.streaming.api.scala._
 import org.apache.flink.streaming.connectors.kafka.{FlinkKafkaConsumer, FlinkKafkaProducer}
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord, KafkaConsumer}
+import org.apache.spark.api.java.function.MapFunction
 
 import java.sql.{Connection, DriverManager, PreparedStatement}
 import java.util
@@ -30,7 +32,7 @@ object DanmuKafka {
     //数据写入Kafka
     stream.addSink(new FlinkKafkaProducer[String]("hadoop102:9092","DanmuSource",new SimpleStringSchema()))
 //    stream.addSink(JdbcSink.sink(
-//      "INSERT INTO danmu_bill (name,neirong,time) VALUES (?,?,?)",//定义写入Mysql的语句
+//      "INSERT INTO danmu_bill(name,neirong,time) VALUES (?,?,?)",//定义写入Mysql的语句
 //      new JdbcStatementBuilder[String] {
 //        override def accept(t: PreparedStatement, u:String): Unit = {
 //          t.setString(1,u.split("用户：")(1).split("\t")(0))
@@ -49,7 +51,7 @@ object DanmuKafka {
     env.execute()
   }
 
-  def GetDanmu(): Unit = {
+  def GetDanmu(sink: MyRichSinkToMySQL): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
     //构建ETL管道
     //从Kafka读取数据,并且写入mysql
@@ -62,9 +64,8 @@ object DanmuKafka {
       val words: Array[String] = data.split("\t")
       danmu(words(0).split("用户：")(1), words(1).split("内容：")(1), words(2).split("time：")(1))
     })
-    danmuStream.addSink(new MyRichSinkToMySQL)
+    danmuStream.addSink(sink)
     env.execute()
-
   }
   class MyRichSinkToMySQL extends RichSinkFunction[danmu] {
     //预编译
@@ -72,8 +73,8 @@ object DanmuKafka {
     var conn: Connection =_
     //插入语句
     var insertTmp: PreparedStatement =_
-    //更新语句
-    var updateTmp: PreparedStatement =_
+//    //更新语句
+//    var updateTmp: PreparedStatement =_
 
     //重写open方法
     override def open(parameters: Configuration): Unit = {
@@ -105,7 +106,7 @@ object DanmuKafka {
     //关闭所有连接
     override def close(): Unit = {
       insertTmp.close()
-      updateTmp.close()
+      //updateTmp.close()
       conn.close()
     }
   }

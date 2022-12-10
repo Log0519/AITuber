@@ -15,7 +15,7 @@
 <!--    直播间的实时消息会发送到flink，经过处理后作为生产者发送到kafka的DanmuSource主题上-->
 <!--    先打开kafka消费者，bin/kafka-console-consumer.sh --bootstrap-server hadoop102:9092 --topic DanmuSource-->
     <div>
-      <el-button @click="getDanmu();writeToMysql()">实时获取</el-button>
+      <el-button @click="getDanmu()">实时获取</el-button>
       <el-button @click="stopDanmu">停止获取</el-button>
       <el-switch
           style="margin-left: 30px"
@@ -56,15 +56,23 @@ import request from "../utils/request";
       writeToMysql(){
         console.log("进入writeToMysql方法"+this.isWrite)
         if(this.isWrite===true){
-          if(flag===false){
-            request.get("/danmuSource/write").then(res=>{
-              console.log("开启写入mysql数据通道")
+          console.log("正在开启写入mysql数据通道"+this.isWrite)
+            request.get("/danmuSource/write",{
+              params:{
+                flag:this.isWrite
+              }
+             }).then(res=> {
+              console.log("完成开启写入mysql数据通道"+this.isWrite)
             })
-          }else {
-            console.log("已经打开了一条mysql数据通道")
-          }
         }else {
-          console.log("关闭mysql数据通道")
+          console.log("正在关闭写入mysql数据通道"+this.isWrite)
+          request.get("/danmuSource/write",{
+            params:{
+              flag:this.isWrite
+            }
+          }).then(res=> {
+            console.log("完成关闭写入mysql数据通道"+this.isWrite)
+          })
         }
       },
     stopDanmu(){

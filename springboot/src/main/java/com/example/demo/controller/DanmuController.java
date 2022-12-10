@@ -27,8 +27,17 @@ public class DanmuController {
     }
 
     @GetMapping ("/write")
-    public Result<?> write(){
-            DanmuKafka.GetDanmu();
+    public Result<?> write(@RequestParam(defaultValue = "false") Boolean flag){
+        DanmuKafka.MyRichSinkToMySQL sink = new DanmuKafka.MyRichSinkToMySQL();
+        System.out.println("flag值为"+flag);
+        if(flag){
+            System.out.println("flag值为"+flag);
+            DanmuKafka.GetDanmu(sink);
+        }
+          else {
+            System.out.println("flag值为"+flag);
+              sink.close();
+        }
         return Result.success();
     }
 
