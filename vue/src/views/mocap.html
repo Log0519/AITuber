@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <video class="input_video" hidden></video>
-    <canvas class="output_canvas" width="640px" height="470px"></canvas>
+    <canvas class="output_canvas" width="640px" height="410px"></canvas>
 </div>
 </body>
 </html>
@@ -39,17 +39,17 @@
         canvasCtx.globalCompositeOperation = 'source-over';
         //绘制逻辑
         drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
-            {color: 'rgba(0,255,19,0.5)', lineWidth: 2});
+            {color: 'rgba(182,215,185,0.1)', lineWidth: 2});
         // drawLandmarks(canvasCtx, results.poseLandmarks,
         //     {color: '#FF0000', lineWidth: 1});
         drawConnectors(canvasCtx, results.faceLandmarks, FACEMESH_TESSELATION,
-            {color: 'rgba(141,255,218,0.4)', lineWidth: 1});
+            {color: 'rgba(227,223,223,0.1)', lineWidth: 1});
         drawConnectors(canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS,
-            {color: '#00ccad', lineWidth: 2});
+            {color: 'rgba(181,197,182,0.1)', lineWidth: 2});
         // drawLandmarks(canvasCtx, results.leftHandLandmarks,
         //     {color: '#00FF00', lineWidth: 1});
         drawConnectors(canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS,
-            {color: '#00fdba', lineWidth: 2});
+            {color: 'rgba(219,225,221,0.1)', lineWidth: 2});
         // drawLandmarks(canvasCtx, results.rightHandLandmarks,
         //     {color: '#00ff00', lineWidth: 1});
         canvasCtx.restore();
