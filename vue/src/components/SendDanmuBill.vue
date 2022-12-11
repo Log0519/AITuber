@@ -4,13 +4,21 @@
       <span>BillBill_url:</span>
 <!--      wss://titan-ws.pinduoduo.com/-->
 <!--      wss://broadcastlv.chat.bilibili.com/sub-->
+<!--      https://api.live.bilibili.com/room/v1/Room/room_init?id=52030-->
       <el-input disabled type="text" id="url" value="wss://broadcastlv.chat.bilibili.com/sub" style="width: 40%;margin-left: 10px"> </el-input>
     </div>
     <div style="display: flex;font-size: 16px;margin-top: 5px">
 <!--      401854710-->
 <!--      1440094-->
-      直播房间 roomid:
-      <el-input type="text" id="roomid" value="545068" style="width: 13%;margin-left: 10px"></el-input>
+
+      直播房间 url:
+      <el-input   placeholder="请输入内容"
+                  type="textarea"
+                  :autosize="{ minRows: 2, maxRows: 2}"
+                  id="homeurl"
+                  v-model="homeUrl"
+                  style="width:60%;
+                  margin-left: 10px"></el-input>
     </div>
 <!--    直播间的实时消息会发送到flink，经过处理后作为生产者发送到kafka的DanmuSource主题上-->
 <!--    先打开kafka消费者，bin/kafka-console-consumer.sh --bootstrap-server hadoop102:9092 --topic DanmuSource-->
@@ -33,7 +41,6 @@
 
 
 <script>
-
 import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
 import {Locale} from "vant";
 import request from "../utils/request";
@@ -43,13 +50,16 @@ import request from "../utils/request";
     },
     mounted() {
       window.itemsSend=this.itemsSend
+      console.log("homeID"+this.homeID)
       this.isWrite=false
     },
     data() {
       return {
         isWrite:false,
         itemsSend:[],
-        temp:[]
+        temp:[],
+        homeID:0,
+        homeUrl:'https://live.bilibili.com/697?'
       }
       },
     methods:{
@@ -84,8 +94,10 @@ import request from "../utils/request";
       }
     },
     getDanmu(){
-      WebSocketTest()
-
+      var url= document.getElementById("homeurl").value;
+      var id =''
+      id=url.split("com/")[1].split("?")[0]
+      GetBillRoomID(id)
     }
     },
 
@@ -93,8 +105,19 @@ import request from "../utils/request";
   var timer = null;
   var flag=false;
   var ws;
-  function WebSocketTest(t) {
-  var roomid = document.getElementById("roomid").value;
+
+   function GetBillRoomID(id) {
+     request.get("/danmuSource/getRoomID",{
+      params:{
+        id:id
+      }
+    }).then(res=> {
+      console.log("获取到的roomID："+res.data)
+       WebSocketTest(res.data)
+    })
+  }
+
+  function WebSocketTest(roomid) {
   var url = document.getElementById("url").value;
   // var key = document.getElementById("key").value;
   console.log("roomid: " + roomid +
@@ -210,17 +233,16 @@ import request from "../utils/request";
     //itemsSend是另外一个页面用来获取所有弹幕信息的数组，使用unshift可以把后来的数据放在前面
     itemsSend.unshift({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':finalDate,'answer':'新品不打折哟'})
     //itemsSend.push({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':finalDate,'answer':'新品不打折哟'})
-    console.log("开始一次提交")
 
     //启动springboot，启动虚拟机上的kafka，可以进行获取弹幕发送到kafka并且写入到aituber下的danmu_bill数据库
-    request.get("/danmuSource/send",{
-      params: {
-        name: element.info[2][1],
-        neirong: element.info[1],
-        time: element.info[9].ts
-      }}).then(res=>{
-      console.log("发送到kafka")
-    })
+    // request.get("/danmuSource/send",{
+    //   params: {
+    //     name: element.info[2][1],
+    //     neirong: element.info[1],
+    //     time: element.info[9].ts
+    //   }}).then(res=>{
+    //   console.log("发送到kafka")
+    // })
 }
   //cmd = INTERACT_WORD 有人进入直播了
   else if (element.cmd === "INTERACT_WORD") {

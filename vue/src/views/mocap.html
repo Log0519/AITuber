@@ -52,6 +52,10 @@
             {color: 'rgba(219,225,221,0.1)', lineWidth: 2});
         // drawLandmarks(canvasCtx, results.rightHandLandmarks,
         //     {color: '#00ff00', lineWidth: 1});
+        if(results.faceLandmarks){
+            console.log(results.faceLandmarks)
+        }
+
         canvasCtx.restore();
     }
 
@@ -61,6 +65,7 @@
     holistic.setOptions({
         modelComplexity: 1,
         smoothLandmarks: true,
+
         enableSegmentation: true,
         smoothSegmentation: true,
         refineFaceLandmarks: true,
