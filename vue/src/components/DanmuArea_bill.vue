@@ -201,7 +201,7 @@ export default {
       overflow: auto;
       display:flex;
       flex-wrap: wrap;
-      height:170px;
+      height:207px;
       width: 580px;
       margin: 0 auto;
       .marquee-list {
