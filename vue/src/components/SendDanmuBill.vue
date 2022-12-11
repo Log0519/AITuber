@@ -1,20 +1,19 @@
 <template>
   <div id="sse">
-    <div style="display: flex;font-size: 16px">
+    <div id="BillBill_url" hidden>
       <span>BillBill_url:</span>
 <!--      wss://titan-ws.pinduoduo.com/-->
 <!--      wss://broadcastlv.chat.bilibili.com/sub-->
 <!--      https://api.live.bilibili.com/room/v1/Room/room_init?id=52030-->
       <el-input disabled type="text" id="url" value="wss://broadcastlv.chat.bilibili.com/sub" style="width: 40%;margin-left: 10px"> </el-input>
-    </div>
+      </div>
     <div style="display: flex;font-size: 16px;margin-top: 5px">
 <!--      401854710-->
 <!--      1440094-->
 
       直播房间 url:
       <el-input   placeholder="请输入内容"
-                  type="textarea"
-                  :autosize="{ minRows: 2, maxRows: 2}"
+                  type="text"
                   id="homeurl"
                   v-model="homeUrl"
                   style="width:60%;
@@ -29,7 +28,7 @@
           style="margin-left: 30px"
           v-model="isWrite"
           @change="writeToMysql()"
-          active-text="入库"
+          active-text="入库（开启入库需要启动kafka）"
           >
       </el-switch>
     </div>
@@ -89,6 +88,11 @@ import request from "../utils/request";
       if(flag===true){
         ws.close()
         flag=false;
+        this.$message({
+          showClose: true,
+          message: '已关闭连接！',
+          type: 'success'
+        });
       }else {
         console.log("连接未打开")
       }
@@ -98,6 +102,11 @@ import request from "../utils/request";
       var id =''
       id=url.split("com/")[1].split("?")[0]
       GetBillRoomID(id)
+      this.$message({
+        showClose: true,
+        message: '已连接成功！',
+        type: 'success'
+      });
     }
     },
 
@@ -144,6 +153,7 @@ import request from "../utils/request";
   // WebSocket连接成功回调
   ws.onopen = function () {
   console.log("WebSocket 已连接上");
+
   //组合认证数据包 并发送
   ws.send(getCertification(JSON.stringify(json)).buffer);
   //心跳包的定时器
