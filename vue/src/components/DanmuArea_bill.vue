@@ -2,37 +2,96 @@
 <template>
   <div class="message-page" style="display:flex;">
     <div  class="msg-tit">
-      <SendDanmuBill ref="send"/>
+      <SendDanmuBill ref="send"
+      :home-url="homeurl"
+      />
       <div class="msg-top">
         <div class="tit-word">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">历史消息</el-button>
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+                     @click="windowFlag=0"
+          >历史消息</el-button>
         </div>
         <div class="tit-word" style="margin-left: 30px;">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">实时告警</el-button>
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+                     @click="windowFlag=1"
+          >实时告警</el-button>
         </div>
         <div class="tit-word" style="margin-left: 30px;">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">频繁问题</el-button>
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+                     @click="windowFlag=2"
+          >频繁问题</el-button>
         </div>
         <div class="tit-word" style="margin-left: 30px;">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">活跃用户</el-button>
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+                     @click="windowFlag=3"
+          >活跃用户</el-button>
         </div>
         <el-button style="margin-left: 75px;font-size: 14px;background-color: rgba(254,249,215,0)" text @click="onDialog()">管理 >></el-button>
       </div>
       <div class="msg-line"></div>
-      <div class="marquee-wrap">
-        <ul class="marquee-list" :class="{'animate-up': animateUp}" @mouseenter="stopFn" @mouseleave="startFn">
+
+
+      <div v-if="windowFlag===0" class="marquee-wrap">
+        <ul class="marquee-list" :class="{'animate-up': animateUp}">
           <li   v-for="(item, index) in items" :key="index">
-              <p v-if="item.flag" :style="fontStyle" class="p-word">
-                {{'('+item.state+') '}} {{item.time}}  {{' — '+item.name+' ::'}} {{' '+item.neirong}}
-                <el-button @click="openChangeWindow(item.neirong,item.answer)" style="max-height: 10px;max-width: 30px;background-color: rgba(254,249,215,0)" text>详情</el-button>
-              </p>
+              <div v-if="item.flag" :style="fontStyle" class="p-word">
+                {{'('+item.state+') '}} {{item.time}}
+
+                {{' — '+item.name+' ::'}}
+
+            <div style="color: #c073e4">
+                {{' '+item.neirong}}
+            </div>
+                <el-button @click="openChangeWindow(item.neirong,item.answer)"
+                           style="max-height: 10px;
+                           max-width: 30px;
+                            padding-top: 8px;
+                           background-color: rgba(254,249,215,0)" text>详情</el-button>
+              </div>
             <p v-else :style="fontStyle2" class="p-word">
               {{'('+item.state+') '}} {{item.time}}  {{' — '+item.name+' ::'}} {{' '+item.neirong}}
-              <el-button @click="openChangeWindow(item.neirong,item.answer)" style="max-height: 10px;max-width: 30px;color: #e33d60;background-color: rgba(254,249,215,0)" text> 详情</el-button>
+              <el-button @click="openChangeWindow(item.neirong,item.answer)"
+                         style="max-height: 8px;
+                         max-width: 30px;
+                         color: #e33d60;
+                         padding-top: 10px;
+              background-color: rgba(254,249,215,0)" text> 详情</el-button>
             </p>
           </li>
         </ul>
       </div>
+
+      <div v-else-if="windowFlag===1" class="streamingWarning">
+        <div style="height: 100px;width: 50px;background-color: #1890ff">
+          </div>
+      </div>
+
+      <div v-else-if="windowFlag===2" class="streamingWarning">
+        <div style="height: 100px;width: 50px;background-color: #aecef1">
+        </div>
+      </div>
+
+      <div v-else-if="windowFlag===3" class="streamingWarning">
+        <ul class="marquee-list" :class="{'animate-up': animateUp}">
+          <li   v-for="(item, index) in users" :key="index">
+            <div style="color: #8450e0;display: flex" class="p-word">
+              <div style="color: #c073e4;">
+              {{'用户：'+item.name}}
+              </div>
+              {{' — 活跃次数：'+item.userCount}} {{' — 时间'+item.time}}
+<!--              {{' '+item.count}}-->
+<!--              <el-button @click="openChangeWindow(item.neirong,item.answer)"-->
+<!--                         style="max-height: 10px;max-width: 30px;-->
+<!--                         background-color: rgba(254,249,215,0);-->
+<!--                         padding-top: 8px-->
+<!--                          " text>详情</el-button>-->
+            </div>
+          </li>
+        </ul>
+
+      </div>
+
+
     </div>
 
     <MocapDialog
@@ -75,21 +134,31 @@ export default {
       //dialog
       formLabelWidth: '120px',
       items:[],
+      users:[],
       animateUp: false,
-      timer: null
+      timer: null,
+      windowFlag:0
     }
 
+  },
+  props: {
+    homeurl: { // 地址
+      type: String,
+      default: 'https://live.bilibili.com/697?'
+    },
   },
   computed: {
     fontStyle(){
       const _site = {
         'color':'#635879',
+        'display':'flex'
       }
       return _site
     },
     fontStyle2(){
       const _site = {
         'color':'#dc2958',
+        'display':'flex'
       }
       return _site
     },
@@ -101,7 +170,7 @@ export default {
   mounted() {
     if(this.$refs.send.itemsSend){
       this.items=this.$refs.send.itemsSend
-
+      this.users=this.$refs.send.itemsSend2
     }
   },
   methods:{
@@ -117,7 +186,6 @@ export default {
           var words=res.data[i].split(",")
           this.items.push({'flag':true,'state':"自动",'name': words[0].split("[")[1],'neirong':words[1],'time': words[2].split("]")[0],'answer':'新品不打折哟'})
         }res.data.length()
-
       })
     },
     //对话框方法
@@ -153,20 +221,7 @@ export default {
         });
       });
     },
-  //   scrollAnimate() {
-  //     this.animateUp = false
-  //     setTimeout(() => {
-  //       this.items.push(this.items[0])
-  //       this.items.shift()
-  //       this.animateUp = false
-  //     }, 190)
-  //   },
-  //   stopFn(){
-  //     clearInterval(this.timer)
-  //   },
-  //   startFn(){
-  //     this.timer = setInterval(this.scrollAnimate, 1300);
-  //   }
+
 },
   destroyed() {
     clearInterval(this.timer)
@@ -197,6 +252,43 @@ export default {
 
     }
     .marquee-wrap  {
+      /*width: 80%;*/
+      overflow: auto;
+      display:flex;
+      flex-wrap: wrap;
+      height:207px;
+      width: 580px;
+      margin: 0 auto;
+      .marquee-list {
+        /*border: 1px solid red;*/
+        li {
+
+          .p-tit{
+            font-size: 12px;
+            font-family: PingFangSC-Regular, PingFang SC,serif;
+            color: #222222;
+            height: 22px;
+            line-height: 22px;
+          }
+          .p-word{
+            margin-top: 8px;
+            font-size: 14px;
+            font-family: PingFangSC-Regular, PingFang SC,serif;
+            height: 16px;
+            line-height: 18px;
+            width: 767px;
+            white-space: nowrap;
+          }
+
+        }
+      }
+      .animate-up {
+        transition: all 0.5s ease-in-out;
+        transform: translateY(-58px);
+      }
+    }
+
+    .streamingWarning  {
       /*width: 80%;*/
       overflow: auto;
       display:flex;
