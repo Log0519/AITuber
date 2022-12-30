@@ -256,7 +256,8 @@ import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
     //itemsSend是另外一个页面用来获取所有弹幕信息的数组，使用unshift可以把后来的数据放在前面
 
     var countTemp=0;
-    userCount.unshift({'username':element.info[2][1]})
+
+    //历史消息板块
     itemsSend.unshift({'flag':true,
       'state':"自动",
       'name': element.info[2][1],
@@ -264,18 +265,30 @@ import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
       'time':finalDate,
       'answer':'新品不打折哟',
     })
-    for (let user in userCount) {
-    if(userCount[user].username===element.info[2][1]){
-      countTemp+=1;
+
+
+    //活跃用户板块
+    var t=1
+    for (let user in itemsSend2) {
+      if(itemsSend2[user].name===element.info[2][1]){
+        itemsSend2[user].userCount+=1;
+        t=2
+      }
     }
+    if(t===1){
+      itemsSend2.unshift({
+        'name': element.info[2][1],
+        'userCount':1,
+        'time':finalDate
+      })
     }
-    itemsSend2.unshift({
-      'name': element.info[2][1],
-      'userCount':countTemp,
-      'time':finalDate
-    })
+
+
 
     itemsSend2.sort((a, b) => b.userCount - a.userCount)
+
+
+
 
     //itemsSend.push({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':finalDate,'answer':'新品不打折哟'})
     //启动springboot，启动虚拟机上的kafka，可以进行获取弹幕发送到kafka并且写入到aituber下的danmu_bill数据库
