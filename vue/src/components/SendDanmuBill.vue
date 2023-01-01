@@ -49,8 +49,11 @@ import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
     },
     mounted() {
       window.itemsSend=this.itemsSend
+      window.noDanmu=this.noDanmu
+      window.activeDanmu=this.activeDanmu
       window.itemsSend2=this.itemsSend2
       window.userCount=this.userCount
+      window.danmuCount=this.danmuCount
       window.userCountTemp=this.userCountTemp
       this.homeurl=this.homeUrl
       console.log("homeID"+this.homeID)
@@ -60,12 +63,15 @@ import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
       return {
         isWrite:false,
         itemsSend:[],
+        danmuCount:[],
         itemsSend2:[],
+        activeDanmu:[],
         userCount:[],
         userCountTemp:[],
         temp:[],
         homeID:0,
-        homeurl: ''
+        homeurl: '',
+        noDanmu:["哈哈哈","??"]
       }
       },
     props: {
@@ -255,7 +261,7 @@ import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
     var finalDate=strings[3]+'-'+mm+'-'+strings[2]+' '+strings[4]
     //itemsSend是另外一个页面用来获取所有弹幕信息的数组，使用unshift可以把后来的数据放在前面
 
-    var countTemp=0;
+
 
     //历史消息板块
     itemsSend.unshift({'flag':true,
@@ -266,6 +272,25 @@ import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
       'answer':'新品不打折哟',
     })
 
+    //频繁问题板块
+    var t1=1
+    for (let danmu in activeDanmu) {
+      if(activeDanmu[danmu].name===element.info[1]){
+        activeDanmu[danmu].danmuCount+=1;
+        t1=2
+      }
+    }
+    if(t1===1){
+      if(element.info[1].search("哈")){
+        activeDanmu.unshift({
+          'name': element.info[1],
+          'danmuCount':1,
+          'time':finalDate
+        })
+      }
+
+    }
+    activeDanmu.sort((a, b) => b.danmuCount - a.danmuCount)
 
     //活跃用户板块
     var t=1

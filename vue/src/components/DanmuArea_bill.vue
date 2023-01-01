@@ -39,12 +39,12 @@
           <div v-if="windowFlag===2">
             <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px;color: #c073e4"
                        @click="windowFlag=2"
-            >频繁问题</el-button>
+            >频繁弹幕</el-button>
           </div>
           <div v-else>
             <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
                        @click="windowFlag=2"
-            >频繁问题</el-button>
+            >频繁弹幕</el-button>
           </div>
         </div>
 
@@ -101,16 +101,28 @@
         </ul>
       </div>
 
+<!--      实时告警-->
       <div v-else-if="windowFlag===1" class="streamingWarning">
         <div style="height: 100px;width: 50px;background-color: #1890ff">
           </div>
       </div>
 
+<!--      频繁弹幕-->
       <div v-else-if="windowFlag===2" class="streamingWarning">
-        <div style="height: 100px;width: 50px;background-color: #aecef1">
-        </div>
+        <ul class="marquee-list" :class="{'animate-up': animateUp}">
+          <li   v-for="(item, index) in danmus" :key="index">
+            <div style="color: #8450e0;display: flex" class="p-word">
+              <div style="color: #c073e4;">
+                {{'弹幕：'+item.name}}
+              </div>
+              {{':: 次数：'+item.danmuCount}} {{' — 时间'+item.time}}
+            </div>
+          </li>
+        </ul>
       </div>
 
+
+<!--      活跃用户-->
       <div v-else-if="windowFlag===3" class="streamingWarning">
         <ul class="marquee-list" :class="{'animate-up': animateUp}">
           <li   v-for="(item, index) in users" :key="index">
@@ -118,7 +130,7 @@
               <div style="color: #c073e4;">
               {{'用户：'+item.name}}
               </div>
-              {{' — 活跃次数：'+item.userCount}} {{' — 时间'+item.time}}
+              {{':: 活跃次数：'+item.userCount}} {{' — 时间'+item.time}}
 <!--              {{' '+item.count}}-->
 <!--              <el-button @click="openChangeWindow(item.neirong,item.answer)"-->
 <!--                         style="max-height: 10px;max-width: 30px;-->
@@ -175,6 +187,7 @@ export default {
       formLabelWidth: '120px',
       items:[],
       users:[],
+      danmus:[],
       animateUp: false,
       timer: null,
       windowFlag:0
@@ -211,23 +224,10 @@ export default {
     if(this.$refs.send.itemsSend){
       this.items=this.$refs.send.itemsSend
       this.users=this.$refs.send.itemsSend2
+      this.danmus=this.$refs.send.activeDanmu
     }
   },
   methods:{
-    getnew(){
-
-    },
-    getHis(){
-      request.get("/danmuSource/get").then(res=>{
-        console.log(res.data)
-        console.log(res.data[0])
-        this.items=[]
-        for (let i = 0; i < res.data.length; i++) {
-          var words=res.data[i].split(",")
-          this.items.push({'flag':true,'state':"自动",'name': words[0].split("[")[1],'neirong':words[1],'time': words[2].split("]")[0],'answer':'新品不打折哟'})
-        }res.data.length()
-      })
-    },
     //对话框方法
     onDialog () { // 调用Dialog弹出对话框
       this.showDialog = true
