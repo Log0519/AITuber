@@ -7,27 +7,67 @@
       />
       <div class="msg-top">
         <div class="tit-word">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
-                     @click="windowFlag=0"
-          >历史消息</el-button>
+          <!--          控制点击变色-->
+          <div v-if="windowFlag===0">
+            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px;color: #c073e4"
+                       @click="windowFlag=0"
+            >历史记录</el-button>
+          </div>
+          <div v-else>
+            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+                       @click="windowFlag=0"
+            >历史记录</el-button>
+          </div>
         </div>
+
         <div class="tit-word" style="margin-left: 30px;">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+<!--          控制点击变色-->
+          <div v-if="windowFlag===1">
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px;color: #c073e4"
                      @click="windowFlag=1"
           >实时告警</el-button>
+          </div>
+          <div v-else>
+            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+                       @click="windowFlag=1"
+            >实时告警</el-button>
+          </div>
         </div>
+
         <div class="tit-word" style="margin-left: 30px;">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
-                     @click="windowFlag=2"
-          >频繁问题</el-button>
+          <!--          控制点击变色-->
+          <div v-if="windowFlag===2">
+            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px;color: #c073e4"
+                       @click="windowFlag=2"
+            >频繁问题</el-button>
+          </div>
+          <div v-else>
+            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+                       @click="windowFlag=2"
+            >频繁问题</el-button>
+          </div>
         </div>
+
+
         <div class="tit-word" style="margin-left: 30px;">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
-                     @click="windowFlag=3"
-          >活跃用户</el-button>
+          <!--          控制点击变色-->
+          <div v-if="windowFlag===3">
+            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px;color: #c073e4"
+                       @click="windowFlag=3"
+            >活跃用户</el-button>
+          </div>
+          <div v-else>
+            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+                       @click="windowFlag=3"
+            >活跃用户</el-button>
+          </div>
         </div>
+
+
         <el-button style="margin-left: 75px;font-size: 14px;background-color: rgba(254,249,215,0)" text @click="onDialog()">管理 >></el-button>
       </div>
+
+
       <div class="msg-line"></div>
 
 
