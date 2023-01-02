@@ -1,4 +1,5 @@
 <template>
+  
   <div class="s-canvas">
     <canvas
         id="s-canvas"
