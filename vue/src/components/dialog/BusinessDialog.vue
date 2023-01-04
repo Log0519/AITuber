@@ -16,7 +16,7 @@
                 <el-form-item  label="房间名称" >
                   <el-input v-model="form.homename" style="width: 150px"></el-input>
                 </el-form-item>
-                <el-form-item label="房间room_id" style=" margin-left:50px;display: flex">
+                <el-form-item label="网址" style=" margin-left:50px;display: flex">
                   <el-input v-model="form.homeId" style="width: 100px"></el-input>
                 </el-form-item>
               </div>
@@ -26,6 +26,7 @@
                 <el-option label="拼多多" value="拼多多"></el-option>
                 <el-option label="淘宝" value="淘宝"></el-option>
                 <el-option label="京东" value="京东"></el-option>
+                <el-option label="哔哩哔哩" value="哔哩哔哩"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="自动开始">
@@ -41,16 +42,6 @@
                   active-color="RGB(111,111,223)"
               >
               </el-switch>
-            </el-form-item>
-            <el-form-item label="结束时间" style="display:flex;">
-                <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 20%;"></el-date-picker>
-
-                <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 20%;"></el-time-picker>
-            </el-form-item>
-            <el-form-item  style="z-index: 12" label="活动区">
-              <el-select  placeholder="请选择活动区域" >
-                <el-option label="区域一" value="shanghai"></el-option>
-              </el-select>
             </el-form-item>
             <el-form-item label="介绍">
               <el-input type="textarea" v-model="form.desc"></el-input>

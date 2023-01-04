@@ -4,16 +4,24 @@
     <div class="msg-tit">
       <div class="msg-top">
         <div class="tit-word">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">历史消息</el-button>
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+                     @click="windowFlag=0"
+          >历史消息</el-button>
         </div>
         <div class="tit-word" style="margin-left: 30px;">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">实时告警</el-button>
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+                     @click="windowFlag=1"
+          >实时告警</el-button>
         </div>
         <div class="tit-word" style="margin-left: 30px;">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">频繁问题</el-button>
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+                     @click="windowFlag=2"
+          >频繁问题</el-button>
         </div>
         <div class="tit-word" style="margin-left: 30px;">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px">活跃用户</el-button>
+          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
+                     @click="windowFlag=3"
+          >活跃用户</el-button>
         </div>
         <el-button style="margin-left: 75px;font-size: 14px;background-color: rgba(254,249,215,0)" text @click="onDialog()">管理 >></el-button>
       </div>
@@ -21,6 +29,8 @@
       <div class="marquee-wrap">
         <ul class="marquee-list" :class="{'animate-up': animateUp}" @mouseenter="stopFn" @mouseleave="startFn">
           <el-button @click="get1()">添加数据</el-button>
+
+          <div v-if="windowFlag===2">
           <li   v-for="(item, index) in items" :key="index">
               <p v-if="item.flag" :style="fontStyle" class="p-word">
               {{'('+item.state+')'}}  {{'---"'+item.name+'"---'}} {{item.time}}
@@ -31,6 +41,12 @@
               <el-button @click="openChangeWindow(item.name,item.answer)" style="max-height: 10px;max-width: 30px;color: #e33d60;background-color: rgba(254,249,215,0)" text> 详情</el-button>
             </p>
           </li>
+          </div>
+
+          <div v-else-if="windowFlag===1">
+            <div style="height: 30px;width: 20px;background-color: #c073e4"></div>
+          </div>
+
         </ul>
       </div>
     </div>
@@ -65,6 +81,7 @@ export default {
   },
   data(){
     return{
+      windowFlag:0,
       //dialog
       showDialog: false,
       content: '',

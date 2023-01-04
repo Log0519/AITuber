@@ -45,9 +45,10 @@
             :now-date="d.nowDate"
             :end-time="d.endTime"
             :pace="d.pace"
-            :home-name=d.hostname
-            @delete="onDelete"
-            @enter="onEnter"
+            :home-name="d.hostname"
+            :home-url="d.homeUrl"
+            @delete="onDelete(d.hostname,d.nowDate)"
+            @enter="onEnter(d.hostname,d.pace,d.nowDate,d.homeUrl)"
         />
       </div>
     </div>
@@ -62,6 +63,7 @@ import AreaSidebar from "../components/sidebar/BusinessAreaSidebar.vue";
 import {Headset} from "@element-plus/icons";
 import Home from "../components/Home.vue";
 import BusinessDialog from "../components/dialog/BusinessDialog.vue"
+import request from "../utils/request";
 export default {
   name: "area",
   components:{
@@ -82,20 +84,34 @@ export default {
       input:'',
       inputWords:'',
       flag:true,
-      endYear:"",
-      endMo:"",
-      endDay:"",
       index:1,
-      nowDate:''
+      nowDate:'',
+      homeUrl:''
     };
   },
   created() {
+
   },
   mounted() {
+    this.homeInit()
     this.flag=false;
     this.temp=new Map()
   },
   methods: {
+    homeInit(){
+      this.counter=[]
+      request.get("/areaHome/init").then(res => {
+        if (res.code === '0') {
+          console.log(res.data)
+          for (let i = 0; i < res.data.length; i++) {
+            this.counter.unshift({"hostname":res.data[i].name,
+              "pace":res.data[i].host,"nowDate":res.data[i].createtime,"homeUrl":res.data[i].homeurl})
+          }
+        } else {
+
+        }
+      })
+    },
     getNowDate() {
       //获取当前时间
       var _this = this;
@@ -111,19 +127,20 @@ export default {
     load () {
       this.count += 2
     },
-    onDelete(){
-      this.temp.delete(this.$refs.home[0].homeName)
-      this.counter=[]
-      this.temp.forEach((value,key)=>{
-        this.counter.push({"hostname":value.toString().split(",")[0],
-          "pace":value.toString().split(",")[1],
-          "endTime":value.toString().split(",")[2],
-          "nowDate":value.toString().split(",")[3]
-        })
+    onDelete(name,nowDate){
+      request.get("/areaHome/clear",{
+        params:{
+          name:name,
+          createtime:nowDate,
+        }
+      }).then(res => {
+        console.log(name)
+        console.log(nowDate)
+        this.homeInit()
       })
     },
-    onEnter(){
-      this.$router.push("/mocap")
+    onEnter(name,pace,time,homeUrl){
+      this.$router.push({name:'Mocap',query:{homeName:name,pace:pace,createTime:time,homeUrl:homeUrl}})
     },
 //对话框方法
     onDialog () { // 调用Dialog弹出对话框
@@ -139,14 +156,14 @@ export default {
       this.homeName=this.$refs.test.form.homename
       this.nowDate=this.getNowDate()
       this.pace=this.$refs.test.form.pace
-      this.endYear=this.$refs.test.form.date1.toString().split(" ")[3]
-      this.endMo=this.$refs.test.form.date1.toString().split(" ")[1]
-      this.endDay=this.$refs.test.form.date1.toString().split(" ")[2]
-      this.endTime2=this.$refs.test.form.date2.toString().split(" ")[4]
-      this.endTime=this.endYear+"-"+this.endMo+"-"+this.endDay+" "+this.endTime2
-      console.log(this.endTime)
+      this.homeUrl=this.$refs.test.form.homeId
+      // this.endYear=this.$refs.test.form.date1.toString().split(" ")[3]
+      // this.endMo=this.$refs.test.form.date1.toString().split(" ")[1]
+      // this.endDay=this.$refs.test.form.date1.toString().split(" ")[2]
+      // this.endTime2=this.$refs.test.form.date2.toString().split(" ")[4]
+      // this.endTime=this.endYear+"-"+this.endMo+"-"+this.endDay+" "+this.endTime2
+      // console.log(this.endTime)
       console.log(this.nowDate)
-
       if(this.homeName===""){
         this.$message.error('房间名称不能为空！');
         return
@@ -155,25 +172,27 @@ export default {
         this.$message.error('请选择直播平台！');
         return
       }
-      if(this.endTime==="undefined-undefined-undefined undefined"){
-        this.$message.error('请选择结束时间！');
-        return
-      }
-      if(this.endTime<=this.nowDate){
-        this.$message.error('结束时间必须大于现在时间！');
-        return
-      }
       if(this.temp.get(this.homeName)==null){
         this.temp.set(this.homeName,this.homeName+","+this.pace+","+this.endTime+","+this.nowDate)
-        this.counter.push({"hostname":this.homeName,"pace":this.pace,"endTime":this.endTime,"nowDate":this.nowDate})
+        //this.counter.push({"hostname":this.homeName,"pace":this.pace,"endTime":this.endTime,"nowDate":this.nowDate})
+        request.get("/areaHome/add",{
+          params:{
+            name:this.homeName,
+            createtime:this.nowDate,
+            state:"未开始",
+            host:this.pace,
+            homeurl:this.homeUrl
+          }
+        }).then(res => {
+          this.homeInit()
+          this.homeName=""
+          this.pace=""
+        })
       }else {
         this.$message.error('房间名称不能重复！');
       }
-      this.endYear=""
-      this.endMo=""
-      this.endDay=""
       this.showDialog = false
-      this.endTime=""
+      this.$refs.test.form.homeId=""
       this.$refs.test.form.homename=""
       this.$refs.test.form.pace=""
       this.$refs.test.form.date1='2002-13-14 20:20:12'

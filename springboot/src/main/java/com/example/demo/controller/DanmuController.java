@@ -4,7 +4,7 @@ import com.example.demo.common.Result;
 import com.log.DanmuKafka;
 import com.log.getDanmu;
 import org.springframework.web.bind.annotation.*;
-
+import com.utils.GetRoomID;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Queue;
@@ -46,6 +46,13 @@ public class DanmuController {
     ){
         ArrayList<String> list = getDanmu.Bill();
         return Result.success(list);
+    }
+
+    @GetMapping ("/getRoomID")
+    public Result<?> getRoomID(@RequestParam(defaultValue = "") String id
+    ){
+        String roomID = GetRoomID.GetBillRoomID(id);
+        return Result.success(roomID);
     }
 
 

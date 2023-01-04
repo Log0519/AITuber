@@ -2,13 +2,10 @@
 <div class="homeBack">
   <div class="information" >
     <div style="font-size: 20px;text-align: center">
-      房间
+      <div class="homeName" style="font-size: 20px;color: #c657ff">
+        {{ homeName }}
+      </div>
     </div>
-  <div style="font-size: 17px;display: flex">房间名称：
-  <div class="homeName" style="font-size: 17px;color: #c657ff">
-    {{ homeName }}
-  </div>
-  </div>
     <div style="font-size: 17px;display: flex">直播平台：
     <div class="pace" style="font-size: 17px;color: #c657ff">
       {{ pace }}
@@ -17,34 +14,40 @@
     <div class="state" style="display: flex;font-size: 17px">
       状态：
     <div style="font-size: 17px;color: #8d8f8d">{{state}}</div>
-      <div style="margin-left: 100px">
-    创建时间：{{nowDate}}
+      <div style="margin-left: 100px;font-size: 14px;display: flex">
+    创建时间：
+        <div style="color:#c657ff ">
+          {{nowDate}}
+        </div>
       </div>
     </div>
     <div class="moddle" style="display: flex;font-size: 17px">
       模式：
     <div style="font-size: 17px;color: #13da2e">自动</div>
-        <div style="display: flex;margin-left: 117px">剩余时间：  <CountDown :endTime='endTime'/>
+        <div style="display: flex;margin-left: 117px;font-size: 14px;display: flex">网址：
+          <div style="color:#c657ff ">
+          {{homeUrl}}
+          </div>
       </div>
     </div>
     <div style="display: flex">
-
-
     <el-button type="danger" style="font-size:5px;margin-left: 370px" @click="onDialog()">删除房间</el-button>
   <el-button style="background-color: rgba(238,236,255,0);font-size: 16px" text @click="enterHome()">进入房间>></el-button>
     </div>
     </div>
 </div>
   <DeleteDialog
+      ref="delete"
       style="z-index: 1"
       title="提示"
       :width="340"
       :height="100"
       :footer="true"
+      :create-time="nowDate"
+      :name="homeName"
       cancelText="取消"
       okText="确认"
       switchFullscreen
-      ref="test"
       @close="onClose"
       @cancel="onCancel"
       @ok="onConfirm"
@@ -72,6 +75,10 @@ export default {
       type: String,
       default: ''
     },
+    homeUrl: { // 网址
+      type: String,
+      default: ''
+    },
     pace: { // 标题
       type: String,
       default: ''
@@ -84,9 +91,14 @@ export default {
       type: String,
       default: ''
     },
+    backName() {
+      return this.homeName;
+    }
   },
   methods:{
     deleteHome(){
+      console.log(this.homeName)
+      console.log(this.nowDate)
       this.$emit('delete')
     },
     enterHome(){
@@ -125,7 +137,7 @@ export default {
   border-radius: 20px;
   border: 3px solid #d3a6ff;
   width: 582px;
-  height: 170px;
+  height: 150px;
   box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
 }
 .information{

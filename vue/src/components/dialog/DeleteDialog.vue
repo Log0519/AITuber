@@ -26,6 +26,14 @@ export default {
       type: String,
       default: '提示'
     },
+    name: { //房间名称
+      type: String,
+      default: '提示'
+    },
+    createTime: { //房间创建时间
+      type: String,
+      default: '提示'
+    },
     content: { // 内容
       type: String,
       default: ''
@@ -84,7 +92,7 @@ export default {
     },
     dialogHeight () {
       if (this.fullScreen) {
-        return '100vh'
+        return '100%'
       } else {
         return this.height + 'px'
       }
