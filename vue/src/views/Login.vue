@@ -117,7 +117,7 @@ export default {
       this.$router.push("/register")
     },
     go() {
-    this.$router.push("/mocap")
+    this.$router.push("/area")
   },
     // 重置验证码
     refreshCode() {

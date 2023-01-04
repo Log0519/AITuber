@@ -1,7 +1,7 @@
 :root {
     --clr: rgb(194, 236, 210);
     --b-clr1: rgb(110, 245, 234);
-    --b-clr2: rgb(241, 172, 187);
+    --b-clr2: rgb(181, 150, 255);
 }
 
 body{
@@ -25,7 +25,7 @@ body{
     content: '';
     margin: 100px auto;
     /*background-color: rgba(255, 255, 255, 0.27);*/
-    background:linear-gradient(transparent,transparent,var(--b-clr1));
+    /*background:linear-gradient(transparent,transparent,var(--b-clr1));*/
     border-radius: 24px;
     border: 1px solid #aaa;
     width: 500px;
@@ -110,7 +110,7 @@ body{
     color: #fff;
     width: 490px;
     height: 328px;
-    background: linear-gradient(150deg, #aadef3, #e8fffe);
+    background: linear-gradient(150deg, #ffb9b9, #ffe8ab);
     border-radius: 20px;
     display: flex;
     justify-content: center;
@@ -122,7 +122,7 @@ body{
     color: #fff;
     width: 500px;
     height: 290px;
-    background: linear-gradient(150deg, #fdc3ec, #fef9d7);
+    background:  linear-gradient(150deg, #ffb9b9, #ffe8ab);
     border-radius: 20px;
     display: flex;
     justify-content: center;

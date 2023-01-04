@@ -6,11 +6,24 @@
 <!--  主体-->
   <div class="body" style="display: flex" >
     <div class="window1" style="display: flex">
-      <div class="window1-left" style="width: 26%">
-
+      <div class="window1-left" style="width: 36%">
+        <div style="margin: 10px;display: flex;font-size: 18px">房间名称：
+          <div style="color: #b44aef">
+          {{homeName}}
+          </div>
+        </div>
+        <div style="margin: 10px;display: flex;font-size: 14px">平台：
+          <div style="color: #b44aef">
+            {{pace}}
+          </div>
+        </div>
+        <div style="margin: 10px;display: flex;font-size: 13px">创建时间：
+          <div style="color: #b44aef">
+            {{createTime}}
+          </div>
+        </div>
       <div style="margin: 20px">
         ⭐模型：
-
       <el-select id="1" v-model="value" placeholder="选择模型" style="width: 100px;margin:10px 0px">
         <el-option
             v-for="item in options"
@@ -50,7 +63,12 @@
       <!--    右    >-->
       <div class="window1-right" style="width: 76%">
         <div class="window-model" style="width: 300px;height: 270px"></div>
-        <danmuArea_bill style="font-size: 16px;background-color: rgba(236,223,253,0.45);color: #635773"/>
+        <danmuArea_bill
+            style="font-size: 16px;
+            background-color: rgba(236,223,253,0.45);
+            color: #635773"
+            :homeurl="homeUrl"
+        />
       </div>
     </div>
 
@@ -84,6 +102,7 @@
 import MocapSidebar from "../components/sidebar/MocapSidebar.vue";
 import DanmuArea_bill from "../components/DanmuArea_bill.vue";
 import SendDanmuBill from "../components/SendDanmuBill.vue";
+import {useRoute, useRouter} from "vue-router/dist/vue-router";
 
 export default {
   name: "mocap",
@@ -100,10 +119,19 @@ export default {
       videoHeight: 400,
       src:'',
       inputWords:'',
+      homeName:'',
+      pace:'',
+      createTime:'',
+      homeUrl:''
     };
   },
   created() {
-
+    const router = useRouter()
+    console.log(router.currentRoute.value.query)
+    this.homeName=router.currentRoute.value.query.homeName
+    this.createTime=router.currentRoute.value.query.createTime
+    this.pace=router.currentRoute.value.query.pace
+    this.homeUrl=router.currentRoute.value.query.homeUrl
   },
   mounted() {
   },

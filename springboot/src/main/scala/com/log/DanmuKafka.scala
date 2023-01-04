@@ -50,7 +50,6 @@ object DanmuKafka {
 
     env.execute()
   }
-
   def GetDanmu(sink: MyRichSinkToMySQL): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
     //构建ETL管道

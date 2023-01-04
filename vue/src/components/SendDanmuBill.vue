@@ -15,7 +15,7 @@
       <el-input   placeholder="请输入内容"
                   type="text"
                   id="homeurl"
-                  v-model="homeUrl"
+                  v-model="homeurl"
                   style="width:60%;
                   margin-left: 10px"></el-input>
     </div>
@@ -40,15 +40,22 @@
 
 
 <script>
-import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
 import {Locale} from "vant";
 import request from "../utils/request";
+import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
   export default {
     name: "sendDanmuBill",
     components:{
     },
     mounted() {
       window.itemsSend=this.itemsSend
+      window.noDanmu=this.noDanmu
+      window.activeDanmu=this.activeDanmu
+      window.itemsSend2=this.itemsSend2
+      window.userCount=this.userCount
+      window.danmuCount=this.danmuCount
+      window.userCountTemp=this.userCountTemp
+      this.homeurl=this.homeUrl
       console.log("homeID"+this.homeID)
       this.isWrite=false
     },
@@ -56,11 +63,23 @@ import request from "../utils/request";
       return {
         isWrite:false,
         itemsSend:[],
+        danmuCount:[],
+        itemsSend2:[],
+        activeDanmu:[],
+        userCount:[],
+        userCountTemp:[],
         temp:[],
         homeID:0,
-        homeUrl:'https://live.bilibili.com/697?'
+        homeurl: '',
+        noDanmu:["哈哈哈","??"]
       }
       },
+    props: {
+      homeUrl: { // 地址
+        type: String,
+        default: 'https://live.bilibili.com/697?'
+      },
+    },
     methods:{
       writeToMysql(){
         console.log("进入writeToMysql方法"+this.isWrite)
@@ -241,9 +260,62 @@ import request from "../utils/request";
     }
     var finalDate=strings[3]+'-'+mm+'-'+strings[2]+' '+strings[4]
     //itemsSend是另外一个页面用来获取所有弹幕信息的数组，使用unshift可以把后来的数据放在前面
-    itemsSend.unshift({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':finalDate,'answer':'新品不打折哟'})
-    //itemsSend.push({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':finalDate,'answer':'新品不打折哟'})
 
+
+
+    //历史消息板块
+    itemsSend.unshift({'flag':true,
+      'state':"自动",
+      'name': element.info[2][1],
+      'neirong': element.info[1],
+      'time':finalDate,
+      'answer':'新品不打折哟',
+    })
+
+    //频繁问题板块
+    var t1=1
+    for (let danmu in activeDanmu) {
+      if(activeDanmu[danmu].name===element.info[1]){
+        activeDanmu[danmu].danmuCount+=1;
+        t1=2
+      }
+    }
+    if(t1===1){
+      if(element.info[1].search("哈")){
+        activeDanmu.unshift({
+          'name': element.info[1],
+          'danmuCount':1,
+          'time':finalDate
+        })
+      }
+
+    }
+    activeDanmu.sort((a, b) => b.danmuCount - a.danmuCount)
+
+    //活跃用户板块
+    var t=1
+    for (let user in itemsSend2) {
+      if(itemsSend2[user].name===element.info[2][1]){
+        itemsSend2[user].userCount+=1;
+        t=2
+      }
+    }
+    if(t===1){
+      itemsSend2.unshift({
+        'name': element.info[2][1],
+        'userCount':1,
+        'time':finalDate
+      })
+    }
+
+
+
+    itemsSend2.sort((a, b) => b.userCount - a.userCount)
+
+
+
+
+    //itemsSend.push({'flag':true,'state':"自动",'name': element.info[2][1],'neirong': element.info[1],'time':finalDate,'answer':'新品不打折哟'})
     //启动springboot，启动虚拟机上的kafka，可以进行获取弹幕发送到kafka并且写入到aituber下的danmu_bill数据库
     // request.get("/danmuSource/send",{
     //   params: {
