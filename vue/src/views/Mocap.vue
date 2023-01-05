@@ -148,13 +148,14 @@ export default {
     stopRecord(){
       this.record=true;
     },
+
     // 调用摄像头权限
     openCamera() {
       //必须在model中render后才可获取到dom节点,直接获取无法获取到model中的dom节点
       this.$nextTick(() => {
         const _this = this;
         this.os = false;//切换成关闭摄像头
-        this.src="./src/views/mocap.html"
+        this.src="./src/components/live2d/index.html"
         this.record=true;
 
       });
@@ -191,9 +192,9 @@ export default {
   box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
 }
 .camera_outer{
-    -moz-transform:scaleX(-1);
+    /*-moz-transform:scaleX(-1);
     -webkit-transform:scaleX(-1);
     -o-transform:scaleX(-1);
-    transform:scaleX(-1);
+    transform:scaleX(-1);*/
 }
 </style>
