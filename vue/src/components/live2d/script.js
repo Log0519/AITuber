@@ -1,3 +1,4 @@
+
 const {
     Application,
     live2d: { Live2DModel },
@@ -13,29 +14,37 @@ const {
 } = Kalidokit;
 
 // Url to Live2D
-const modelUrl = "../../../public/models/hiyori/hiyori_pro_t10.model3.json";
+//const modelUrl = "../../../public/models/hiyori/hiyori_pro_t10.model3.json";
+const modelUrl = "../../../public/models/fangcao/fangcao.model3.json";
 
 let currentModel, facemesh;
+
 
 const videoElement = document.querySelector(".input_video"),
     guideCanvas = document.querySelector("canvas.guides");
 
 (async function main() {
+
+
+
     // create pixi application
+    PIXI.loader .add('sky.png')
     const app = new PIXI.Application({
+        transparent:true,
         view: document.getElementById("live2d"),
         autoStart: true,
         backgroundAlpha: 0,
-        backgroundColor: 0xffffff,
+        //backgroundColor: 0x123fff,
         resizeTo: window,
+
     });
 
     // load live2d model
     currentModel = await Live2DModel.from(modelUrl, { autoInteract: false });
-    currentModel.scale.set(0.4);
+    currentModel.scale.set(0.3);
     currentModel.interactive = true;
     currentModel.anchor.set(0.5, 0.5);
-    currentModel.position.set(window.innerWidth * 0.5, window.innerHeight * 0.8);
+    currentModel.position.set(window.innerWidth * 0.5, window.innerHeight * 2.0);
 
     // Add events to drag model
     currentModel.on("pointerdown", (e) => {
@@ -55,6 +64,7 @@ const videoElement = document.querySelector(".input_video"),
     // Add mousewheel events to scale model
     document.querySelector("#live2d").addEventListener("wheel", (e) => {
         e.preventDefault();
+
         currentModel.scale.set(clamp(currentModel.scale.x + event.deltaY * -0.001, -0.5, 10));
     });
 
@@ -209,3 +219,4 @@ const startCamera = () => {
     });
     camera.start();
 };
+

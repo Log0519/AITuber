@@ -8,7 +8,6 @@
       content="Track face and body rigs just your browser webcam!"
     />
 
-
     <!--     Live2D SDK  -->
     <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
@@ -39,11 +38,12 @@
 
 
   </head>
-  <body>
+  <body class="test">
 
 
+  <div class="test2"></div>
     <div class="preview">
-      <video class="input_video" width="1280px" height="720px">
+      <video class="input_video" width="1280px" height="720px" hidden>
 
       </video>
       <canvas class="guides"></canvas>
@@ -54,9 +54,8 @@
 
       </section>
     </div>
+  <canvas class="live2d" id="live2d">   </canvas>
 
-
-    <canvas class="live2d" id="live2d"></canvas>
     <!--<p class="linkOut">
       Visit
       <a id="full" href="https://kalidoface.com">the full Vtuber App</a>!
@@ -64,3 +63,4 @@
     <script type="module" src="./script.js"></script>
   </body>
 </html>
+

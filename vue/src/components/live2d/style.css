@@ -1,7 +1,13 @@
+*{
+    background-color: rgb(1,2,3,0);
+}
 @font-face {
     font-family: "Jelly";
     font-display: block;
     src: url("https://yeemachine.github.io/kalidoface-live2d-models/Font/kalidoface-jelly.ttf") format("truetype");
+}
+.live2d{
+    background-color: transparent;
 }
 h1 {
     font-family: "Jelly";
@@ -55,6 +61,7 @@ body {
 }
 canvas {
     display: block;
+
 }
 .guides {
     position: absolute;
