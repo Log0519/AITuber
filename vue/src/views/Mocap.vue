@@ -82,21 +82,33 @@
   <div style="margin: 1px">
 
 <!--    主播房间的时候-->
-    <div v-if="src===''" style="margin: 0px 0px 0px 10px" class="camera_outer">
-      <div  style="width:850px;height:500px;background-color: #fff3f3;margin-bottom: 5px">
-        <div style="background-color: #ffc5ef;color: #d7629c;height: 30px;text-align: center">
-        主播房间
-        </div>
+    <div v-if="src===''" style="margin: 10px 0px 0px 10px" class="camera_outer">
+      <div class="tuberHome" style="width:850px;height:490px;margin-bottom: 5px">
+
         </div>
     </div>
 <!--    播放视频的时候-->
-    <div v-else style="margin: 0px 0px 0px 10px" class="camera_outer">
+    <div v-else style="margin: 10px 0px 0px 10px" class="camera_outer">
+      <div class="tuberHome" style="width:850px;height:490px;margin-bottom: 5px">
+        <embed :src="src" width=850px height=490px />
+      </div>
 
-        <embed :src="src" width=850px height=500px />
     </div>
 
 
-  <div style="margin-top: 0px;margin-left: 20px">
+  <div style="margin-top: 0px;margin-left: 20px;display: flex">
+
+    <div style="color: #c073e4">
+   视频地址:
+    </div>
+    <el-input   placeholder="请输入地址"
+
+                v-model="srcTemp"
+                style="width:30%;height: 30px;
+                  margin-left: 10px;margin-right: 20px"
+                clearable>
+
+    </el-input>
     <el-button  v-if="os" @click="goMv" size="large" style="font-size: 19px">播放视频</el-button>
     <el-button  v-else @click="stopMv"  size="large" style="font-size: 19px">关闭视频</el-button>
     <el-button  v-if="!isCatch" @click="openCamera" size="large" style="font-size: 19px">开始捕捉</el-button>
@@ -161,6 +173,7 @@ export default {
       inputWords:'',
       homeName:'',
       pace:'',
+      srcTemp:'https://www.bilibili.com/video/BV1314y157yr/?spm_id_from=333.1007.partition_recommend.content.click&vd_source=3d1ff2df722f6acff6222de13667383c',
       createTime:'',
       homeUrl:'',
       showDialog:true,
@@ -192,7 +205,8 @@ export default {
       this.os=true
     },
     goMv(){
-     this.src="./public/vedio/back.mp4"
+      this.src=this.srcTemp
+     //this.src="./public/vedio/back.mp4"
       this.os=false
     },
     //对话框方法
@@ -276,4 +290,9 @@ export default {
     -o-transform:scaleX(-1);
     transform:scaleX(-1);*/
 }
+.tuberHome{
+  background-image: url("/pho/gifback4.gif");
+  background-size: cover;
+}
+
 </style>
