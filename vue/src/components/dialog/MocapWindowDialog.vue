@@ -1,15 +1,24 @@
 <template>
-  <div class="m-dialog-mask" style="overflow:hidden;" >
+  <div class="m-dialog-mask" style="overflow:hidden;
+  width: 300px;
+  height: 280px">
     <div class="m-dialog" :style="`width: ${dialogWidth}; height: ${dialogHeight};`">
-      <div class="m-dialog-content">
+      <div class="m-dialog-content" >
 
         <svg @click="onClose" class="u-close" viewBox="64 64 896 896" data-icon="close" aria-hidden="true" focusable="false"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg>
         <div class="m-dialog-header">
         </div>
 <!--        商家-->
 
-
-           <embed src="src/components/live2d/index.html" width=850px height=505px />
+            <div v-if="modelCode==='1'" >
+           <embed src="src/components/live2d/model_hiyori/index.html" width=300px height=400px />
+            </div>
+        <div v-else-if="modelCode==='2'">
+          <embed src="src/components/live2d/model_fangcao/index.html" width=300px height=400px />
+        </div>
+        <div v-else-if="modelCode==='3'">
+          <embed src="src/components/live2d/model_redgirl/index.html" width=300px height=400px />
+        </div>
 
       </div>
     </div>
@@ -19,6 +28,10 @@
 export default {
   name: 'Dialog1',
   props: {
+    modelCode: { // 标题
+      type: String,
+      default: '提示'
+    },
     title: { // 标题
       type: String,
       default: '提示'

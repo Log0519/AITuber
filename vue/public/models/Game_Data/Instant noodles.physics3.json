@@ -690,43 +690,7 @@
 		{
 			"Id": "PhysicsSetting8",
 			"Input": [
-				{
-					"Source": {
-						"Target": "Parameter",
-						"Id": "ParamAngleX"
-					},
-					"Weight": 60,
-					"Type": "X",
-					"Reflect": false
-				},
-				{
-					"Source": {
-						"Target": "Parameter",
-						"Id": "ParamAngleZ"
-					},
-					"Weight": 60,
-					"Type": "Angle",
-					"Reflect": false
-				},
-				{
-					"Source": {
-						"Target": "Parameter",
-						"Id": "ParamBodyAngleX"
-					},
-					"Weight": 40,
-					"Type": "X",
-					"Reflect": false
-				},
-				{
-					"Source": {
-						"Target": "Parameter",
-						"Id": "ParamBodyAngleZ"
-					},
-					"Weight": 40,
-					"Type": "Angle",
-					"Reflect": false
-				}
-			],
+				],
 			"Output": [
 				{
 					"Destination": {
