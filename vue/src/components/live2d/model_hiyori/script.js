@@ -17,8 +17,8 @@ const {
 
 
 //const modelUrl=window.model
-//const modelUrl = "../../../public/models/hiyori/hiyori_pro_t10.model3.json";
-const modelUrl = "../../../public/models/fangcao/fangcao.model3.json";
+const modelUrl = "../../../../public/models/hiyori/hiyori_pro_t10.model3.json";
+//const modelUrl = "../../../../public/models/fangcao/fangcao.model3.json";
 //const modelUrl = "../../../public/models/Game_Data/instant noodles.model3.json";
 
 let currentModel, facemesh;
@@ -31,7 +31,6 @@ const videoElement = document.querySelector(".input_video"),
 
 (async function main() {
 
-
     // create pixi application
     PIXI.loader .add('sky.png')
     const app = new PIXI.Application({
@@ -41,15 +40,15 @@ const videoElement = document.querySelector(".input_video"),
         backgroundAlpha: 0,
         //backgroundColor: 0x123fff,
         resizeTo: window,
-
     });
 
     // load live2d model
     currentModel = await Live2DModel.from(modelUrl, { autoInteract: false });
-    currentModel.scale.set(0.3);
+    currentModel.scale
+    currentModel.scale.set(0.17);
     currentModel.interactive = true;
     currentModel.anchor.set(0.5, 0.5);
-    currentModel.position.set(window.innerWidth * 0.5, window.innerHeight * 2.0);
+    currentModel.position.set(window.innerWidth * 0.5, window.innerHeight * 1.1);
 
     // Add events to drag model
     currentModel.on("pointerdown", (e) => {
@@ -66,12 +65,12 @@ const videoElement = document.querySelector(".input_video"),
         }
     });
 
-    // 将鼠标滚轮事件添加到缩放模型
-    document.querySelector("#live2d").addEventListener("wheel", (e) => {
-        e.preventDefault();
-
-        currentModel.scale.set(clamp(currentModel.scale.x + event.deltaY * -0.001, -0.5, 10));
-    });
+    // // 将鼠标滚轮事件添加到缩放模型
+    // document.querySelector("#live2d").addEventListener("wheel", (e) => {
+    //     e.preventDefault();
+    //
+    //     currentModel.scale.set(clamp(currentModel.scale.x + event.deltaY * -0.001, -0.5, 10));
+    // });
 
     // 将live2d模型添加到舞台
     app.stage.addChild(currentModel);
@@ -196,6 +195,10 @@ const rigFace = (result, lerpAmount = 0.7) => {
             result.head.y
         );
         // eye blink 眨眼
+
+            // coreModel.setParameterValueById("ParamEyeLOpen", result.eye.l);
+            // coreModel.setParameterValueById("ParamEyeROpen", result.eye.r);
+
         coreModel.setParameterValueById("ParamEyeLOpen", stabilizedEyes.l);
         coreModel.setParameterValueById("ParamEyeROpen", stabilizedEyes.r);
 
@@ -205,6 +208,7 @@ const rigFace = (result, lerpAmount = 0.7) => {
             "ParamMouthOpenY",
             lerp(result.mouth.y, coreModel.getParameterValueById("ParamMouthOpenY"), 0.3)
         );
+
         // Adding 0.3 to ParamMouthForm to make default more of a "smile"
         coreModel.setParameterValueById(
             "ParamMouthForm",

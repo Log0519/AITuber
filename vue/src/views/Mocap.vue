@@ -24,13 +24,22 @@
         </div>
       <div style="margin: 10px">
 
-        <el-form-item  label="⭐模型：">
-          <el-select  id="chooseModel" class="chooseModel" v-model="model" style="width: 100px">
-            <el-option label="hiyori" value="../../../public/models/hiyori/hiyori_pro_t10.model3.json"></el-option>
-            <el-option label="fangcao" value="../../../public/models/fangcao/fangcao.model3.json"></el-option>
-            <el-option label="redGril" value="../../../public/models/Game_Data/instant noodles.model3.json"></el-option>
-          </el-select>
-        </el-form-item>
+        ⭐模型：
+        <div class="list" style="background-color: #f5eac0;margin-top:10px;width: 560px;height: 170px;
+        margin-left: 20px;border-radius: 20px;overflow: auto">
+        <div class="his-body" style="margin-left: 10px;color: #2cb43d;display: flex; flex-wrap: wrap">
+        <div v-for="(d,index) in phoCounter" :key="index">
+          <!--                photo组件-->
+          <PhoItem
+              :src="d.src"
+              @click="modelCode=d.code;"
+              :name="d.name"
+          >
+          </PhoItem>
+
+        </div>
+        </div>
+        </div>
       </div>
         <!--    左-->
 <!--        <div style="display: flex;margin: 20px">-->
@@ -56,7 +65,7 @@
 <!--          </div>-->
 
 <!--        </div>-->
-          <div class="window-model" style="width: 300px;height: 100px"></div>
+
           <danmuArea_bill
               style="font-size: 16px;margin-left: 10px;
             background-color: rgba(236,223,253,0.45);
@@ -102,7 +111,8 @@
 
 
   <MocapWindowDialog
-      style="z-index: 1;margin-left: 647px;margin-top: 75px"
+      :model-code="modelCode"
+      style="z-index: 1;margin-left: 947px;margin-top: 292px"
       :width="1020"
       :height="480"
       :content="content"
@@ -126,6 +136,9 @@ import DanmuArea_bill from "../components/DanmuArea_bill.vue";
 import SendDanmuBill from "../components/SendDanmuBill.vue";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 import MocapWindowDialog from "../components/dialog/MocapWindowDialog.vue";
+import PhoItem from "../components/PhoItem.vue";
+
+
 
 export default {
   name: "mocap",
@@ -133,10 +146,12 @@ export default {
     SendDanmuBill,
     MocapSidebar,
     DanmuArea_bill,
-    MocapWindowDialog
+    MocapWindowDialog,
+    PhoItem
   },
   data() {
     return {
+      modelCode:'3',
       isCatch:true,
       os: true,//控制摄像头开关
       record:true,
@@ -149,7 +164,15 @@ export default {
       createTime:'',
       homeUrl:'',
       showDialog:true,
-      model:'fangcao'
+      model:'hiyori',
+      phoCounter:[{"src":'/public/pho/fangcao.png',"code":'2',"name":'fangcao'},
+        {"src":'/public/pho/redgirl.png',"code":'3',"name":'redgirl'},
+        {"src":'/public/pho/fangcao.png',"code":'2',"name":'fangcao'},
+        {"src":'/public/pho/fangcao.png',"code":'2',"name":'fangcao'},
+        {"src":"/public/pho/hiyori.png","code":'1',"name":'hiyori'},
+        {"src":"/public/pho/hiyori.png","code":'1',"name":'hiyori'},
+        {"src":"/public/pho/hiyori.png","code":'1',"name":'hiyori'},
+      ],
     };
   },
   created() {
@@ -169,7 +192,7 @@ export default {
       this.os=true
     },
     goMv(){
-      this.src="./public/vedio/back.mp4"
+     this.src="./public/vedio/back.mp4"
       this.os=false
     },
     //对话框方法
@@ -204,7 +227,6 @@ export default {
       this.$nextTick(() => {
         const _this = this;
         this.isCatch=true
-        // this.src="./src/components/live2d/index.html"
         this.record=true;
       });
       this.showDialog=true
