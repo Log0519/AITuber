@@ -123,8 +123,9 @@
 
 
   <MocapWindowDialog
+      :hidden="flag"
       :model-code="modelCode"
-      style="z-index: 1;margin-left: 947px;margin-top: 292px"
+      :style="tuberStyle"
       :width="1020"
       :height="480"
       :content="content"
@@ -137,6 +138,7 @@
       @ok="onConfirm"
       v-show="showDialog"
   />
+
 
 
 </template>
@@ -163,6 +165,7 @@ export default {
   },
   data() {
     return {
+
       modelCode:'3',
       isCatch:true,
       os: true,//控制摄像头开关
@@ -173,7 +176,8 @@ export default {
       inputWords:'',
       homeName:'',
       pace:'',
-      srcTemp:'https://www.bilibili.com/video/BV1314y157yr/?spm_id_from=333.1007.partition_recommend.content.click&vd_source=3d1ff2df722f6acff6222de13667383c',
+      left:'947px',
+      srcTemp:'./public/vedio/back.mp4',
       createTime:'',
       homeUrl:'',
       showDialog:true,
@@ -199,12 +203,25 @@ export default {
   mounted() {
 
   },
+  computed:{
+    tuberStyle(){
+      var site = {
+        'z-index': '1',
+        'margin-left': this.left,
+        'margin-top': '292px'
+      }
+      return site
+    },
+  },
   methods: {
     stopMv(){
       this.src=""
       this.os=true
+      this.left='947px'
     },
     goMv(){
+      this.left='1247px'
+      console.log(this.tuberStyle)
       this.src=this.srcTemp
      //this.src="./public/vedio/back.mp4"
       this.os=false
