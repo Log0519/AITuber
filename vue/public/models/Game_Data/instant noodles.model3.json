@@ -1,0 +1,66 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "Instant noodles.moc3",
+		"Textures": [
+			"Instant noodles.8192/texture_00.png"
+		],
+		"Physics": "Instant noodles.physics3.json",
+		"DisplayInfo": "Instant noodles.cdi3.json",
+		"Expressions": [
+			{
+				"Name": "01",
+				"File": "expressions/01.exp3.json"
+			},
+			{
+				"Name": "02",
+				"File": "expressions/02.exp3.json"
+			},
+			{
+				"Name": "03",
+				"File": "expressions/03.exp3.json"
+			},
+			{
+				"Name": "04",
+				"File": "expressions/04.exp3.json"
+			},
+			{
+				"Name": "05",
+				"File": "expressions/05.exp3.json"
+			},
+			{
+				"Name": "06",
+				"File": "expressions/06.exp3.json"
+			},
+			{
+				"Name": "07",
+				"File": "expressions/07.exp3.json"
+			},
+			{
+				"Name": "08",
+				"File": "expressions/08.exp3.json"
+			}
+		]
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": [
+				"ParamBreath",
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			]
+		},
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": [
+				"ParamBreath",
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			]
+		}
+	],
+	"HitAreas": []
+}

@@ -10,6 +10,7 @@ import Area from "../views/Area.vue";
 import OtherArea from "../views/OtherArea.vue";
 import AllSet from "../views/AllSet.vue";
 import DatasView from "../views/DatasView.vue";
+import MocapWindowDialog from "../components/dialog/MocapWindowDialog.vue";
 
 
 
@@ -41,6 +42,7 @@ const routes = [
         name: 'Mocap',
         component: Mocap,
       },
+
       {
         path: '/otherArea',
         name: 'OtherArea',
@@ -72,6 +74,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register,
+  },
+  {
+    path: '/mocapWindow',
+    name: 'MocapWindow',
+    component: MocapWindowDialog,
   },
 ]
 

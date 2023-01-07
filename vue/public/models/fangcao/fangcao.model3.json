@@ -1,0 +1,71 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "fangcao.moc3",
+		"Textures": [
+			"fangcao.4096/texture_00.png",
+			"fangcao.4096/texture_01.png",
+			"fangcao.4096/texture_02.png"
+		],
+		"Physics": "fangcao.physics3.json",
+		"DisplayInfo": "fangcao.cdi3.json",
+		"Expressions": [
+			{
+				"Name": "睡着",
+				"File": "sleep.exp3.json"
+			},
+			{
+				"Name": "问号",
+				"File": "question.exp3.json"
+			},
+			{
+				"Name": "黑线",
+				"File": "heixian.exp3.json"
+			},
+			{
+				"Name": "眯眼",
+				"File": "miyan.exp3.json"
+			},
+			{
+				"Name": "晕",
+				"File": "yun.exp3.json"
+			},
+			{
+				"Name": "脸红",
+				"File": "red.exp3.json"
+			},
+			{
+				"Name": "头饰",
+				"File": "accessory.exp3.json"
+			},
+			{
+				"Name": "披肩",
+				"File": "pijian.exp3.json"
+			},
+			{
+				"Name": "口型",
+				"File": "MouthPress.exp3.json"
+			},
+			{
+				"Name": "嘟嘴",
+				"File": "duzui.exp3.json"
+			}
+		]
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": [
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			]
+		},
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		}
+	],
+	"HitAreas": []
+}
