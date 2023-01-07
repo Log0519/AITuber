@@ -9,7 +9,7 @@
 <!--        商家-->
 
 
-           <embed src="src/components/live2d/index.html" width=650px height=435px />
+           <embed src="src/components/live2d/index.html" width=850px height=505px />
 
       </div>
     </div>
@@ -114,7 +114,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  width: 600px;
+  width: 850px;
   height: 500px;
   z-index: 10000;
   background: rgba(0,0,0,0);

@@ -1,5 +1,3 @@
-
-
 let facemesh;
 let video;
 let predictions = [];

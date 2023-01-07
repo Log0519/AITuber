@@ -22,18 +22,16 @@
             {{createTime}}
           </div>
         </div>
-<!--      <div style="margin: 20px">-->
-<!--        ⭐模型：-->
-<!--      <el-select id="1" v-model="value" placeholder="选择模型" style="width: 100px;margin:10px 0px">-->
-<!--        <el-option-->
-<!--            v-for="item in options"-->
-<!--            :key="item.value"-->
-<!--            :label="item.label"-->
-<!--            :value="item.value"-->
-<!--        >-->
-<!--        </el-option>-->
-<!--      </el-select>-->
-<!--      </div>-->
+      <div style="margin: 10px">
+
+        <el-form-item  label="⭐模型：">
+          <el-select  id="chooseModel" class="chooseModel" v-model="model" style="width: 100px">
+            <el-option label="hiyori" value="../../../public/models/hiyori/hiyori_pro_t10.model3.json"></el-option>
+            <el-option label="fangcao" value="../../../public/models/fangcao/fangcao.model3.json"></el-option>
+            <el-option label="redGril" value="../../../public/models/Game_Data/instant noodles.model3.json"></el-option>
+          </el-select>
+        </el-form-item>
+      </div>
         <!--    左-->
 <!--        <div style="display: flex;margin: 20px">-->
 <!--          <div style="font-size: 16px">-->
@@ -58,7 +56,7 @@
 <!--          </div>-->
 
 <!--        </div>-->
-          <div class="window-model" style="width: 300px;height: 200px"></div>
+          <div class="window-model" style="width: 300px;height: 100px"></div>
           <danmuArea_bill
               style="font-size: 16px;margin-left: 10px;
             background-color: rgba(236,223,253,0.45);
@@ -104,9 +102,9 @@
 
 
   <MocapWindowDialog
-      style="z-index: 1;margin-left: 850px;margin-top: 245px"
+      style="z-index: 1;margin-left: 647px;margin-top: 75px"
       :width="1020"
-      :height="680"
+      :height="480"
       :content="content"
       :footer="false"
       cancelText="取消"
@@ -150,7 +148,8 @@ export default {
       pace:'',
       createTime:'',
       homeUrl:'',
-      showDialog:true
+      showDialog:true,
+      model:'fangcao'
     };
   },
   created() {
@@ -162,6 +161,7 @@ export default {
     this.homeUrl=router.currentRoute.value.query.homeUrl
   },
   mounted() {
+
   },
   methods: {
     stopMv(){
@@ -219,7 +219,13 @@ export default {
     },
 
   }
+
 };
+
+
+
+
+
 </script>
 
 <style lang="scss" scoped>
