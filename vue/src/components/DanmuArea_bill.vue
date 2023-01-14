@@ -291,6 +291,9 @@ export default {
       margin: 8px 0;
 
     }
+    .marquee-wrap::-webkit-scrollbar {
+      display: none;
+    }
     .marquee-wrap  {
       /*width: 80%;*/
       overflow: auto;

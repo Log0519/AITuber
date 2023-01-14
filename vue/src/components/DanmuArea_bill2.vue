@@ -1,6 +1,6 @@
 <!--<li v-for='item in items' >{{'('+item[0].state+')'}}  {{'---"'+item[1].name+'"---'}} {{item[2].time}}</li>-->
 <template>
-  <div class="message-page" style="display:flex;">
+
     <div  class="msg-tit">
       <div hidden>
       <SendDanmuBill ref="send"
@@ -71,36 +71,39 @@
 
 
 
-
-
-
-
       <div class="msg-line"></div>
 
 
-      <div v-if="windowFlag===0" class="marquee-wrap" >
+      <div v-if="windowFlag===0" class="marquee-wrap">
         <ul class="marquee-list" :class="{'animate-up': animateUp}">
           <li   v-for="(item, index) in items" :key="index">
-              <div v-if="item.flag" :style="fontStyle" class="p-word">
+<!--            flag=true 弹幕消息-->
+            <div v-if="item.flag===true" :style="fontStyle" class="p-word">
 
-                {{item.name+' :'}}
-                <div style="color: #c073e4">
-                {{' '+item.neirong}} {{item.time}}
-                </div>
-                <el-button @click="openChangeWindow(item.neirong,item.answer)"
-                           style="max-height: 10px;
-                           max-width: 30px;
-                            padding-top: 8px;
-                           background-color: rgba(254,249,215,0)" text>详情</el-button>
+              <img src="/pho/fangcao.png" style="min-block-size: 20px;border-radius: 50%">
+              <div style="color: #aa00ff;margin-left: 5px">
+                {{item.name+'：'}}
               </div>
-            <p v-else :style="fontStyle2" class="p-word">
-                {{item.name+' :'}} {{' '+item.neirong}} {{item.time}}
-              <el-button @click="openChangeWindow(item.neirong,item.answer)"
-                         style="max-height: 8px;
-                         max-width: 30px;
-                         color: #e33d60;
-                         padding-top: 10px;
-              background-color: rgba(254,249,215,0)" text> 详情</el-button>
+              <div style="color: #e0fff1">
+                {{' '+item.neirong}}
+              </div>
+              <div style="color: #5379da">
+                {{' - '+item.time}}
+              </div>
+
+            </div>
+
+<!--           flag=enter 进入房间-->
+            <p v-else-if="item.flag==='enter'" :style="fontStyle2" class="p-word">
+
+                {{"欢迎 "+item.name}} {{item.neirong}}
+
+            </p>
+            <!--           flag=gift 送出礼物-->
+            <p v-else-if="item.flag==='gift'" :style="fontStyle2" class="p-word">
+
+              {{"谢谢 "+item.name}} {{'送出的"'+item.neirong+'"'}}
+
             </p>
           </li>
         </ul>
@@ -117,10 +120,10 @@
         <ul class="marquee-list" :class="{'animate-up': animateUp}">
           <li   v-for="(item, index) in danmus" :key="index">
             <div style="color: #8450e0;display: flex" class="p-word">
-              <div style="color: #c073e4;">
-                {{'弹幕：'+item.name}}
+              <div style="color: #c073e4;margin-left: 5px">
+                {{item.name}}
               </div>
-              {{':: 次数：'+item.danmuCount}} {{' — 时间'+item.time}}
+              {{'：'+item.danmuCount}} {{' — '+item.time}}
             </div>
           </li>
         </ul>
@@ -132,10 +135,11 @@
         <ul class="marquee-list" :class="{'animate-up': animateUp}">
           <li   v-for="(item, index) in users" :key="index">
             <div style="color: #8450e0;display: flex" class="p-word">
-              <div style="color: #c073e4;">
-                {{'用户：'+item.name}}
+              <img src="/pho/fangcao.png" style="min-block-size: 20px;border-radius: 50%">
+              <div style="color: #c073e4;margin-left: 5px">
+                {{item.name}}
               </div>
-              {{':: 活跃次数：'+item.userCount}} {{' — 时间'+item.time}}
+              {{'：'+item.userCount}} {{' — '+item.time}}
               <!--              {{' '+item.count}}-->
               <!--              <el-button @click="openChangeWindow(item.neirong,item.answer)"-->
               <!--                         style="max-height: 10px;max-width: 30px;-->
@@ -168,7 +172,7 @@
         @ok="onConfirm"
         v-show="showDialog"
     />
-  </div>
+
 
 
 </template>
@@ -217,7 +221,7 @@ export default {
     },
     fontStyle2(){
       const _site = {
-        'color':'#dc2958',
+        'color':'#d93660',
         'display':'flex'
       }
       return _site
@@ -278,14 +282,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.message-page{
-  border: 1px solid transparent;
-  margin-top: 14px;
-  width: 245px;
-  height: 410px;
-  background: #FFFFFF;
-  border-radius: 4px;
-  /**/
+
   .msg-tit{
     padding: 6px 5px 5px 10px;
     .msg-top{
@@ -298,13 +295,15 @@ export default {
       margin: 8px 0;
 
     }
+    .marquee-wrap::-webkit-scrollbar {
+      display: none;
+    }
     .marquee-wrap  {
       /*width: 80%;*/
       overflow: auto;
-      display:flex;
       flex-wrap: wrap;
       height:357px;
-      width: 230px;
+
       margin: 0 auto;
       .marquee-list {
         /*border: 1px solid red;*/
@@ -313,7 +312,7 @@ export default {
         li {
 
           .p-tit{
-            font-size: 12px;
+            font-size: 6px;
             font-family: PingFangSC-Regular, PingFang SC,serif;
             color: #222222;
             height: 22px;
@@ -321,9 +320,10 @@ export default {
           }
           .p-word{
             margin-top: 8px;
-            font-size: 14px;
+            font-size: 7px;
+            font-weight: 10;
             font-family: PingFangSC-Regular, PingFang SC,serif;
-            height: 16px;
+            height: 17px;
             line-height: 18px;
             width: 217px;
             white-space: nowrap;
@@ -374,6 +374,5 @@ export default {
       }
     }
   }
-}
 
 </style>
