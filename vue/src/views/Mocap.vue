@@ -4,7 +4,7 @@
 <!--    <MocapSidebar/>-->
 <!--  </div>-->
 <!--  主体-->
-  <div class="body" style="display: flex" >
+  <div v-if="pace==='哔哩哔哩'" class="body" style="display: flex" >
     <div class="window1" style="display: flex">
       <div class="window1-left" style="width: 100%">
         <div style="margin: 10px;display: flex;font-size: 18px">房间名称：
@@ -83,7 +83,14 @@
 
 <!--    主播房间的时候-->
     <div v-if="src===''" style="margin: 10px 0px 0px 10px" class="camera_outer">
-      <div class="tuberHome" style="width:850px;height:490px;margin-bottom: 5px">
+
+        <div class="tuberHome" style="width:850px;height:490px;margin-bottom: 5px">
+          <danmuArea_bill2
+              style="font-size: 16px;margin-left: 10px;
+            background-color: rgba(236,223,253,0.45);
+            color: #635773"
+              :homeurl="homeUrl"
+          />
 
         </div>
     </div>
@@ -122,6 +129,129 @@
   </div>
 
 
+
+
+  <div v-else class="body" style="display: flex" >
+    <div class="window1" style="display: flex">
+      <div class="window1-left" style="width: 100%">
+        <div style="margin: 10px;display: flex;font-size: 18px">房间名称：
+          <div style="color: #b44aef">
+            {{homeName}}
+          </div>
+        </div>
+        <div style="margin: 10px;display: flex;font-size: 14px">平台：
+          <div style="color: #b44aef">
+            {{pace}}
+          </div>
+        </div>
+        <div style="margin: 10px;display: flex;font-size: 13px">创建时间：
+          <div style="color: #b44aef">
+            {{createTime}}
+          </div>
+        </div>
+        <div style="margin: 10px">
+
+          ⭐模型：
+          <div class="list" style="background-color: #f5eac0;margin-top:10px;width: 560px;height: 170px;
+        margin-left: 20px;border-radius: 20px;overflow: auto">
+            <div class="his-body" style="margin-left: 10px;color: #2cb43d;display: flex; flex-wrap: wrap">
+              <div v-for="(d,index) in phoCounter" :key="index">
+                <!--                photo组件-->
+                <PhoItem
+                    :src="d.src"
+                    @click="modelCode=d.code;"
+                    :name="d.name"
+                >
+                </PhoItem>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--    左-->
+        <!--        <div style="display: flex;margin: 20px">-->
+        <!--          <div style="font-size: 16px">-->
+        <!--            <div style="font-size: 20px">⭐声音:</div>-->
+        <!--            <div style="margin-top: 20px">1、文字转语音：-->
+        <!--              <el-input-->
+        <!--                  style="margin: 10px"-->
+        <!--                  placeholder="请输入内容"-->
+        <!--                  type="textarea"-->
+        <!--                  :autosize="{ minRows: 4, maxRows: 8}"-->
+        <!--                  v-model="inputWords"-->
+        <!--                  >-->
+        <!--              </el-input>-->
+        <!--              <el-button style="margin-left: 115px" @click="ChangeToVoice">转化</el-button>-->
+        <!--            </div>-->
+        <!--            <div>2、导入音频：-->
+        <!--              <el-button style="margin: 10px">导入</el-button>-->
+        <!--            </div>-->
+        <!--            <div>3、实时传入：-->
+        <!--              <el-select style="margin: 10px"></el-select>-->
+        <!--            </div>-->
+        <!--          </div>-->
+
+        <!--        </div>-->
+
+        <danmuArea_bill
+            style="font-size: 16px;margin-left: 10px;
+            background-color: rgba(236,223,253,0.45);
+            color: #635773"
+            :homeurl="homeUrl"
+        />
+      </div>
+      <!--    右    >-->
+
+    </div>
+
+
+    <div class="window2" >
+      <div style="margin: 1px">
+
+        <!--    主播房间的时候-->
+        <div v-if="src===''" style="margin: 10px 0px 0px 10px" class="camera_outer">
+
+          <div class="tuberHome" style="width:850px;height:490px;margin-bottom: 5px">
+
+          </div>
+        </div>
+        <!--    播放视频的时候-->
+        <div v-else style="margin: 10px 0px 0px 10px" class="camera_outer">
+          <div class="tuberHome" style="width:850px;height:490px;margin-bottom: 5px">
+            <embed :src="src" width=850px height=490px />
+          </div>
+
+        </div>
+
+
+        <div style="margin-top: 0px;margin-left: 20px;display: flex">
+
+          <div style="color: #c073e4">
+            视频地址:
+          </div>
+          <el-input   placeholder="请输入地址"
+
+                      v-model="srcTemp"
+                      style="width:30%;height: 30px;
+                  margin-left: 10px;margin-right: 20px"
+                      clearable>
+
+          </el-input>
+          <el-button  v-if="os" @click="goMv" size="large" style="font-size: 19px">播放视频</el-button>
+          <el-button  v-else @click="stopMv"  size="large" style="font-size: 19px">关闭视频</el-button>
+          <el-button  v-if="!isCatch" @click="openCamera" size="large" style="font-size: 19px">开始捕捉</el-button>
+          <el-button  v-else @click="stopCamera"  size="large" style="font-size: 19px">停止捕捉</el-button>
+        </div>
+        <div>
+          <el-button style="margin-left: 750px;margin-top: 30px" size="large" @click="backArea">返回列表</el-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
   <MocapWindowDialog
       :hidden="flag"
       :model-code="modelCode"
@@ -139,18 +269,18 @@
       v-show="showDialog"
   />
 
-
-
 </template>
 
 
 <script>
 import MocapSidebar from "../components/sidebar/MocapSidebar.vue";
 import DanmuArea_bill from "../components/DanmuArea_bill.vue";
+import DanmuArea_bill2 from "../components/DanmuArea_bill2.vue";
 import SendDanmuBill from "../components/SendDanmuBill.vue";
 import {useRoute, useRouter} from "vue-router/dist/vue-router";
 import MocapWindowDialog from "../components/dialog/MocapWindowDialog.vue";
 import PhoItem from "../components/PhoItem.vue";
+
 
 
 
@@ -160,8 +290,9 @@ export default {
     SendDanmuBill,
     MocapSidebar,
     DanmuArea_bill,
+    DanmuArea_bill2,
     MocapWindowDialog,
-    PhoItem
+    PhoItem,
   },
   data() {
     return {
@@ -178,6 +309,7 @@ export default {
       pace:'',
       left:'947px',
       srcTemp:'./public/vedio/back.mp4',
+      // srcTemp:'./public/vedio/back.mp4',
       createTime:'',
       homeUrl:'',
       showDialog:true,
@@ -199,6 +331,7 @@ export default {
     this.createTime=router.currentRoute.value.query.createTime
     this.pace=router.currentRoute.value.query.pace
     this.homeUrl=router.currentRoute.value.query.homeUrl
+
   },
   mounted() {
 
@@ -220,7 +353,7 @@ export default {
       this.left='947px'
     },
     goMv(){
-      this.left='1247px'
+      this.left='1200px'
       console.log(this.tuberStyle)
       this.src=this.srcTemp
      //this.src="./public/vedio/back.mp4"
