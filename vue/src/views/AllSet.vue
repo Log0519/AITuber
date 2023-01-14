@@ -8,10 +8,7 @@
 <!--    主要内容-->
   <div  style="margin-top: 10px;margin-left: 20px">
   <div style="text-align: center;font-size: 30px">设置</div>
-
   </div>
-
-
 
   </div>
 

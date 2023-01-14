@@ -3,7 +3,7 @@ import Layout from "../layout/Layout.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Model from "../views/Model.vue";
-import MocapNo from "../views/MocapNo.vue";
+
 import ModelScene from "../views/ModelScene.vue";
 import Mocap from "../views/Mocap.vue";
 import Area from "../views/Area.vue";
@@ -15,6 +15,7 @@ import MocapWindowDialog from "../components/dialog/MocapWindowDialog.vue";
 
 
 
+
 const routes = [
   {
     path: '/',
@@ -22,11 +23,6 @@ const routes = [
     component: Layout,
     redirect:'/login',
     children:[
-      {
-        path: '/mocapNo',
-        name: 'mocapNo',
-        component: MocapNo,
-      },
       {
         path: '/modelscene',
         name: 'modelscene',
