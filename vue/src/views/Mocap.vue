@@ -242,6 +242,7 @@
           <el-button  v-else @click="stopMv"  size="large" style="font-size: 19px">关闭视频</el-button>
           <el-button  v-if="!isCatch" @click="openCamera" size="large" style="font-size: 19px">开始捕捉</el-button>
           <el-button  v-else @click="stopCamera"  size="large" style="font-size: 19px">停止捕捉</el-button>
+
         </div>
         <div>
           <el-button style="margin-left: 750px;margin-top: 30px" size="large" @click="backArea">返回列表</el-button>
@@ -442,7 +443,9 @@ export default {
     transform:scaleX(-1);*/
 }
 .tuberHome{
-  background-image: url("/pho/gifback4.gif");
+  background-image: url("/pho/homeBack02.gif");
+  //background-image: url("/pho/gifback4.gif");
+  //background-image: url("/vedio/noVoice.mp4");
   background-size: cover;
 }
 
