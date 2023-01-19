@@ -6,10 +6,17 @@
         {{ homeName }}
       </div>
     </div>
+    <div style="display: flex">
     <div style="font-size: 17px;display: flex">直播平台：
     <div class="pace" style="font-size: 17px;color: #c657ff">
       {{ pace }}
     </div>
+    </div>
+      <div style="font-size: 17px;display: flex;margin-left: 50px">商店：
+        <div class="pace" style="font-size: 17px;color: #c657ff">
+          {{isBuy}}
+        </div>
+      </div>
     </div>
     <div class="state" style="display: flex;font-size: 17px">
       状态：
@@ -75,6 +82,10 @@ export default {
       type: String,
       default: ''
     },
+    isBuy: { // 商店
+      type: String,
+      default: 'false'
+    },
     homeUrl: { // 网址
       type: String,
       default: ''
@@ -136,7 +147,7 @@ export default {
   background-color: rgb(248, 240, 148);
   border-radius: 20px;
   border: 3px solid #d3a6ff;
-  width: 582px;
+  width: 680px;
   height: 150px;
   box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
 }

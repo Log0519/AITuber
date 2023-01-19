@@ -143,11 +143,12 @@ export default {
 
 <style lang="scss" scoped>
 .back{
-  margin: 20px 0px 0px 20px;
+  margin-left: 1%;
+  margin-right: 1%;
   background-color: rgba(255, 255, 255, 0.27);
   border-radius: 10px;
   border: 1px solid #aaa;
-  width: 1340px;
+  width: 98%;
   height: 600px;
   box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
 }
@@ -156,7 +157,7 @@ export default {
   background-color: rgba(216, 129, 245, 0.03);
   border-radius: 10px;
   border: 2px solid #e8cccf;
-  width: 1250px;
+  width: 96%;
   height: 500px;
   //box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
 }

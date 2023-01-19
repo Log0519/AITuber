@@ -1,26 +1,27 @@
 <template>
 <!--侧边栏-->
-  <div>
-    <AreaSidebar/>
-  </div>
+<!--  <div>-->
+<!--    <AreaSidebar/>-->
+<!--  </div>-->
 <!--  主体-->
   <div class="back" >
 <!--    主要内容-->
   <div  style="margin-top: 10px;margin-left: 20px" >
 
-  <div style="margin-left:570px;font-size: 30px;color:  #b349ef">商家房间列表
+  <div style="text-align: center;font-size: 30px;color:  #fce889">房间列表
+
+  </div>
     <el-button @click="onDialog()"
                type="primary"
                style="width: 90px;
                height: 30px;
                background-color:#fce889;
-               margin-left: 200px;
+               margin-left: 80%;
                font-size: 18px;
                color: #c073e4;
                line-height: 40px"
                round>创建房间
     </el-button>
-  </div>
     <!--    房间列表-->
     <BusinessDialog
         style="z-index: 1"
@@ -45,10 +46,11 @@
             :now-date="d.nowDate"
             :end-time="d.endTime"
             :pace="d.pace"
+            :is-buy="d.isBuy"
             :home-name="d.hostname"
             :home-url="d.homeUrl"
             @delete="onDelete(d.hostname,d.nowDate)"
-            @enter="onEnter(d.hostname,d.pace,d.nowDate,d.homeUrl)"
+            @enter="onEnter(d.hostname,d.pace,d.nowDate,d.homeUrl,d.isBuy)"
         />
       </div>
     </div>
@@ -86,7 +88,8 @@ export default {
       flag:true,
       index:1,
       nowDate:'',
-      homeUrl:''
+      homeUrl:'',
+      isBuy:false
     };
   },
   created() {
@@ -105,7 +108,7 @@ export default {
           console.log(res.data)
           for (let i = 0; i < res.data.length; i++) {
             this.counter.unshift({"hostname":res.data[i].name,
-              "pace":res.data[i].host,"nowDate":res.data[i].createtime,"homeUrl":res.data[i].homeurl})
+              "pace":res.data[i].host,"nowDate":res.data[i].createtime,"homeUrl":res.data[i].homeurl,"isBuy":res.data[i].isbuy})
           }
         } else {
 
@@ -139,8 +142,8 @@ export default {
         this.homeInit()
       })
     },
-    onEnter(name,pace,time,homeUrl){
-      this.$router.push({name:'Mocap',query:{homeName:name,pace:pace,createTime:time,homeUrl:homeUrl}})
+    onEnter(name,pace,time,homeUrl,isBuy){
+      this.$router.push({name:'Mocap',query:{homeName:name,pace:pace,createTime:time,homeUrl:homeUrl,isBuy:isBuy}})
     },
 //对话框方法
     onDialog () { // 调用Dialog弹出对话框
@@ -157,6 +160,7 @@ export default {
       this.nowDate=this.getNowDate()
       this.pace=this.$refs.test.form.pace
       this.homeUrl=this.$refs.test.form.homeId
+      this.isBuy=this.$refs.test.form.isBuy
       // this.endYear=this.$refs.test.form.date1.toString().split(" ")[3]
       // this.endMo=this.$refs.test.form.date1.toString().split(" ")[1]
       // this.endDay=this.$refs.test.form.date1.toString().split(" ")[2]
@@ -177,6 +181,7 @@ export default {
         //this.counter.push({"hostname":this.homeName,"pace":this.pace,"endTime":this.endTime,"nowDate":this.nowDate})
         request.get("/areaHome/add",{
           params:{
+            isbuy:this.isBuy,
             name:this.homeName,
             createtime:this.nowDate,
             state:"未开始",
@@ -213,12 +218,13 @@ export default {
 
 <style lang="scss" scoped>
 .back{
-  margin: 20px 0px 0px 20px;
+  margin-left: 1%;
+  margin-right: 1%;
   background-color: rgba(255, 255, 255, 0.27);
   border-radius: 10px;
   border: 1px solid #aaa;
-  width: 1340px;
-  height: 600px;
+  width: 98%;
+  height: 650px;
   box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
 }
 .homes{
@@ -226,8 +232,11 @@ export default {
   background-color: rgba(216, 129, 245, 0.03);
   border-radius: 10px;
   border: 2px solid #e8cccf;
-  width: 1250px;
+  width: 96%;
   height: 500px;
   //box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
+}
+.homes::-webkit-scrollbar{
+  display: none;
 }
 </style>

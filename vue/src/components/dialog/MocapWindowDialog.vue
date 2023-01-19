@@ -1,7 +1,7 @@
 <template>
   <div class="m-dialog-mask" style="overflow:hidden;
   width: 300px;
-  height: 280px">
+  height: 269px">
     <div class="m-dialog" :style="`width: ${dialogWidth}; height: ${dialogHeight};`">
       <div class="m-dialog-content" >
 
@@ -127,13 +127,14 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
+
   width: 850px;
   height: 500px;
   z-index: 10000;
   background: rgba(0,0,0,0);
   .m-dialog {
     position: relative;
-    top: 40%;
+    top: 20%;
     transform: translateY(-50%);
     -ms-transform: translateY(-50%);; /* IE 9 */
     -webkit-transform: translateY(-50%); /* Safari and Chrome */

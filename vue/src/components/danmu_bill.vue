@@ -210,6 +210,7 @@ export default {
       margin: 0 auto;
       overflow: hidden;
       .marquee-list {
+        width: 900px;
         /*border: 1px solid red;*/
         li {
           .p-tit{

@@ -1,6 +1,6 @@
 <!--<li v-for='item in items' >{{'('+item[0].state+')'}}  {{'---"'+item[1].name+'"---'}} {{item[2].time}}</li>-->
 <template>
-  <div class="message-page" style="display:flex;">
+
     <div  class="msg-tit">
       <div hidden>
       <SendDanmuBill ref="send"
@@ -8,7 +8,7 @@
 
       />
       </div>
-      <div class="msg-top">
+      <div class="msg-top" style="font-family: 幼圆,serif">
         <div class="tit-word">
           <!--          控制点击变色-->
           <div v-if="windowFlag===0">
@@ -23,19 +23,19 @@
           </div>
         </div>
 
-        <div class="tit-word">
-          <!--          控制点击变色-->
-          <div v-if="windowFlag===1">
-            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px;color: #c073e4"
-                       @click="windowFlag=1"
-            >告警</el-button>
-          </div>
-          <div v-else>
-            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
-                       @click="windowFlag=1"
-            >告警</el-button>
-          </div>
-        </div>
+<!--        <div class="tit-word">-->
+<!--          &lt;!&ndash;          控制点击变色&ndash;&gt;-->
+<!--          <div v-if="windowFlag===1">-->
+<!--            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px;color: #c073e4"-->
+<!--                       @click="windowFlag=1"-->
+<!--            >告警</el-button>-->
+<!--          </div>-->
+<!--          <div v-else>-->
+<!--            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"-->
+<!--                       @click="windowFlag=1"-->
+<!--            >告警</el-button>-->
+<!--          </div>-->
+<!--        </div>-->
 
         <div class="tit-word">
           <!--          控制点击变色-->
@@ -71,37 +71,64 @@
 
 
 
-
-
-
-
       <div class="msg-line"></div>
 
 
-      <div v-if="windowFlag===0" class="marquee-wrap" >
+      <div v-if="windowFlag===0" class="marquee-wrap">
         <ul class="marquee-list" :class="{'animate-up': animateUp}">
           <li   v-for="(item, index) in items" :key="index">
-              <div v-if="item.flag" :style="fontStyle" class="p-word">
+<!--            flag=true 弹幕消息-->
+            <div v-if="item.flag===true" :style="fontStyle" class="p-word">
 
-                {{item.name+' :'}}
-                <div style="color: #c073e4">
-                {{' '+item.neirong}} {{item.time}}
-                </div>
-                <el-button @click="openChangeWindow(item.neirong,item.answer)"
-                           style="max-height: 10px;
-                           max-width: 30px;
-                            padding-top: 8px;
-                           background-color: rgba(254,249,215,0)" text>详情</el-button>
+
+              <img src="/pho/fangcao.png" style="width: 20px;height:20px;border-radius: 50%;margin-top: 2px">
+              <div>
+
+
+                <div style="color: #ee8f8f;margin-left: 10px;margin-right: 10px;
+                font-family: 幼圆,serif;font-size: 13px">
+                {{item.name+'：'}}
+
               </div>
-            <p v-else :style="fontStyle2" class="p-word">
-                {{item.name+' :'}} {{' '+item.neirong}} {{item.time}}
-              <el-button @click="openChangeWindow(item.neirong,item.answer)"
-                         style="max-height: 8px;
-                         max-width: 30px;
-                         color: #e33d60;
-                         padding-top: 10px;
-              background-color: rgba(254,249,215,0)" text> 详情</el-button>
-            </p>
+              <div class="OneDanmu" style='margin-left: 10px;background-color: #ffe774;border-radius: 5px'>
+                <div style="height: 4px"></div>
+                <div style="background-color: #914f4f;margin-left: 4px;margin-right:4px;border-radius: 5px">
+                  <div style="height: 3px"></div>
+                  <div style="color: #ffc840;margin-left: 10px;margin-right: 10px;font-family: 幼圆,serif">
+                    {{' '+item.neirong}}
+                      </div>
+                       <div style="color: #bfcefa; text-align: right;margin-left:10px;margin-right: 10px">
+                    {{item.time}}
+                  </div>
+                  <div style="height: 3px"></div>
+                </div>
+                <div style="height:4px"></div>
+              </div>
+              </div>
+
+            </div>
+
+<!--           flag=enter 进入房间-->
+            <div v-else-if="item.flag==='enter'" :style="fontStyle2" class="p-word">
+              <div style="width: 40px"></div>
+                {{"欢迎 "}}
+              <div style="color: #da9b6f">
+            {{item.name}}
+              </div>
+
+              {{item.neirong}}
+
+            </div>
+            <!--           flag=gift 送出礼物-->
+            <div v-else-if="item.flag==='gift'" style="color: #60d8ee" class="p-word">
+              <div style="display: flex">
+              {{"谢谢"}}
+              <div style="color:#da9b6f ">
+              {{item.name}}
+              </div>
+              {{'送出的"'+item.neirong+'"'}}
+              </div>
+            </div>
           </li>
         </ul>
       </div>
@@ -117,10 +144,10 @@
         <ul class="marquee-list" :class="{'animate-up': animateUp}">
           <li   v-for="(item, index) in danmus" :key="index">
             <div style="color: #8450e0;display: flex" class="p-word">
-              <div style="color: #c073e4;">
-                {{'弹幕：'+item.name}}
+              <div style="color: #c073e4;margin-left: 5px">
+                {{item.name}}
               </div>
-              {{':: 次数：'+item.danmuCount}} {{' — 时间'+item.time}}
+              {{'：'+item.danmuCount}} {{' — '+item.time}}
             </div>
           </li>
         </ul>
@@ -132,10 +159,11 @@
         <ul class="marquee-list" :class="{'animate-up': animateUp}">
           <li   v-for="(item, index) in users" :key="index">
             <div style="color: #8450e0;display: flex" class="p-word">
-              <div style="color: #c073e4;">
-                {{'用户：'+item.name}}
+              <img src="/pho/fangcao.png" style="height: 20px;width:20px;border-radius: 50%">
+              <div style="color: #c073e4;margin-left: 5px">
+                {{item.name}}
               </div>
-              {{':: 活跃次数：'+item.userCount}} {{' — 时间'+item.time}}
+              {{'：'+item.userCount}} {{' — '+item.time}}
               <!--              {{' '+item.count}}-->
               <!--              <el-button @click="openChangeWindow(item.neirong,item.answer)"-->
               <!--                         style="max-height: 10px;max-width: 30px;-->
@@ -168,7 +196,7 @@
         @ok="onConfirm"
         v-show="showDialog"
     />
-  </div>
+
 
 
 </template>
@@ -217,8 +245,9 @@ export default {
     },
     fontStyle2(){
       const _site = {
-        'color':'#dc2958',
-        'display':'flex'
+        'color':'#d93660',
+        'display':'flex',
+        'font-family': '幼圆'
       }
       return _site
     },
@@ -278,33 +307,29 @@ export default {
 </script>
 
 <style scoped lang="less">
-.message-page{
-  border: 1px solid transparent;
-  margin-top: 14px;
-  width: 245px;
-  height: 410px;
-  background: #FFFFFF;
-  border-radius: 4px;
-  /**/
+
+
   .msg-tit{
-    padding: 6px 5px 5px 10px;
+    padding: 5px 5px 5px 20px;
     .msg-top{
       display: flex;
     }
     .msg-line{
-      width: 230px;
-      height: 1px;
+      width: 430px;
+      height: 0px;
       background: #EFEFEF;
       margin: 8px 0;
 
     }
+    .marquee-wrap::-webkit-scrollbar {
+      display: none;
+    }
     .marquee-wrap  {
       /*width: 80%;*/
       overflow: auto;
-      display:flex;
       flex-wrap: wrap;
-      height:357px;
-      width: 230px;
+      height:407px;
+
       margin: 0 auto;
       .marquee-list {
         /*border: 1px solid red;*/
@@ -313,17 +338,18 @@ export default {
         li {
 
           .p-tit{
-            font-size: 12px;
+            font-size: 6px;
             font-family: PingFangSC-Regular, PingFang SC,serif;
             color: #222222;
             height: 22px;
             line-height: 22px;
           }
           .p-word{
-            margin-top: 8px;
-            font-size: 14px;
+
+            font-size: 7px;
+            font-weight: 10;
             font-family: PingFangSC-Regular, PingFang SC,serif;
-            height: 16px;
+            margin-top: 10px;
             line-height: 18px;
             width: 217px;
             white-space: nowrap;
@@ -360,9 +386,7 @@ export default {
             margin-top: 8px;
             font-size: 14px;
             font-family: PingFangSC-Regular, PingFang SC,serif;
-            height: 16px;
             line-height: 18px;
-            width: 767px;
             white-space: nowrap;
           }
 
@@ -374,6 +398,5 @@ export default {
       }
     }
   }
-}
 
 </style>

@@ -17,4 +17,5 @@ public class AreaHome {
     private String state;
     private String host;
     private String homeurl;
+    private String isbuy;
 }

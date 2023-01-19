@@ -11,6 +11,7 @@ import OtherArea from "../views/OtherArea.vue";
 import AllSet from "../views/AllSet.vue";
 import DatasView from "../views/DatasView.vue";
 import MocapWindowDialog from "../components/dialog/MocapWindowDialog.vue";
+import Shop from "../views/Shop.vue";
 
 
 
@@ -53,6 +54,11 @@ const routes = [
         path: '/allSet',
         name: 'AllSet',
         component: AllSet,
+      },
+      {
+        path: '/shop',
+        name: 'Shop',
+        component: Shop,
       },
       {
         path: '/datasView',

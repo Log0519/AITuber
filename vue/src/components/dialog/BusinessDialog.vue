@@ -17,7 +17,7 @@
                   <el-input v-model="form.homename" style="width: 150px"></el-input>
                 </el-form-item>
                 <el-form-item label="网址" style=" margin-left:50px;display: flex">
-                  <el-input v-model="form.homeId" style="width: 100px"></el-input>
+                  <el-input v-model="form.homeId" style="width: 200px"></el-input>
                 </el-form-item>
               </div>
             </div>
@@ -29,22 +29,11 @@
                 <el-option label="哔哩哔哩" value="哔哩哔哩"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="自动开始">
-              <el-switch
-                  v-model="value1"
-                  active-color="RGB(111,111,223)"
-                  >
-              </el-switch>
+            <el-form-item label="商店" style="margin-top: 20px">
+            <el-checkbox v-model="form.isBuy"></el-checkbox>
             </el-form-item>
-            <el-form-item label="一直播放">
-              <el-switch
-                  v-model="value2"
-                  active-color="RGB(111,111,223)"
-              >
-              </el-switch>
-            </el-form-item>
-            <el-form-item label="介绍">
-              <el-input type="textarea" v-model="form.desc"></el-input>
+            <el-form-item label="介绍" style="margin-top: 20px">
+              <el-input type="textarea"  v-model="form.desc"></el-input>
             </el-form-item>
           </el-form>
         </div>
@@ -106,7 +95,8 @@ export default {
         delivery: false,
         type: [],
         resource: '',
-        desc: ''
+        desc: '',
+        isBuy:false
       },
       value1:false,
       value2:true,
@@ -169,7 +159,7 @@ export default {
     transition: all .3s ease;
     .m-dialog-content {
       position: relative;
-      background: #ffe5ac;
+      background: #81bcf6;
       border-radius: 4px;
       box-shadow: 0 4px 12px rgba(211, 158, 158, 0.1);
       .u-screen {

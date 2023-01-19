@@ -207,7 +207,9 @@ import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
   var element = packet.body[i];
   //做一下简单的打印
   console.log(element);//数据格式从打印中就可以分析出来啦
-  //cmd = DANMU_MSG 是弹幕
+
+
+  //1、 cmd = DANMU_MSG 是弹幕
   if (element.cmd === "DANMU_MSG"){
   console.log("uid: " + element.info[2][0]
   + " 用户: " + element.info[2][1]
@@ -326,11 +328,45 @@ import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
     //   console.log("发送到kafka")
     // })
 }
-  //cmd = INTERACT_WORD 有人进入直播了
+  //2、 cmd = INTERACT_WORD 有人进入直播了
   else if (element.cmd === "INTERACT_WORD") {
   console.log("进入直播: " + element.data.uname);
+
+    itemsSend.unshift({'flag':'enter',
+      'state':"自动",
+      'name': element.data.uname,
+      'neirong':" 进入直播间",
+      'time':"2020-11-11 20:20:20",
+      'answer':'新品不打折哟',
+    })
 }
-  //还有其他的
+
+  // 3、cmd === "SEND_GIFT" 送礼物
+  else if (element.cmd === "SEND_GIFT") {
+    console.log("送出礼物: " + element.data.giftName+"======================");
+
+    itemsSend.unshift({'flag':'gift',
+      'state':"自动",
+      'name': element.data.uname,
+      'neirong':element.data.giftName,
+      'time':"2020-11-11 20:20:20",
+      'answer':'新品不打折哟',
+    })
+  }
+
+  //4、cmd === NOTICE_MSG 通知消息
+  else if (element.cmd === "NOTICE_MSG") {
+    console.log("通知: " + element.data);
+    // itemsSend.unshift({'flag':'gift',
+    //   'state':"自动",
+    //   'name': element.data.uname,
+    //   'neirong':+element.data.giftName,
+    //   'time':"2020-11-11 20:20:20",
+    //   'answer':'新品不打折哟',
+    // })
+
+  }
+
 }
 }
 });
