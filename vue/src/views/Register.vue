@@ -1,9 +1,9 @@
 <template>
   <div style="width: 100%;height: 100vh;overflow:hidden">
     <div class="register">
-      <div class="register-content">
+      <div class="register-content" >
         <div >
-          <div style="font-size: 30px;font-weight: bold;text-align: center;margin-top: 30px ;padding: 30px">
+          <div style="font-size: 30px;font-weight: bold;text-align: center;margin-top: 30px ;padding: 30px;color:  #9aef8d">
             欢迎注册
 
           </div>
@@ -15,7 +15,7 @@
             </el-form-item>
             <el-form-item style="margin-top: 20px"  prop="password">
               <el-input  style="width: 260px" v-model ="form.password" show-password ></el-input>
-              <lable style="color: aqua">密码</lable>
+              <lable style="color: #b0eaa7">密码</lable>
             </el-form-item>
             <el-form-item style="margin-top: 20px" prop="confirm">
               <el-input  style="width: 260px" v-model ="form.confirm" show-password ></el-input>
@@ -23,7 +23,7 @@
             </el-form-item >
             <el-form-item style="margin-left: 40px" class="button-container">
               <el-button type="primary" style="width: 80px" class="login-button" @click="back">返回</el-button>
-              <el-button type="primary" class="login-button" @click="register">立即注册</el-button>
+              <el-button type="primary" style="width: 120px" class="login-button" @click="register">立即注册</el-button>
             </el-form-item>
           </el-form>
         </div>

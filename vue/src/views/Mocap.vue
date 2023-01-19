@@ -4,28 +4,29 @@
 <!--    <MocapSidebar/>-->
 <!--  </div>-->
 <!--  主体-->
+  <div class="back">
   <div v-if="pace==='哔哩哔哩'" class="body" style="display: flex;width: 98%;margin-left: 1%" >
     <div class="window1" style="display: flex">
       <div class="window1-left" style="width: 100%">
-        <div style="margin: 10px;display: flex;font-size: 18px;color: #f2f2f2">房间名称：
-          <div style="color: #fce889">
+        <div style="margin: 10px;display: flex;font-size: 18px;color:#49b74b">房间名称：
+          <div style="color: #e291ea">
           {{homeName}}
           </div>
         </div>
-        <div style="margin: 10px;display: flex;font-size: 14px;color: #f2f2f2">平台：
-          <div style="color: #fce889">
+        <div style="margin: 10px;display: flex;font-size: 14px;color: #49b74b">平台：
+          <div style="color: #e291ea">
             {{pace}}
           </div>
         </div>
-        <div style="margin: 10px;display: flex;font-size: 13px;color: #f2f2f2">创建时间：
-          <div style="color: #fce889">
+        <div style="margin: 10px;display: flex;font-size: 13px;color: #49b74b">创建时间：
+          <div style="color: #e291ea">
             {{createTime}}
           </div>
         </div>
-      <div style="margin: 10px;color: #f2f2f2">
+      <div style="margin: 10px;color: #49b74b">
 
         ⭐模型：
-        <div class="list" style="background-color: #f5eac0;margin-top:10px;width: 98%;height: 170px;
+        <div class="list" style="background-color: #aaecab;margin-top:10px;width: 98%;height: 170px;
         margin-left: 1%;border-radius: 20px;overflow: auto">
         <div class="his-body" style="margin-left: 10px;color: #2cb43d;display: flex; flex-wrap: wrap">
         <div v-for="(d,index) in phoCounter" :key="index">
@@ -41,38 +42,6 @@
         </div>
         </div>
       </div>
-        <!--    左-->
-<!--        <div style="display: flex;margin: 20px">-->
-<!--          <div style="font-size: 16px">-->
-<!--            <div style="font-size: 20px">⭐声音:</div>-->
-<!--            <div style="margin-top: 20px">1、文字转语音：-->
-<!--              <el-input-->
-<!--                  style="margin: 10px"-->
-<!--                  placeholder="请输入内容"-->
-<!--                  type="textarea"-->
-<!--                  :autosize="{ minRows: 4, maxRows: 8}"-->
-<!--                  v-model="inputWords"-->
-<!--                  >-->
-<!--              </el-input>-->
-<!--              <el-button style="margin-left: 115px" @click="ChangeToVoice">转化</el-button>-->
-<!--            </div>-->
-<!--            <div>2、导入音频：-->
-<!--              <el-button style="margin: 10px">导入</el-button>-->
-<!--            </div>-->
-<!--            <div>3、实时传入：-->
-<!--              <el-select style="margin: 10px"></el-select>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--        </div>-->
-
-
-<!--          <danmuArea_bill-->
-<!--              style="font-size: 16px;width: 98%;margin-left: 1%;-->
-<!--            background-color: rgba(236,223,253,0.45);-->
-<!--            color: #635773"-->
-<!--              :homeurl="homeUrl"-->
-<!--          />-->
         <SendDanmuBill style="color: #f2f2f2;margin-left: 20px">
 
         </SendDanmuBill>
@@ -252,9 +221,9 @@
     </div>
 
 
-  <div style="margin-top: 0px;margin-left: 20px;display: flex">
+  <div style="margin-top: 20px;margin-left: 20px;display: flex">
 
-    <div style="color: #fce889">
+    <div style="color: #49b74b">
    视频地址:
     </div>
     <el-input   placeholder="请输入地址"
@@ -265,13 +234,13 @@
                 clearable>
 
     </el-input>
-    <el-button  v-if="os" @click="goMv" size="large" style="font-size: 19px">播放视频</el-button>
-    <el-button  v-else @click="stopMv"  size="large" style="font-size: 19px">关闭视频</el-button>
-    <el-button  v-if="!isCatch" @click="openCamera" size="large" style="font-size: 19px">开始捕捉</el-button>
-    <el-button  v-else @click="stopCamera"  size="large" style="font-size: 19px">停止捕捉</el-button>
+    <el-button class="myButton" v-if="os" @click="goMv"  style="font-size: 19px;border-radius: 10px;height: 30px">播放视频</el-button>
+    <el-button  class="myButton"  v-else @click="stopMv"  style="font-size: 19px;border-radius: 10px;height: 30px">关闭视频</el-button>
+    <el-button   class="myButton" v-if="!isCatch" @click="openCamera" style="font-size: 19px;border-radius: 10px;height: 30px">开始捕捉</el-button>
+    <el-button    class="myButton" v-else @click="stopCamera"   style="font-size: 19px;border-radius: 10px;height: 30px">停止捕捉</el-button>
   </div>
     <div>
-      <el-button style="margin-left: 750px;margin-top: 30px" size="large" @click="backArea">返回列表</el-button>
+      <el-button class="myButton" style="margin-left: 750px;margin-top: 30px;border-radius: 10px;height: 30px" @click="backArea">返回列表</el-button>
     </div>
     </div>
     </div>
@@ -283,24 +252,24 @@
   <div v-else class="body" style="display: flex" >
     <div class="window1" style="display: flex">
       <div class="window1-left" style="width: 100%">
-        <div style="margin: 10px;display: flex;font-size: 18px;color: #f2f2f2">房间名称：
-          <div style="color: #fce889">
+        <div style="margin: 10px;display: flex;font-size: 18px;color: #49b74b">房间名称：
+          <div style="color:  #e291ea">
             {{homeName}}
           </div>
         </div>
-        <div style="margin: 10px;display: flex;font-size: 14px;color: #f2f2f2">平台：
-          <div style="color: #fce889">
+        <div style="margin: 10px;display: flex;font-size: 14px;color: #49b74b">平台：
+          <div style="color:  #e291ea">
             {{pace}}
           </div>
         </div>
-        <div style="margin: 10px;display: flex;font-size: 13px;color: #f2f2f2">创建时间：
-          <div style="color: #fce889">
+        <div style="margin: 10px;display: flex;font-size: 13px;color: #49b74b">创建时间：
+          <div style="color:  #e291ea">
             {{createTime}}
           </div>
         </div>
         <div style="margin: 10px">
           ⭐模型：
-          <div class="list" style="background-color: #f5eac0;margin-top:10px;width: 98%;height: 170px;
+          <div class="list" style="background-color:  #aaecab;margin-top:10px;width: 98%;height: 170px;
         margin-left: 1%;border-radius: 20px;overflow: auto">
             <div class="his-body" style="margin-left: 10px;color: #2cb43d;display: flex; flex-wrap: wrap">
               <div v-for="(d,index) in phoCounter" :key="index">
@@ -316,31 +285,6 @@
             </div>
           </div>
         </div>
-        <!--    左-->
-        <!--        <div style="display: flex;margin: 20px">-->
-        <!--          <div style="font-size: 16px">-->
-        <!--            <div style="font-size: 20px">⭐声音:</div>-->
-        <!--            <div style="margin-top: 20px">1、文字转语音：-->
-        <!--              <el-input-->
-        <!--                  style="margin: 10px"-->
-        <!--                  placeholder="请输入内容"-->
-        <!--                  type="textarea"-->
-        <!--                  :autosize="{ minRows: 4, maxRows: 8}"-->
-        <!--                  v-model="inputWords"-->
-        <!--                  >-->
-        <!--              </el-input>-->
-        <!--              <el-button style="margin-left: 115px" @click="ChangeToVoice">转化</el-button>-->
-        <!--            </div>-->
-        <!--            <div>2、导入音频：-->
-        <!--              <el-button style="margin: 10px">导入</el-button>-->
-        <!--            </div>-->
-        <!--            <div>3、实时传入：-->
-        <!--              <el-select style="margin: 10px"></el-select>-->
-        <!--            </div>-->
-        <!--          </div>-->
-
-        <!--        </div>-->
-
         <danmuArea_bill
             style="font-size: 16px;margin-left:1%;
             background-color: rgba(236,223,253,0.45);
@@ -372,9 +316,9 @@
         </div>
 
 
-        <div style="margin-top: 0px;margin-left: 20px;display: flex">
+        <div style="margin-top: 20px;margin-left: 20px;display: flex">
 
-          <div style="color:#fce889">
+          <div style="color:#49b74b">
             视频地址:
           </div>
           <el-input   placeholder="请输入地址"
@@ -385,14 +329,14 @@
                       clearable>
 
           </el-input>
-          <el-button  v-if="os" @click="goMv" size="large" style="font-size: 19px">播放视频</el-button>
-          <el-button  v-else @click="stopMv"  size="large" style="font-size: 19px">关闭视频</el-button>
-          <el-button  v-if="!isCatch" @click="openCamera" size="large" style="font-size: 19px">开始捕捉</el-button>
-          <el-button  v-else @click="stopCamera"  size="large" style="font-size: 19px">停止捕捉</el-button>
+          <el-button class="myButton" v-if="os" @click="goMv"  style="font-size: 19px;border-radius: 10px;height: 30px">播放视频</el-button>
+          <el-button  class="myButton"  v-else @click="stopMv"  style="font-size: 19px;border-radius: 10px;height: 30px">关闭视频</el-button>
+          <el-button   class="myButton" v-if="!isCatch" @click="openCamera" style="font-size: 19px;border-radius: 10px;height: 30px">开始捕捉</el-button>
+          <el-button    class="myButton" v-else @click="stopCamera"   style="font-size: 19px;border-radius: 10px;height: 30px">停止捕捉</el-button>
 
         </div>
         <div>
-          <el-button style="margin-left: 750px;margin-top: 30px" size="large" @click="backArea">返回列表</el-button>
+          <el-button class="myButton" style="margin-left: 750px;margin-top: 30px;border-radius: 10px;height: 30px" @click="backArea">返回列表</el-button>
         </div>
       </div>
     </div>
@@ -417,7 +361,7 @@
       @ok="onConfirm"
       v-show="showDialog"
   />
-
+</div>
 </template>
 
 
@@ -615,24 +559,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.back{
+  background-color: #ffffff;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
+  height: 100vh;
+}
 .window1{
-  background-color: rgba(255, 255, 255, 0.27);
   border-radius: 10px;
-  border: 1px solid #aaa;
-  width: 39%;
+  width: 35%;
   height: 640px;
-  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
 }
 //人物视角窗口window2
 .window2{
   margin-left: 1%;
-  background-color: rgba(255, 255, 255, 0.27);
+
   border-radius: 10px;
-  border: 1px solid #aaa;
   width: 60%;
   height: 640px;
-  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
 }
+
 .camera_outer{
     /*-moz-transform:scaleX(-1);
     -webkit-transform:scaleX(-1);
@@ -657,5 +604,17 @@ export default {
 }
 .goodsList::-webkit-scrollbar{
  display: none;
+}
+.list::-webkit-scrollbar{
+  display: none;
+}
+.myButton{
+  color: #70cb62;
+}
+.myButton:hover{
+  background: #9aef8d;
+  color: #fff;
+  border-radius: 10px;
+  border-color:  #9aef8d;
 }
 </style>

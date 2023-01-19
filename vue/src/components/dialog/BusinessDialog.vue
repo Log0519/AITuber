@@ -13,26 +13,26 @@
           <el-form ref="form" :model="form" label-width="100px">
             <div style="display: flex;width:70%">
               <div style="display: flex" >
-                <el-form-item  label="房间名称" >
-                  <el-input v-model="form.homename" style="width: 150px"></el-input>
+                <el-form-item  label="房间名称" size="large">
+                  <el-input v-model="form.homename" style="width: 150px;height: 30px"></el-input>
                 </el-form-item>
-                <el-form-item label="网址" style=" margin-left:50px;display: flex">
-                  <el-input v-model="form.homeId" style="width: 200px"></el-input>
+                <el-form-item label="网址" size="large" style=" margin-left:50px;display: flex">
+                  <el-input v-model="form.homeId" style="width: 200px;height: 30px"></el-input>
                 </el-form-item>
               </div>
             </div>
-            <el-form-item label="直播平台">
-              <el-select v-model="form.pace" style="width: 100px">
+            <el-form-item label="直播平台" size="large" style="height: 30px">
+              <el-select v-model="form.pace"  style="width: 100px;height: 30px">
                 <el-option label="拼多多" value="拼多多"></el-option>
                 <el-option label="淘宝" value="淘宝"></el-option>
                 <el-option label="京东" value="京东"></el-option>
                 <el-option label="哔哩哔哩" value="哔哩哔哩"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="商店" style="margin-top: 20px">
-            <el-checkbox v-model="form.isBuy"></el-checkbox>
+            <el-form-item label="商店" size="large" style="margin-top: 30px">
+            <el-checkbox v-model="form.isBuy" ></el-checkbox>
             </el-form-item>
-            <el-form-item label="介绍" style="margin-top: 20px">
+            <el-form-item label="介绍" size="large" style="margin-top: 30px;width: 400px">
               <el-input type="textarea"  v-model="form.desc"></el-input>
             </el-form-item>
           </el-form>
@@ -159,7 +159,7 @@ export default {
     transition: all .3s ease;
     .m-dialog-content {
       position: relative;
-      background: #81bcf6;
+      background: #c4f8c0;
       border-radius: 4px;
       box-shadow: 0 4px 12px rgba(211, 158, 158, 0.1);
       .u-screen {
@@ -183,7 +183,7 @@ export default {
         padding: 16px 24px;
         color: rgba(0,0,0,.65);
         border-radius: 4px 4px 0 0;
-        border-bottom: 1px solid #e8e8e8;
+        border-bottom: 3px solid #ffffff;
         .u-head {
           margin: 0;
           color: rgba(0,0,0,.85);
@@ -204,21 +204,27 @@ export default {
       .m-dialog-footer {
         padding: 10px 16px;
         text-align: right;
-        border-top: 1px solid #e8e8e8;
+        border-top: 3px solid #ffffff;
         .u-cancel {
           height: 32px;
           line-height: 32px;
           padding: 0 15px;
           font-size: 18px;
-          border-radius: 4px;
-          color: rgba(0,0,0,.65);
+          border-radius: 10px;
+          color: #7ede70;
           background: #fff;
-          border: 1px solid #d9d9d9;
+          border: 1px solid #ffffff;
           cursor: pointer;
           transition: all .3s cubic-bezier(.645,.045,.355,1);
           &:hover {
-            color: #40a9ff;
-            border-color: #40a9ff;
+            background: #9aef8d;
+            color: #fff;
+            border-radius: 10px;
+            border-color:  #9aef8d;
+            box-shadow: 0 0 5px #b0f6ab,
+            0 0 25px #b9fabd,
+            0 0 50px #c7fdcf,
+            0 0 100px #baffbe;
           }
           &:focus {
             color: #096dd9;
@@ -231,16 +237,22 @@ export default {
           line-height: 32px;
           padding: 0 15px;
           font-size: 18px;
-          border-radius: 4px;
-          background: #1890ff;
-          border: 1px solid #1890ff;
-          color: #fff;
+          border-radius: 10px;
+          background: #ffffff;
+          border: 1px solid #ffffff;
+          color: #7ede70;
           transition: all .3s cubic-bezier(.645,.045,.355,1);
           cursor: pointer;
           &:hover {
-            color: #fff;
-            background: #40a9ff;
-            border-color: #40a9ff;
+
+              background: #9aef8d;
+              color: #fff;
+              border-radius: 10px;
+              border-color:  #9aef8d;
+              box-shadow: 0 0 5px #b0f6ab,
+              0 0 25px #b9fabd,
+              0 0 50px #c7fdcf,
+              0 0 100px #baffbe;
           }
           &:focus {
             background: #096dd9;

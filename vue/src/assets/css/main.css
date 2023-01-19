@@ -13,7 +13,7 @@ html {
   /*background: url(../imgs/Desert.jpg) no-repeat 0px 0px;*/
   /*background-color: #3d445f;*/
 
-  background: linear-gradient(#141e30,#243b55);
+  background: linear-gradient(#c5f6be, #c5f6be);
   background-size: 100% 100%;
   -moz-background-size: 100% 100%;
 }

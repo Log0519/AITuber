@@ -11,8 +11,6 @@
         </div>
       </el-col>
 
-
-
     </div>
     <div class="button-container" >
       <div class="inner-container">
@@ -20,18 +18,15 @@
         <!--      <el-button type="primary" @click="goMocap" style="width: 100px; height: 40px; background-color:#fdea78; margin-top: 10px; font-size: 18px; color: #c175df; line-height: 40px" round>捕捉</el-button>-->
         <el-button class="area" type="text" @click="goArea">房间</el-button>
         <el-button class="shop" type="text" @click="goShop">商店管理</el-button>
-
         <el-button class="settings" type="text" @click="goAllSet" >设置</el-button>
-
         <!--      <el-button type="primary" @click="goNoMocap" style="width: 100px;  height: 40px; background-color:#fdea78; margin-top: 10px; font-size: 18px; color: #c175df; line-height: 40px" round>无捕</el-button>-->
         <el-button class="dataView" type="text" @click="goDatasView"  >数据面板</el-button>
 
       </div>
 
-
     </div>
     <div class="right">
-      <el-button class="exit" type="primary" @click="returnLogin"  round>退出登录</el-button>
+      <el-button class="myButton"  style="margin-left: 80%;font-size: 12px;height: 25px;width: 60px;border-radius: 10px;margin-top: 20px" @click="returnLogin"  round>退出登录</el-button>
     </div>
 
   </div>
@@ -83,4 +78,14 @@ export default {
 
 
 <style scoped>
+.myButton:hover{
+  background: #9aef8d;
+  color: #fff;
+  border-radius: 20px;
+  border-color:  #9aef8d;
+  box-shadow: 0 0 5px #b0f6ab,
+  0 0 25px #b9fabd,
+  0 0 50px #c7fdcf,
+  0 0 100px #baffbe;
+}
 </style>

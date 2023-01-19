@@ -28,9 +28,9 @@ body{
     height: 420px;
     margin-top: -210px;
     margin-left: -250px;
-    background:rgba(0,0,0,.5);
+    background: rgba(255, 255, 255, 1);
     box-sizing: border-box;
-    box-shadow:0 15px 25px rgba(0,0,0,.6);
+    box-shadow:0 15px 25px rgba(84, 76, 76, 0.3);
     border-radius: 10px;
 
 
@@ -43,9 +43,9 @@ body{
     top: 50%;
     margin-top: -270px;
     margin-left: -260px;
-    background:rgba(0,0,0,.5);
+    background: #ffffff;
     box-sizing: border-box;
-    box-shadow:0 15px 25px rgba(0,0,0,.6);
+    box-shadow:0 15px 25px rgba(159, 175, 158, 0.6);
     border-radius: 10px;
 }
 
@@ -131,17 +131,16 @@ body{
     margin: auto;
     padding: 0%;
     font-family: sans-serif;
-    background: linear-gradient(#141e30,#243b55);
     position: relative;
 
 }
 .login-button{
     position: relative;
     display: inline-block;
+    font-size: 20px;
     height: 35px;
     width: 100px;
-    color: aqua;
-    font-size: 16px;
+    color: #8dd583;
     text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
@@ -151,20 +150,20 @@ body{
     border-style: none;
 }
 .login-button:hover{
-    background: aqua;
+    background: #9aef8d;
     color: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 5px aqua,
-    0 0 25px aqua,
-    0 0 50px aqua,
-    0 0 100px aqua;
+    box-shadow: 0 0 5px #b0f6ab,
+    0 0 25px #b9fabd,
+    0 0 50px #c7fdcf,
+    0 0 100px #baffbe;
 }
 .login-button-container{
     width: 215px;
     margin:auto;
 }
 label{
-    color: aqua;
+    color: #5db252;
 }
 .login-form{
     width: 280px;

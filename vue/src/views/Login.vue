@@ -2,19 +2,20 @@
   <div class="login-container" style="width: 100%;height: 100vh;overflow:hidden">
     <div class="login">
       <div class="content">
-        <h2 style="font-size: 30px;font-weight: bold;text-align: center;margin-top: 70px ;padding: 30px">
+        <h2 style="font-size: 30px;font-weight: bold;text-align: center;margin-top: 70px ;padding: 30px;color: #8dd583">
           登录
         </h2>
         <el-form ref="form" :model="form" size="normal" class="login-form"
                  :rules="rules">
 
           <el-form-item class="login-input"  prop="username">
+            <label>用户名:</label>
             <el-input class="log-input" style="" v-model="form.username"></el-input>
-            <label>用户名</label>
+
           </el-form-item>
           <el-form-item class="login-input"   prop="password" >
+            <label>密码:</label>
             <el-input class="log-input"  v-model ="form.password" show-password></el-input>
-            <label>密码</label>
           </el-form-item>
 
 

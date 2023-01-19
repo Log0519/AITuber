@@ -1,24 +1,17 @@
 <template>
-<!--侧边栏-->
-<!--  <div>-->
-<!--    <AreaSidebar/>-->
-<!--  </div>-->
-<!--  主体-->
   <div class="back" >
 <!--    主要内容-->
   <div  style="margin-top: 10px;margin-left: 20px" >
 
-  <div style="text-align: center;font-size: 30px;color:  #fce889">房间列表
-
-  </div>
-    <el-button @click="onDialog()"
-               type="primary"
+    <el-button
+        class="myButton"
+                @click="onDialog()"
                style="width: 90px;
                height: 30px;
-               background-color:#fce889;
                margin-left: 80%;
                font-size: 18px;
-               color: #c073e4;
+               border-color: #f2f2f2;
+               border-radius: 5px;
                line-height: 40px"
                round>创建房间
     </el-button>
@@ -218,25 +211,33 @@ export default {
 
 <style lang="scss" scoped>
 .back{
-  margin-left: 1%;
-  margin-right: 1%;
-  background-color: rgba(255, 255, 255, 0.27);
-  border-radius: 10px;
-  border: 1px solid #aaa;
-  width: 98%;
-  height: 650px;
-  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
+  background-color: #ffffff;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
+  height: 100vh;
+
 }
 .homes{
-  margin: 20px 0px 0px 20px;
-  background-color: rgba(216, 129, 245, 0.03);
+  margin: 10px 0px 0px 20px;
+  background-color: #d6ffdb;
   border-radius: 10px;
-  border: 2px solid #e8cccf;
+  //border: 2px solid #e8cccf;
   width: 96%;
-  height: 500px;
+  height: 580px;
   //box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
 }
 .homes::-webkit-scrollbar{
   display: none;
+}
+.myButton:hover{
+  background: #9aef8d;
+  color: #fff;
+  border-radius: 20px;
+  border-color:  #9aef8d;
+  box-shadow: 0 0 5px #b0f6ab,
+  0 0 25px #b9fabd,
+  0 0 50px #c7fdcf,
+  0 0 100px #baffbe;
 }
 </style>
