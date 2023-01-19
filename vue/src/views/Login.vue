@@ -1,48 +1,54 @@
 <template>
-  <div style="width: 100%;height: 100vh;overflow:hidden">
+  <div class="login-container" style="width: 100%;height: 100vh;overflow:hidden">
     <div class="login">
       <div class="content">
-      <div style="color: #ed73f1;font-size: 30px;font-weight: bold;text-align: center;padding: 30px">
-      AI数字人
-      </div>
-      <el-form ref="form" :model="form" size="normal" style="width: 60%;margin-left: 83px"
-      :rules="rules">
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="form.username"></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="password" style="margin-left: 14px">
-          <el-input  v-model ="form.password" show-password></el-input>
-        </el-form-item>
+        <h2 style="font-size: 30px;font-weight: bold;text-align: center;margin-top: 70px ;padding: 30px">
+          登录
+        </h2>
+        <el-form ref="form" :model="form" size="normal" class="login-form"
+                 :rules="rules">
 
-        <el-form-item>
-          <el-row style="padding-left: 65px">
-            <el-col :span="11"
-            ><el-input
-                style="width: 100%"
-                placeholder="请输入验证码"
-                v-model="formLogin.code"
-            ></el-input
-            ></el-col>
-            <el-col :span="10" style="padding-left: 15px">
-              <div class="login-code" width="100%" @click="refreshCode">
-                <!--验证码组件-->
-                <dentify :identifyCode="identifyCode"></dentify></div
+          <el-form-item class="login-input"  prop="username">
+            <el-input class="log-input" style="" v-model="form.username"></el-input>
+            <label>用户名</label>
+          </el-form-item>
+          <el-form-item class="login-input"   prop="password" >
+            <el-input class="log-input"  v-model ="form.password" show-password></el-input>
+            <label>密码</label>
+          </el-form-item>
+
+
+          <el-form-item>
+            <el-row style="padding-left: 65px">
+              <el-col :span="11"
+              ><el-input
+                  class="check-input"
+                  style="width: 160px;margin-left: -60px; "
+                  placeholder="请输入验证码"
+                  v-model="formLogin.code"
+              ></el-input
               ></el-col>
-          </el-row>
-        </el-form-item>
+              <el-col :span="10" style="padding-left: 15px">
+                <div class="login-code" width="100%" @click="refreshCode">
+                  <!--验证码组件-->
+                  <dentify :identifyCode="identifyCode"></dentify></div
+                ></el-col>
+            </el-row>
+          </el-form-item>
 
-        <el-form-item style="margin-left: 80px">
-          <el-button type="primary" size="small" @click="login">登 录</el-button>
-          <el-button type="primary" size="small" @click="goRegister">注 册</el-button>
-          <el-button type="primary" size="small" @click="go">跳过</el-button>
-        </el-form-item>
-      </el-form>
+          <el-form-item  class="login-button-container">
+            <el-button class="login-button" type="primary"  @click="login">登 录</el-button>
+            <el-button class="login-button" type="primary"  @click="goRegister">注 册</el-button>
+
+          </el-form-item>
+        </el-form>
 
 
       </div>
-    </div>
-  </div>
 
+    </div>
+    <el-button style="position:absolute;top: 0px;left: 0px" type="primary" size="small" @click="go">跳过</el-button>
+  </div>
 </template>
 
 <script>

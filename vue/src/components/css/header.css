@@ -1,0 +1,46 @@
+.header-container{
+    position: relative;
+    margin: 0px auto;
+    height: 60px;
+    background-color: white;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    display: flex;
+}
+.button-container{
+    height: 60px;
+    flex: none;
+    display: flex;
+
+}
+.inner-container{
+    height: 60px;
+    flex: none;
+    margin: auto;
+    display: flex;
+}
+.left{
+    flex: 1;
+}
+.right{
+    flex: 1;
+}
+
+.model,.area,.settings,.dataView,.shop{
+    width: 100px;
+    height: 60px;
+    background-color: white;
+    border-bottom-color: white;
+    font-size: 20px;
+    color: #96a7be;
+    line-height: 60px;
+}
+.exit{
+    float: right;
+    width: 100px;
+    height: 40px;
+    margin-top: 10px;
+    margin-right: 5px;
+    font-size: 14px;
+}
