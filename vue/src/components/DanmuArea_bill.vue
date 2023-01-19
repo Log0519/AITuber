@@ -20,7 +20,7 @@
           </div>
         </div>
 
-        <div class="tit-word" style="margin-left: 30px;">
+        <div class="tit-word" style="margin-left:5%;">
 <!--          控制点击变色-->
           <div v-if="windowFlag===1">
           <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px;color: #c073e4"
@@ -34,7 +34,7 @@
           </div>
         </div>
 
-        <div class="tit-word" style="margin-left: 30px;">
+        <div class="tit-word" style="margin-left:5%;">
           <!--          控制点击变色-->
           <div v-if="windowFlag===2">
             <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px;color: #c073e4"
@@ -49,7 +49,7 @@
         </div>
 
 
-        <div class="tit-word" style="margin-left: 30px;">
+        <div class="tit-word" style="margin-left:5%;">
           <!--          控制点击变色-->
           <div v-if="windowFlag===3">
             <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px;color: #c073e4"
@@ -64,7 +64,7 @@
         </div>
 
 
-        <el-button style="margin-left: 75px;font-size: 14px;background-color: rgba(254,249,215,0)" text @click="onDialog()">管理 >></el-button>
+        <el-button style="margin-left:10%;font-size: 14px;background-color: rgba(254,249,215,0)" text @click="onDialog()">管理 >></el-button>
       </div>
 
 
@@ -281,11 +281,13 @@ export default {
   /**/
   .msg-tit{
     padding: 6px 5px 5px 10px;
+    width: 98%;
     .msg-top{
       display: flex;
+      width: 98%;
     }
     .msg-line{
-      width: 580px;
+      width: 98%;
       height: 1px;
       background: #EFEFEF;
       margin: 8px 0;

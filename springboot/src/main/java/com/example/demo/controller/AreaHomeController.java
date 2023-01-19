@@ -24,7 +24,7 @@ public class AreaHomeController {
     @GetMapping("/init")
     public Result<?> init(){
         List<AreaHome> list = areaHomeMapper.selectList(Wrappers.<AreaHome>lambdaQuery()
-                .select(AreaHome::getName,AreaHome::getCreatetime,AreaHome::getState,AreaHome::getHost
+                .select(AreaHome::getName,AreaHome::getCreatetime,AreaHome::getState,AreaHome::getHost,AreaHome::getIsbuy
                 ,AreaHome::getHomeurl)
         );
         return Result.success(list);
@@ -35,13 +35,21 @@ public class AreaHomeController {
                          @RequestParam(defaultValue = "") String createtime,
                          @RequestParam(defaultValue = "") String host,
                          @RequestParam(defaultValue = "") String state,
-                         @RequestParam(defaultValue = "") String homeurl){
+                         @RequestParam(defaultValue = "") String homeurl,
+                         @RequestParam(defaultValue = "") String isbuy
+    ){
         AreaHome areaHome = new AreaHome();
         areaHome.setName(name);
         areaHome.setCreatetime(createtime);
         areaHome.setHost(host);
         areaHome.setState(state);
         areaHome.setHomeurl(homeurl);
+        if(isbuy.equals("false")){
+            isbuy="关闭";
+        }else {
+            isbuy="开启";
+        }
+        areaHome.setIsbuy(isbuy);
         areaHomeMapper.insert(areaHome);
         return Result.success();
     }

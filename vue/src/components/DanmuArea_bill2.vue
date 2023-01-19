@@ -8,7 +8,7 @@
 
       />
       </div>
-      <div class="msg-top">
+      <div class="msg-top" style="font-family: 幼圆,serif">
         <div class="tit-word">
           <!--          控制点击变色-->
           <div v-if="windowFlag===0">
@@ -85,10 +85,11 @@
               <div>
 
 
-                <div style="color: #ee8f8f;margin-left: 10px;margin-right: 10px;font-family: 幼圆,serif;font-size: 13px">
+                <div style="color: #ee8f8f;margin-left: 10px;margin-right: 10px;
+                font-family: 幼圆,serif;font-size: 13px">
                 {{item.name+'：'}}
-                </div>
 
+              </div>
               <div class="OneDanmu" style='margin-left: 10px;background-color: #ffe774;border-radius: 5px'>
                 <div style="height: 4px"></div>
                 <div style="background-color: #914f4f;margin-left: 4px;margin-right:4px;border-radius: 5px">
@@ -119,11 +120,15 @@
 
             </div>
             <!--           flag=gift 送出礼物-->
-            <p v-else-if="item.flag==='gift'" :style="fontStyle2" class="p-word">
-
-              {{"谢谢 "+item.name}} {{'送出的"'+item.neirong+'"'}}
-
-            </p>
+            <div v-else-if="item.flag==='gift'" style="color: #60d8ee" class="p-word">
+              <div style="display: flex">
+              {{"谢谢"}}
+              <div style="color:#da9b6f ">
+              {{item.name}}
+              </div>
+              {{'送出的"'+item.neirong+'"'}}
+              </div>
+            </div>
           </li>
         </ul>
       </div>
@@ -303,13 +308,14 @@ export default {
 
 <style scoped lang="less">
 
+
   .msg-tit{
-    padding: 6px 5px 5px 10px;
+    padding: 5px 5px 5px 20px;
     .msg-top{
       display: flex;
     }
     .msg-line{
-      width: 230px;
+      width: 430px;
       height: 0px;
       background: #EFEFEF;
       margin: 8px 0;
