@@ -2,8 +2,6 @@
   <!--  侧边栏-->
   <div >
 <div class="back">
-  <div style="width: 96%;margin-left: 2%;
-  height: 96%;margin-top: 0.5%;border: solid;border-color: #fce889;border-width: 6px">
     <div style="text-align: center;color: #f2f2f2;font-size: 24px;">商店管理
     </div>
     <div style="margin-left: 1%">
@@ -28,7 +26,6 @@
 
   </div>
 </div>
-  </div>
 
 
 
@@ -50,12 +47,10 @@ data(){
 <style scoped>
 .back{
 
-  background-color: rgba(255, 255, 255, 0.27);
-  border-radius: 10px;
-  border: 1px solid #aaa;
-  margin-left: 1%;
-  width: 98%;
-  height: 650px;
-  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
+  background-color: #ffffff;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
+  height: 100vh;
 }
 </style>

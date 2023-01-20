@@ -10,11 +10,14 @@ p{
     margin-left: 20px;
 }
 .page-background{
-    margin: 0px 20px 0px 20px;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    /*margin: 0px 20px 0px 20px;
     background-color: rgba(255, 255, 255, 0.27);
     border-radius: 10px;
     border: 1px solid #aaa;
-    box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);
+    box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5), 0px 0px 15px rgba(200, 75, 75, 0.3);*/
 }
 .user-models-header{
     display: flex;
@@ -28,5 +31,22 @@ p{
     font-size: 20px;
 }
 .models{
+
+}
+.in-model{
+    display: block;
+
+}
+template{
+    display: block;
+}
+
+.model-container{
+
+    display: flex;
+    width: 1280px;
+    height: 100%;
+    background-color: white;
+    margin: 1px auto auto;
 
 }

@@ -20,19 +20,19 @@
           </div>
         </div>
 
-        <div class="tit-word" style="margin-left:5%;">
-<!--          控制点击变色-->
-          <div v-if="windowFlag===1">
-          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px;color: #c073e4"
-                     @click="windowFlag=1"
-          >实时告警</el-button>
-          </div>
-          <div v-else>
-            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"
-                       @click="windowFlag=1"
-            >实时告警</el-button>
-          </div>
-        </div>
+<!--        <div class="tit-word" style="margin-left:5%;">-->
+<!--&lt;!&ndash;          控制点击变色&ndash;&gt;-->
+<!--          <div v-if="windowFlag===1">-->
+<!--          <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px;color: #c073e4"-->
+<!--                     @click="windowFlag=1"-->
+<!--          >实时告警</el-button>-->
+<!--          </div>-->
+<!--          <div v-else>-->
+<!--            <el-button text style="background-color: rgba(254,249,215,0);font-size: 16px"-->
+<!--                       @click="windowFlag=1"-->
+<!--            >实时告警</el-button>-->
+<!--          </div>-->
+<!--        </div>-->
 
         <div class="tit-word" style="margin-left:5%;">
           <!--          控制点击变色-->

@@ -7,7 +7,7 @@
 <!--      https://api.live.bilibili.com/room/v1/Room/room_init?id=52030-->
       <el-input disabled type="text" id="url" value="wss://broadcastlv.chat.bilibili.com/sub" style="width: 40%;margin-left: 10px"> </el-input>
       </div>
-    <div style="display: flex;font-size: 16px;margin-top: 5px">
+    <div style="display: flex;font-size: 16px;margin-top: 5px;color: #49b74b">
 <!--      401854710-->
 <!--      1440094-->
 
@@ -22,8 +22,8 @@
 <!--    直播间的实时消息会发送到flink，经过处理后作为生产者发送到kafka的DanmuSource主题上-->
 <!--    先打开kafka消费者，bin/kafka-console-consumer.sh --bootstrap-server hadoop102:9092 --topic DanmuSource-->
     <div>
-      <el-button @click="getDanmu()">实时获取</el-button>
-      <el-button @click="stopDanmu">停止获取</el-button>
+      <el-button class="myButton" @click="getDanmu()" style="border-radius: 10px">实时获取</el-button>
+      <el-button class="myButton" @click="stopDanmu" style="border-radius: 10px">停止获取</el-button>
       <el-switch
           style="margin-left: 30px"
           v-model="isWrite"
@@ -477,5 +477,13 @@ import SimpleDateFormat from "three/addons/nodes/core/NodeBuilder";
 </script>
 
 <style scoped>
-
+.myButton{
+  color: #70cb62;
+}
+.myButton:hover{
+  background: #9aef8d;
+  color: #fff;
+  border-radius: 10px;
+  border-color:  #9aef8d;
+}
 </style>

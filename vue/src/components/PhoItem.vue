@@ -1,13 +1,13 @@
 <template>
   <div  class="img"
-      style="background-color: #f3a786;
+      style="background-color: #ffe4f0;
                 margin: 7px;
                 border-radius: 10px;
                 border-width: 10px;
                 border-color: #2c3e50;
                 ">
     <div style="height: 5px"></div>
-    <div style="display: flex; width: 160px">
+    <div style="display: flex; width: 200px">
     <img :src="src"
          style="max-width: 70px;
          min-width: 20px;
@@ -15,7 +15,7 @@
          border-radius: 10px;
          margin-left: 5px"
     >
-      <div style="color: #fdeebd;margin-left: 10px">
+      <div style="color: #3e9f47;margin-left: 10px">
       {{name}}
       </div>
     </div>
